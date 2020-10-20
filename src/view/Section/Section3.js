@@ -27,12 +27,12 @@ const Section3 = () => {
 
         {/* 링크 */}
         <div className="section3_button_room">
-          <Link to="/room-create">
+          <Link to="/room-create" style={{ textDecoration: 'none' }}>
             <Button variant="contained" color="secondary" size="large">
               방 만들기
             </Button>
           </Link>
-          <Link to="/room-list">
+          <Link to="/room-list" style={{ textDecoration: 'none' }}>
             <Button variant="contained" color="secondary" size="large">
               방 찾기
             </Button>

@@ -11,7 +11,7 @@ class Header extends Component {
         <div className="header">
           <h1>studyON</h1>
           <div className="button_login">
-            <Link to="/login">
+            <Link to="/login" style={{ textDecoration: 'none' }}>
               <Button variant="contained" color="secondary">
                 login
               </Button>
