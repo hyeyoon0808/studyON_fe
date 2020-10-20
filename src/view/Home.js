@@ -1,30 +1,25 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "../assets/scss/Home.scss";
 import Footer from "./Footer";
+import Header from "./Header";
+import Section1 from "../view/Section/Section1";
+import Section2 from "../view/Section/Section2";
+import Section3 from "../view/Section/Section3";
 
 class Home extends Component {
   render() {
     return (
       <>
         {/* header */}
-        <div className="header">
-          <h1>studyON</h1>
-          <div className="button_login">
-            <Link to="/login">
-              <button>login</button>
-            </Link>
-          </div>
-        </div>
-        <div className="contents">contents</div>
+        <Header />
 
-        <Link to="/room-create">
-          <button>create room</button>
-        </Link>
-        <Link to="/room-list">
-          <button>room list</button>
-        </Link>
-
+        {/* section1 */}
+        <Section1 />
+        {/* section2 */}
+        <Section2 />
+        {/* section3 */}
+        <Section3 />
+        {/* footer */}
         <Footer />
       </>
     );
