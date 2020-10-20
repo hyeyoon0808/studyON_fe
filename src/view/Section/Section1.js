@@ -25,16 +25,11 @@ class Section1 extends Component {
             to="section2"
             spy={true}
             smooth={true}
-            offset={-70}
+            offset={-10}
             duration={500}
           >
             <h3 className="scroll_next">Study Mode ON</h3>
           </Link>
-          <img
-            src={require("../../assets/images/tomato.png")}
-            alt=""
-            className="tomato"
-          />
         </section>
       </>
     );

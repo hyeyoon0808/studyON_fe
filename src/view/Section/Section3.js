@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 
 var sectionStyle = {
   width: "100%",
-  height: "38rem",
+  height: "43rem",
   backgroundImage: `url(${Background})`,
 };
 
@@ -13,13 +13,14 @@ const Section3 = () => {
   return (
     <>
       <section style={sectionStyle} id="section3">
-        <img
+        {/* <img
           src={require("../../assets/images/main_photo.png")}
           alt=""
           className="section3_photo"
-        />
-        <div className="photo_desc">
-          <p className="photo_desc_title">studyON은 </p>
+        /> */}
+        <div className="section3_photo_desc">
+          <div className="section3_photo_desc_title">studyON은 </div>
+          <br />
           <p>여러분의 공부시간을 응원합니다! </p>
           <p>하루의 공부시간을 설정하고 목표량을 달성해보세요.</p>
         </div>
