@@ -13,13 +13,17 @@
     position: absolute;
     float: right;
     right: 1rem;
+    .login_text {
+      text-decoration: none;
+      color: white;
+    }
   }
 }
 .logo {
   position: relative;
   width: 30rem;
   align-items: center;
-  left: 28rem;
+  left: 29rem;
   top: 13rem;
 }
 .logo_desc {
@@ -32,11 +36,12 @@
   top: 10.5rem;
 }
 .scroll_next {
-  color: rgb(34, 33, 33);
+  color: #ffffff;
   width: auto;
   position: absolute;
   bottom: 2rem;
   left: 45%;
+  opacity: 0.6;
 }
 
 .section2_desc {

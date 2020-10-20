@@ -11,11 +11,11 @@ class Header extends Component {
         <div className="header">
           <h1>studyON</h1>
           <div className="button_login">
-            <Link to="/login">
-              <Button variant="contained" color="secondary">
-                login
-              </Button>
-            </Link>
+            <Button variant="contained" color="secondary">
+              <Link to="/login" className="login_text">
+                login{" "}
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

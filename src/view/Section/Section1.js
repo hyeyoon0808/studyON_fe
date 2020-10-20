@@ -20,6 +20,7 @@ class Section1 extends Component {
           <div className="logo_desc">
             Take responsibility for your study time
           </div>
+
           <Link
             activeClass="active"
             to="section2"
