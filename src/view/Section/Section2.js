@@ -20,16 +20,17 @@ const Section2 = () => {
 
         {/* 링크 */}
         <div className="section2_button_room">
-          <Link to="/room-create">
-            <Button variant="contained" color="secondary" size="large">
+          <Button variant="contained" color="secondary" size="large">
+            <Link to="/room-create" className="login_text">
               방 만들기
-            </Button>
-          </Link>
-          <Link to="/room-list">
-            <Button variant="contained" color="secondary" size="large">
+            </Link>
+          </Button>
+
+          <Button variant="contained" color="secondary" size="large">
+            <Link to="/room-list" className="login_text">
               방 찾기
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </section>
     </>
