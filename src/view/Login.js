@@ -26,7 +26,7 @@ class Login extends Component {
       <h4>로그인 후 더 많은 혜택을 누리세요!</h4>
       <br />
       <KaKaoBtn
-        jsKey={'e2a163964f5007c1e1c7bbf0f2b8c16e'}
+        jsKey={''}
         buttonText="KaKao"
         onSuccess={this.responseKaKao}
         onFailure={this.responseFail}
