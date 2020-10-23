@@ -19,7 +19,7 @@ class Header extends Component {
 
           <div className="button_login">
             <Button variant="contained" color="secondary">
-              <Link to="/login" className="login_text">
+              <Link to="/login" className="button_text">
                 login
               </Link>
             </Button>
