@@ -14,6 +14,13 @@
     float: right;
     right: 1rem;
   }
+  .header_logo {
+    width: 5rem;
+    position: absolute;
+    float: left;
+    left: 3.5rem;
+    top: 0.5rem;
+  }
 }
 .login_text {
   text-decoration: none;
@@ -26,20 +33,22 @@
   left: 29rem;
   top: 13rem;
 }
+
 .logo_desc {
   color: #ffffff;
-  font-size: xx-large;
+  font-size: large;
   font-family: "GmarketSansTTF Medium";
-  width: 50rem;
+  width: 13rem;
+  text-align: center;
   position: relative;
-  left: 14.5rem;
+  left: 43rem;
   top: 10.5rem;
 }
 .scroll_next {
   color: #ffffff;
   width: auto;
   position: absolute;
-  bottom: 2rem;
+  bottom: 1rem;
   left: 45%;
   opacity: 0.6;
 }

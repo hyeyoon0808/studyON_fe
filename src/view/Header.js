@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Link , BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Link, BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "../assets/scss/Home.scss";
 import Button from "@material-ui/core/Button";
-import Navbar from "./Navbar/Navbar"
+import Navbar from "./Navbar/Navbar";
 
 class Header extends Component {
   render() {
@@ -10,8 +10,13 @@ class Header extends Component {
       <div>
         {/* header */}
         <div className="header">
-          <Navbar className="navbar"/>
-          <h1>studyON</h1>
+          <Navbar className="navbar" />
+          <img
+            src={require("../assets/images/logo_mini1.gif")}
+            alt=""
+            className="header_logo"
+          />
+
           <div className="button_login">
             <Button variant="contained" color="secondary">
               <Link to="/login" className="login_text">
