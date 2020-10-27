@@ -14,10 +14,18 @@
     float: right;
     right: 1rem;
   }
+  .header_logo {
+    width: 5rem;
+    position: absolute;
+    float: left;
+    left: 4rem;
+    top: 0.5rem;
+  }
 }
-.login_text {
+.button_text {
   text-decoration: none;
   color: white;
+  padding: 0 1rem 0 0;
 }
 .logo {
   position: relative;
@@ -26,20 +34,22 @@
   left: 29rem;
   top: 13rem;
 }
+
 .logo_desc {
   color: #ffffff;
-  font-size: xx-large;
+  font-size: large;
   font-family: "GmarketSansTTF Medium";
-  width: 50rem;
+  width: 13rem;
+  text-align: center;
   position: relative;
-  left: 14.5rem;
+  left: 43rem;
   top: 10.5rem;
 }
 .scroll_next {
   color: #ffffff;
   width: auto;
   position: absolute;
-  bottom: 2rem;
+  bottom: 1rem;
   left: 45%;
   opacity: 0.6;
 }
@@ -64,20 +74,12 @@
 
 .section2_button_room {
   position: relative;
-  left: 37rem;
+  left: 35.5rem;
   top: 14.5rem;
   display: flex;
-  width: 14rem;
+  width: 17rem;
   justify-content: space-between;
 }
-
-// .section3_photo {
-//   width: 34rem;
-//   position: relative;
-//   left: 6rem;
-//   top: 5rem;
-// }
-
 .section3_photo_desc {
   width: 34rem;
   position: relative;
@@ -94,10 +96,9 @@
 
 .section3_button_room {
   position: relative;
-  left: 47rem;
+  left: 44rem;
   top: 15rem;
   display: flex;
-  width: 14rem;
+  width: 17rem;
   justify-content: space-between;
-  z-index: 1;
 }
