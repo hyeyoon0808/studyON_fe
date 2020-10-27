@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
         "&:hover, &:active": {
             backgroundColor: "#ff8080",
         },
+        textDecoration: "none",
     },
 }));
 

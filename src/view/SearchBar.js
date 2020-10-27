@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
     iconButton: {
         padding: 10,
     },
+    text: {
+        textDecoration: "none",
+        color: "white",
+    },
 }));
 
 export default function SearchBar() {
@@ -46,7 +50,7 @@ export default function SearchBar() {
                     <SearchIcon />
                 </IconButton>
             </Paper>
-            <Link to="/room-create">
+            <Link to="/room-create" className={classes.text}>
                 <ButtonTemplate text={"방 만들기"} />
             </Link>
         </div>
