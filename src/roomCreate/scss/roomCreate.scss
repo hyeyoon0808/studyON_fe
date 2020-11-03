@@ -1,0 +1,30 @@
+.create_img {
+  width: 25rem;
+  height: 30rem;
+  position: relative;
+  top: 9rem;
+  left: 10%;
+  box-shadow: 3px 3px 3px 3px #dedede;
+  border-radius: 10px;
+}
+
+.room_create_form {
+  width: 48%;
+  float: right;
+  position: relative;
+  top: 6rem;
+  right: 5%;
+
+  .form_title {
+    width: 30rem;
+  }
+  .form_desc {
+    width: 40rem;
+  }
+  .form_tag {
+    width: 10rem;
+  }
+}
+.form_number {
+  width: 5rem;
+}

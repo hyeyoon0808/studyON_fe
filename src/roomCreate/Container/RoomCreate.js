@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ApiService from "../Api/ApiService";
 import RoomCreateForm from "../view/RoomCreateForm";
+import Header from "../../header/view/Header";
+import Footer from "../../footer/view/Footer";
 
 class RoomCreate extends Component {
   constructor(props) {
@@ -42,6 +44,7 @@ class RoomCreate extends Component {
     const { roomInfo } = this.state;
     return (
       <div>
+        <Header />
         <RoomCreateForm onCreate={this.handleCreate} />
         <div>
           {/* <span>json: {JSON.stringify(roomInfo)}</span> */}
@@ -49,6 +52,7 @@ class RoomCreate extends Component {
             <div>{room.title}</div>
           ))}
         </div>
+        {/* <Footer /> */}
       </div>
     );
   }

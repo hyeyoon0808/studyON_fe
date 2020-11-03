@@ -8,6 +8,7 @@ import TimePicker from "../Container/TimePicker";
 import moment from "moment";
 import InputLabel from "@material-ui/core/InputLabel";
 import ApiService from "../Api/ApiService";
+import "../scss/roomCreate.scss";
 
 class RoomCreateForm extends Component {
   constructor(props) {
@@ -26,8 +27,8 @@ class RoomCreateForm extends Component {
       currentPeopleNum: 1,
       maxPeopleNum: 10,
       startTime: moment(),
-      studyTime: 0,
-      breakTime: 0,
+      studyTime: 25,
+      breakTime: 5,
       currentTerm: 0,
       maxTerm: 0,
     };
@@ -56,7 +57,7 @@ class RoomCreateForm extends Component {
       startTime,
       studyTime,
       breakTime,
-      term,
+      maxTerm,
     } = this.state;
     e.preventDefault();
     let roomInfo = {
@@ -66,7 +67,7 @@ class RoomCreateForm extends Component {
       number: this.state.number,
       startTime: this.state.startTime,
       breakTime: this.state.breakTime,
-      repeat: this.state.repeat,
+      maxTerm: this.state.maxTerm,
     };
     this.props.onCreate({
       title: title,
@@ -76,7 +77,7 @@ class RoomCreateForm extends Component {
       startTime: startTime,
       studyTime: studyTime,
       breakTime: breakTime,
-      term: term,
+      maxTerm: maxTerm,
     });
     console.log(moment(this.state.startTime).format("hh:mm a"));
 
@@ -95,7 +96,7 @@ class RoomCreateForm extends Component {
       startTime: moment(),
       studyTime: 0,
       breakTime: 0,
-      term: 0,
+      maxTerm: 0,
     });
   };
 
@@ -108,83 +109,123 @@ class RoomCreateForm extends Component {
       startTime,
       studyTime,
       breakTime,
-      term,
+      maxTerm,
     } = this.state;
     return (
       <div>
         {/* <button onClick={this.goBack}>취소</button> */}
+        <img
+          src={require("../images/create_img.jpeg")}
+          alt=""
+          className="create_img"
+        />
+        <form onSubmit={this.handleSubmit} className="room_create_form">
+          <div>
+            TITLE &nbsp;
+            <Input
+              name="title"
+              onChange={this.handleChange}
+              value={title}
+              className="form_title"
+              variant="outlined"
+              color="secondary"
+            />
+          </div>
 
-        <form className="roomCreateForm" onSubmit={this.handleSubmit}>
-          <Input
-            name="title"
-            onChange={this.handleChange}
-            value={title}
-            placeholder="title..."
-          />
+          <div>
+            <br /> Description 공지 &nbsp;
+            <TextField
+              multiline
+              rows={3}
+              fullWidth
+              variant="outlined"
+              name="description"
+              onChange={this.handleChange}
+              value={description}
+              color="secondary"
+              className="form_desc"
+            />
+          </div>
+          <div>
+            <br />
+            Tag &nbsp;
+            {/* <InputLabel htmlFor="age-native-simple">Tag</InputLabel> */}
+            <Select
+              name="tag"
+              value={tag}
+              onChange={this.handleChange}
+              className="form_tag"
+              color="secondary"
+            >
+              <MenuItem value={"공무원"}>공무원 준비</MenuItem>
+              <MenuItem value={"ncs"}>NCS 준비</MenuItem>
+              <MenuItem value={"수능"}>수능 준비</MenuItem>
+            </Select>
+          </div>
 
-          <TextField
-            label="Multiline"
-            multiline
-            rows={4}
-            defaultValue="description..."
-            variant="filled"
-            name="description"
-            onChange={this.handleChange}
-            value={description}
-          />
-          <InputLabel htmlFor="age-native-simple">Tag</InputLabel>
-          <Select name="tag" value={tag} onChange={this.handleChange}>
-            <MenuItem value={"공무원"}>공무원 준비</MenuItem>
-            <MenuItem value={"ncs"}>NCS 준비</MenuItem>
-            <MenuItem value={"수능"}>수능 준비</MenuItem>
-          </Select>
-          <TextField
-            name="peopleNum"
-            label="Contact phone number"
-            type="number"
-            value={peopleNum}
-            onChange={this.handleChange}
-            placeholder="Contact phone number"
-            margin="normal"
-          />
-          <TimePicker
-            value={startTime}
-            onChange={this.handleChangeTime}
-            name="startTime"
-          />
+          <div>
+            <br />
+            People Number &nbsp; &nbsp;
+            <TextField
+              name="peopleNum"
+              type="number"
+              value={peopleNum}
+              onChange={this.handleChange}
+              margin="normal"
+              className="form_number"
+              color="secondary"
+            />
+          </div>
+          <div>
+            <br />
+            Start Time 시작시간 &nbsp; &nbsp;
+            <TimePicker
+              value={startTime}
+              onChange={this.handleChangeTime}
+              name="startTime"
+            />
+          </div>
 
-          {/* studyTime */}
-          <TextField
-            name="studyTime"
-            label="study study"
-            type="number"
-            value={studyTime}
-            onChange={this.handleChange}
-            placeholder="studyTime..."
-            margin="normal"
-          />
+          <div>
+            <br />
+            StudyTime 공부시간 &nbsp; &nbsp;
+            <TextField
+              name="studyTime"
+              type="number"
+              value={studyTime}
+              onChange={this.handleChange}
+              margin="normal"
+              className="form_number"
+              color="secondary"
+            />
+          </div>
+          <div>
+            <br />
+            BreakTime 쉬는시간 &nbsp; &nbsp;
+            <TextField
+              name="breakTime"
+              type="number"
+              value={breakTime}
+              onChange={this.handleChange}
+              margin="normal"
+              className="form_number"
+              color="secondary"
+            />
+          </div>
 
-          {/* breakTime */}
-          <TextField
-            name="breakTime"
-            label="break study"
-            type="number"
-            value={breakTime}
-            onChange={this.handleChange}
-            placeholder="repeat..."
-            margin="normal"
-            defaultValue={25}
-          />
-
-          <TextField
-            name="term"
-            label="term"
-            type="number"
-            value={term}
-            onChange={this.handleChange}
-            placeholder="term..."
-            margin="normal"
-          />
+          <div>
+            <br />
+            Term 횟수 &nbsp; &nbsp;
+            <TextField
+              name="maxTerm"
+              type="number"
+              value={maxTerm}
+              onChange={this.handleChange}
+              margin="normal"
+              className="form_number"
+              color="secondary"
+            />
+          </div>
           <Button variant="contained" color="secondary" type="submit">
             등록
           </Button>
