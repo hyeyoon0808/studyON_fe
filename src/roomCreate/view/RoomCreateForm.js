@@ -7,26 +7,31 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TimePicker from "../Container/TimePicker";
 import moment from "moment";
 import InputLabel from "@material-ui/core/InputLabel";
+import ApiService from "../Api/ApiService";
 
 class RoomCreateForm extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.goBack = this.goBack.bind(this);
-  // }
-  // goBack() {
-  //   this.props.history.goBack();
-  // }
+  constructor(props) {
+    super(props);
+    //   this.goBack = this.goBack.bind(this);
 
-  state = {
-    title: "",
-    description: "",
-    tag: "",
-    peopleNum: 0,
-    startTime: moment(),
-    studyTime: 0,
-    breakTime: 0,
-    term: 0,
-  };
+    // goBack() {
+    //   this.props.history.goBack();
+    // }
+
+    this.state = {
+      title: "",
+      description: "",
+      tag: "",
+      peopleNum: 0,
+      currentPeopleNum: 1,
+      maxPeopleNum: 10,
+      startTime: moment(),
+      studyTime: 0,
+      breakTime: 0,
+      currentTerm: 0,
+      maxTerm: 0,
+    };
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -54,6 +59,15 @@ class RoomCreateForm extends Component {
       term,
     } = this.state;
     e.preventDefault();
+    let roomInfo = {
+      title: this.state.title,
+      notification: this.state.notification,
+      tag: this.state.tag,
+      number: this.state.number,
+      startTime: this.state.startTime,
+      breakTime: this.state.breakTime,
+      repeat: this.state.repeat,
+    };
     this.props.onCreate({
       title: title,
       description: description,
@@ -65,6 +79,13 @@ class RoomCreateForm extends Component {
       term: term,
     });
     console.log(moment(this.state.startTime).format("hh:mm a"));
+
+    ApiService.addRoom(roomInfo).then((res) => {
+      this.setState({
+        message: roomInfo.title + "등록",
+      });
+      this.props.history.push("/");
+    });
 
     this.setState({
       title: "",
