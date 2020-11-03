@@ -6,12 +6,14 @@ import RoomCreate from "../roomCreate/Container/RoomCreate";
 import RoomList from "../roomList/view/RoomList";
 import RoomEntrance from "../roomEntrance/view/RoomEntrance";
 import MyPages from "../myPage/view/MyPages";
+import ScrollToTop from "../assets/ScrollToTop";
 
 class MainRouter extends Component {
   render() {
     return (
-      <>
-        <BrowserRouter>
+      <div>
+        <ScrollToTop>
+          {/* <BrowserRouter> */}
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
@@ -20,8 +22,9 @@ class MainRouter extends Component {
             <Route path="/room-entrance" component={RoomEntrance} />
             <Route path="/myPages" component={MyPages} />
           </Switch>
-        </BrowserRouter>
-      </>
+          {/* </BrowserRouter> */}
+        </ScrollToTop>
+      </div>
     );
   }
 }
