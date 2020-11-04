@@ -11,6 +11,9 @@ class SearchBarContainer extends Component {
     addRoomList = () => {
         this.props.Store.addRoomList();
     };
+    findMatches = () => {
+        this.props.Store.findMatches();
+    };
     render() {
         const roomName = this.props.getRoomName;
         return (
@@ -18,6 +21,7 @@ class SearchBarContainer extends Component {
                 roomName={roomName}
                 setRoomName={this.setRoomName}
                 addRoomList={this.addRoomList}
+                findMatches={this.findMatches}
             />
         );
     }

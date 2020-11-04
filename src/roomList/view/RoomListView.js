@@ -5,7 +5,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
-import tileData from "../tileData";
+//import { tileData } from "../tileData.json";
 import { Link } from "react-router-dom";
 
 const UseStyles = makeStyles((theme) => ({
@@ -31,27 +31,24 @@ const UseStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ListView(props) {
-  const { roomList } = props;
+export default function RoomListView(props) {
   const classes = UseStyles();
+  const { rooms } = props;
   return (
     <div className={classes.root}>
       <GridList cols={5} cellHeight={180} className={classes.gridList}>
-        {/* <GridListTile key="Subheader"style={{ height: 'auto' }}>
-          <ListSubheader component="div">방리스트</ListSubheader>
-        </GridListTile> */}
-        {roomList.length > 0 &&
-          roomList.map((tile, id) => (
-            <GridListTile key={tile.id}>
-              <Link to="/room-entrance">
-                <img src={tile.img} alt={tile.title} className={classes.img} />
+        {rooms?.map((tileData) => {
+          return (
+            <GridListTile key={tileData.roomId}>
+              <Link to={`/room-entrance/${tileData.roomId}`}>
+                <img src={tileData.img} className={classes.img} />
               </Link>
               <GridListTileBar
-                title={tile.title}
-                subtitle={<span>by: {tile.author}</span>}
+                title={tileData.title}
+                subtitle={<span>by: {tileData.author}</span>}
                 actionIcon={
                   <IconButton
-                    aria-label={`info about ${tile.title}`}
+                    aria-label={`info about ${tileData.title}`}
                     className={classes.icon}
                   >
                     <InfoIcon />
@@ -59,7 +56,8 @@ export default function ListView(props) {
                 }
               />
             </GridListTile>
-          ))}
+          );
+        })}
       </GridList>
     </div>
   );
