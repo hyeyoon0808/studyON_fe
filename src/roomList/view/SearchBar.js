@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(1),
         flex: 1,
         padding: "0.3rem 0.3rem",
+        width: "85%",
     },
     iconButton: {
         float: "right",
@@ -37,11 +38,18 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchBar(props) {
     const classes = useStyles();
 
-    const { setRoomName, roomName, addRoomList } = props;
-
+    const { setRoomName, roomName, addRoomList, findMatches } = props;
+    const searchRoom = (e) => {
+        e.preventDefault();
+        findMatches();
+    };
     return (
         <div className={classes.root}>
-            <Paper component="form" className={classes.paper}>
+            <Paper
+                component="form"
+                className={classes.paper}
+                onSubmit={searchRoom}
+            >
                 <InputBase
                     value={roomName}
                     className={classes.input}
@@ -50,9 +58,9 @@ export default function SearchBar(props) {
                     inputProps={{ "aria-label": "search google maps" }}
                 />
                 <IconButton
-                    type="submit"
                     className={classes.iconButton}
                     aria-label="search"
+                    onClick={findMatches}
                 >
                     <SearchIcon />
                 </IconButton>
