@@ -5,14 +5,18 @@ import RoomListView from "../view/RoomListView";
 @inject("Store")
 @observer
 class RoomListViewContainer extends Component {
-    componentDidMount() {
-        this.props.Store.initRoomList();
-    }
-    render() {
-        const roomList = this.props.Store.getRoomList;
-        console.log(roomList);
-        return <RoomListView roomList={roomList} />;
-    }
+  componentDidMount() {
+    const { Store } = this.props;
+
+    Store.roomList();
+  }
+
+  render() {
+    //const roomList = this.props.Store.getRoomList;
+    const rooms = this.props.Store.getRoomList;
+    console.log(rooms);
+    return <RoomListView rooms={rooms} />;
+  }
 }
 
 export default RoomListViewContainer;
