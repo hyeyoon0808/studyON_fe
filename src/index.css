@@ -1,23 +1,26 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 @font-face {
-    font-family: "GmarketSansTTF Medium";
-    src: url(./assets/fonts/GmarketSansTTFMedium.ttf) format("truetype");
+  font-family: "GmarketSansTTF Medium";
+  src: url(./assets/fonts/GmarketSansTTFMedium.ttf) format("truetype");
 }
+<<<<<<< HEAD
 @font-face {
-    font-family: "GmarketSansTTF Bold";
-    src: url(./assets/fonts/GmarketSansTTFBold.ttf) format("truetype");
+  font-family: "GmarketSansTTF Bold";
+  src: url(./assets/fonts/GmarketSansTTFBold.ttf) format("truetype");
 }
+=======
+>>>>>>> 0f4890cb6e29e71f71c34d84f40b536261aca7af
