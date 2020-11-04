@@ -5,14 +5,17 @@ import Header from "../../header/view/Header";
 import Footer from "../../footer/view/Footer";
 import "../scss/RoomList.scss";
 import SearchBarContainer from "../container/SearchBarContainer";
+import RoomEntrance from "../../roomEntrance/view/RoomEntrance";
+import { Route } from "react-router-dom"
 import RoomListViewContainer from "../container/RoomListViewContainer";
-function RoomList() {
+function RoomList({ match }) {
   return (
     <>
       <Header />
       <div className="roomList">
         <SearchBarContainer />
-        <RoomListViewContainer />
+        <Route exact path={match.path} component={RoomListView} />
+        <Route path={`room-entrance/:id`} component={RoomEntrance} />
       </div>
       <Footer />
     </>

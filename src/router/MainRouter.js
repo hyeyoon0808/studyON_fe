@@ -19,7 +19,7 @@ class MainRouter extends Component {
             <Route path="/login" component={Login} />
             <Route path="/room-create" component={RoomCreate} />
             <Route path="/room-list" component={RoomList} />
-            <Route path="/room-entrance" component={RoomEntrance} />
+            <Route path="/room-entrance/:id" component={RoomEntrance} />
             <Route path="/myPages" component={MyPages} />
           </Switch>
           {/* </BrowserRouter> */}
