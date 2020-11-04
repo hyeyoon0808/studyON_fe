@@ -8,7 +8,7 @@ export const KAKAO_AUTH_URL =
     OAUTH2_REDIRECT_URI;
 
 export const ACCESS_TOKEN =
-    "k7NlZCPvxNc65aCI_HG6Z6YvCtrKCv63JV20nQo9cpcAAAF1kZFEYg";
+    "";
 
 export function request(options) {
     const headers = new Headers({
