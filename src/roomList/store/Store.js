@@ -1,7 +1,8 @@
 import { observable, computed, action } from "mobx";
-import tileData from "../tileData";
+import tileData from "../tileData.json";
 //1.Mobx Store 클래스 선언
 class Store {
+
     //2. 관리해야하는 state 객체 @observable 선언 및 초기화
     @observable
     roomList = tileData;
