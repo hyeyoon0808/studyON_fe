@@ -12,6 +12,7 @@ class Store {
   roomName = "";
 
   @observable rooms = [];
+@observable user={};
 
   // @computed
   // get getRooms() {
@@ -37,6 +38,10 @@ class Store {
   get getRoomName() {
     return this.roomName;
   }
+ @computed
+    get getUser() {
+        return this.user ? { ...this.user } : {};
+    }
 
   @action
   setRoomName(roomName) {
@@ -61,6 +66,10 @@ class Store {
     this.rooms = await this.roomApi.roomList();
     console.log(this.rooms);
   }
+
+@action 
+async userDetail(){
+  this.user=await this.userApi.userDetail();
 }
 
 //5. 객체 생성해서 export
