@@ -7,7 +7,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TimePicker from "../Container/TimePicker";
 import moment from "moment";
 import InputLabel from "@material-ui/core/InputLabel";
-import ApiService from "../Api/ApiService";
 import "../scss/roomCreate.scss";
 
 class RoomCreateForm extends Component {
@@ -80,13 +79,6 @@ class RoomCreateForm extends Component {
       maxTerm: maxTerm,
     });
     console.log(moment(this.state.startTime).format("hh:mm a"));
-
-    ApiService.addRoom(roomInfo).then((res) => {
-      this.setState({
-        message: roomInfo.title + "등록",
-      });
-      this.props.history.push("/");
-    });
 
     this.setState({
       title: "",
