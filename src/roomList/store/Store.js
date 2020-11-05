@@ -20,7 +20,7 @@ class Store {
     user = {};
 
     @observable
-    roomList = tileData;
+    tileRooms = tileData;
 
     @observable
     roomName = "";
@@ -39,6 +39,11 @@ class Store {
     }
 
     @computed
+    get getTileRooms() {
+        return this.tileRooms ? this.tileRooms.slice() : [];
+    }
+
+    @computed
     get getErrorMessage() {
         return this.errorMessage ? this.errorMessage : "FAIL";
     }
@@ -50,11 +55,6 @@ class Store {
     @computed
     get getUser() {
         return this.user ? { ...this.user } : {};
-    }
-
-    @computed
-    get getTagList() {
-        return this.tagList ? this.tagList.slice() : [];
     }
 
     @computed
@@ -91,7 +91,7 @@ class Store {
 
     @action
     findMatches = () => {
-        this.roomList = tileData.filter((room) => {
+        this.tileRooms = tileData.filter((room) => {
             // 이 곳에서 검색어와 매치 되는 지를 확인해야 합니다
             const regex = new RegExp(this.roomName, "gi");
             return room.title.match(regex);

@@ -7,13 +7,13 @@ import RoomListView from "../view/RoomListView";
 class RoomListViewContainer extends Component {
     componentDidMount() {
         const { Store } = this.props;
-
-        Store.roomList();
+        Store.initRoomList();
+        // Store.roomList();
     }
 
     render() {
-        //const roomList = this.props.Store.getRoomList;
-        const rooms = this.props.Store.getRoomList;
+        const rooms = this.props.Store.getTileRooms;
+        // const rooms = this.props.Store.getRoomList;
         return <RoomListView rooms={rooms} />;
     }
 }
