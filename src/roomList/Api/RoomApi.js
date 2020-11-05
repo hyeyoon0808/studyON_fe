@@ -4,7 +4,6 @@ class RoomApi {
   URL = "/rooms";
 
   roomList() {
-    console.log("roomLIst");
     return axios
       .get(this.URL)
       .then((response) => {

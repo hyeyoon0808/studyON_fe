@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ApiService from "../Api/ApiService";
 import RoomCreateForm from "../view/RoomCreateForm";
 import Header from "../../header/view/Header";
 import Footer from "../../footer/view/Footer";
@@ -13,21 +12,6 @@ class RoomCreate extends Component {
       message: null,
     };
   }
-
-  componentDidMount() {
-    this.reloadRoomList();
-  }
-  reloadRoomList = () => {
-    ApiService.fetchRooms()
-      .then((res) => {
-        this.setState({
-          roomInfo: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log("reload() Error!", err);
-      });
-  };
 
   handleCreate = (data) => {
     console.log(data);
