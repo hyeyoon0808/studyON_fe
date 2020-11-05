@@ -5,7 +5,8 @@ import Profile from "../images/Profile.png";
 import MyCalendar from "./MyCalendar";
 import Header from "../../header/view/Header";
 
-const MyPages = () => {
+const MyPages = (props) => {
+  // const { user } = props;
   return (
     <div className="mypage">
       <Header />
@@ -16,8 +17,8 @@ const MyPages = () => {
         <div className="profile">
           <strong style={{ fontSize: "25px" }}>Profile</strong>
           <Card className="profileCard">
-            <p>Name: </p>
-            <p>Email: </p>
+            <p>Name: user.name</p>
+            <p>Email: user.email</p>
             <p>Your Point: </p>
           </Card>
         </div>

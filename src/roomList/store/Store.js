@@ -3,12 +3,22 @@ import tileData from "../tileData";
 //1.Mobx Store 클래스 선언
 class Store {
     //2. 관리해야하는 state 객체 @observable 선언 및 초기화
+
+    @observable
+    user = {};
+
     @observable
     roomList = tileData;
 
     @observable
     roomName = "";
     //3. state 데이터 리턴 - @computed get으로 함수 구현
+
+    @computed
+    get getUser() {
+        return this.user ? { ...this.user } : {};
+    }
+
     @computed
     get getRoomList() {
         return this.roomList ? this.roomList.slice() : [];
@@ -17,6 +27,11 @@ class Store {
     @computed
     get getRoomName() {
         return this.roomName;
+    }
+
+    @action
+    async userDetail() {
+        this.user = await this.userApi.userDetail();
     }
 
     @action
