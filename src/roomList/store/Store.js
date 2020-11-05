@@ -1,4 +1,5 @@
 import { observable, computed, action } from "mobx";
+import tagData from "../tagData";
 import tileData from "../tileData";
 //1.Mobx Store 클래스 선언
 class Store {
@@ -8,6 +9,10 @@ class Store {
 
     @observable
     roomName = "";
+
+    @observable
+    tagList = tagData;
+
     //3. state 데이터 리턴 - @computed get으로 함수 구현
     @computed
     get getRoomList() {
@@ -17,6 +22,11 @@ class Store {
     @computed
     get getRoomName() {
         return this.roomName;
+    }
+
+    @computed
+    get getTagList() {
+        return this.tagList ? this.tagList.slice() : [];
     }
 
     @action
@@ -46,6 +56,13 @@ class Store {
     @action
     initRoomList = () => {
         this.roomList = tileData;
+    };
+
+    @action
+    checkedTagList = (checked, id) => {
+        this.tagList = tagData.map((tag) =>
+            tag.id === id ? { ...tag, checked } : tag
+        );
     };
 }
 

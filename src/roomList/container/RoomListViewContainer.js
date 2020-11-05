@@ -10,7 +10,6 @@ class RoomListViewContainer extends Component {
     }
     render() {
         const roomList = this.props.Store.getRoomList;
-        console.log(roomList);
         return <RoomListView roomList={roomList} />;
     }
 }

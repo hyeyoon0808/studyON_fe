@@ -10,10 +10,10 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: "0.125rem 0.25rem",
-        margin: "3rem auto",
+        margin: "1.5rem auto",
         display: "flex",
         alignItems: "center",
-        width: 800,
+        width: "fit-content",
     },
     paper: {
         width: 500,
@@ -66,15 +66,15 @@ export default function SearchBar(props) {
                 </IconButton>
             </Paper>
             {/* 스토어 되는지 확인하는 코드, 눌렀을 때 roomList가 늘어나서 제대로 렌더링 되는지 */}
-            <button onClick={addRoomList}>테스트</button>
+            {/* <button onClick={addRoomList}>테스트</button> */}
             {/* <Link to="/room-create" className={classes.text}>
                 <ButtonTemplate text={"방 만들기"} />
             </Link> */}
 
             {/* 임시적으로 방 입장 버튼 만듬 */}
-            <Link to="/room-entrance" className={classes.text}>
+            {/* <Link to="/room-entrance" className={classes.text}>
                 <ButtonTemplate text={"방 입장"} />
-            </Link>
+            </Link> */}
         </div>
     );
 }
