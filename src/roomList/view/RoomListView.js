@@ -39,9 +39,14 @@ export default function RoomListView(props) {
       <GridList cols={5} cellHeight={180} className={classes.gridList}>
         {rooms?.map((tileData) => {
           return (
-            <GridListTile key={tileData.roomId}>
-              <Link to={`/room-entrance/${tileData.roomId}`}>
-                <img src={tileData.img} className={classes.img} />
+            <GridListTile key={tileData.owner}>
+              <Link to={`/room-entrance/${tileData.owner}`}>
+                {/* <img src={tileData.img} className={classes.img} /> */}
+                <img
+                  src={require("../../home/images/studyon.png")}
+                  alt=""
+                  className={classes.img}
+                />
               </Link>
               <GridListTileBar
                 title={tileData.title}
