@@ -23,12 +23,10 @@ class Store {
     roomList = tileData;
 
     @observable
-    tagList = tagData;
+    roomName = "";
 
-    // @computed
-    // get getRooms() {
-    //   return this.rooms ? { ...this.rooms } : {};
-    // }
+    @observable
+    tagList = tagData;
 
     //3. state 데이터 리턴 - @computed get으로 함수 구현
     // @computed
@@ -52,6 +50,11 @@ class Store {
     @computed
     get getUser() {
         return this.user ? { ...this.user } : {};
+    }
+
+    @computed
+    get getTagList() {
+        return this.tagList ? this.tagList.slice() : [];
     }
 
     @computed

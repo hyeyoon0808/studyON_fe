@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import RoomListView from "./RoomListView";
-import SearchBar from "./SearchBar";
 import Header from "../../header/view/Header";
 import Footer from "../../footer/view/Footer";
 import "../scss/RoomList.scss";
@@ -9,6 +7,7 @@ import RoomEntrance from "../../roomEntrance/view/RoomEntranceView";
 import { Route } from "react-router-dom";
 import RoomListViewContainer from "../container/RoomListViewContainer";
 import RoomEntranceContainer from "../../roomEntrance/container/RoomEntranceContainer";
+import TagView from "./TagView";
 import TagContainer from "../container/TagContainer";
 
 function RoomList({ match }) {
