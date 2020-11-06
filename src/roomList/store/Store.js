@@ -26,11 +26,11 @@ class Store {
   @observable
   tagList = tagData;
 
-  //3. state 데이터 리턴 - @computed get으로 함수 구현
-  @computed
-  get getRoomList() {
-    return this.rooms ? this.rooms.slice() : [];
-  }
+  // //3. state 데이터 리턴 - @computed get으로 함수 구현
+  // @computed
+  // get getRoomList() {
+  //   return this.rooms ? this.rooms.slice() : [];
+  // }
 
   @observable
   roomName = "";
@@ -126,29 +126,43 @@ class Store {
   }
 
   @action
+  setRoom(owner) {
+    this.room = this.rooms.find((room) => room.owner === owner);
+  }
+
+  @action
   async userDetail() {
     this.user = await this.userApi.userDetail();
   }
 
   @action
   findMatches = () => {
-    this.tileRooms = tileData.filter((room) => {
+    this.rooms = this.searchList.filter((room) => {
       // 이 곳에서 검색어와 매치 되는 지를 확인해야 합니다
       const regex = new RegExp(this.roomName, "gi");
       return room.title.match(regex);
     });
   };
 
-  @action
-  initRoomList = () => {
-    this.roomList = tileData;
-  };
+  // @action
+  // initRoomList = () => {
+  //   this.roomList = tileData;
+  // };
 
   @action
   checkedTagList = (checked, id) => {
     this.tagList = tagData.map((tag) =>
       tag.id === id ? { ...tag, checked } : tag
     );
+    this.selectedTag = this.tagList[id];
+    this.rooms = this.searchList.filter((room) => {
+      return room.tag.includes(this.selectedTag.title);
+      // return room.tag === this.selectedTag.title;
+    });
+
+    if (this.tagList.every((tag) => tag.checked === false)) {
+      this.rooms = this.searchList;
+    }
   };
 
   @action
@@ -161,4 +175,4 @@ class Store {
 }
 
 //5. 객체 생성해서 export
-export default new RoomStore();
+export default new Store();

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "../home/view/Home";
-import Login from "../login/view/Login";
+import Login from "../user/view/Login";
 import RoomCreateContainer from "../roomCreate/Container/RoomCreateContainer";
 import RoomList from "../roomList/view/RoomList";
 import RoomEntranceView from "../roomEntrance/view/RoomEntranceView";
