@@ -8,14 +8,14 @@ import { observer, inject } from "mobx-react";
 @observer
 class RoomCreateContainer extends Component {
   onSetRoom = (name, value) => {
-    this.props.RoomStore.setRoomProp(name, value);
+    this.props.Store.setRoomProp(name, value);
   };
 
   onAddRoom = (e) => {
     e.preventDefault();
-    let room = this.props.RoomStore.room;
+    let room = this.props.Store.room;
     console.log(room);
-    this.props.RoomStore.roomCreate(room);
+    this.props.Store.roomCreate(room);
   };
 
   // constructor(props) {
@@ -29,7 +29,7 @@ class RoomCreateContainer extends Component {
 
   render() {
     //const { roomInfo } = this.state;
-    const { room } = this.props.RoomStore;
+    const { room } = this.props.Store;
     return (
       <div>
         <Header />
