@@ -4,6 +4,7 @@ import Home from "../home/view/Home";
 import Login from "../user/view/Login";
 import RoomCreate from "../roomCreate/Container/RoomCreate";
 import RoomList from "../roomList/view/RoomList";
+import Signup from "../user/view/Signup";
 import RoomEntranceView from "../roomEntrance/view/RoomEntranceView";
 import MyPages from "../myPage/view/MyPages";
 import ScrollToTop from "../assets/ScrollToTop";
@@ -19,6 +20,7 @@ class MainRouter extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup}/>
             <Route path="/room-create" component={RoomCreate} />
             <Route path="/room-list" component={RoomList} />
             <Route
