@@ -7,6 +7,7 @@ import tagData from "../tagData";
 
 //1.Mobx Store 클래스 선언
 class Store {
+
     roomApi = new RoomApi();
     //2. 관리해야하는 state 객체 @observable 선언 및 초기화
     @observable
@@ -35,6 +36,10 @@ class Store {
 
     @observable
     searchList = [];
+    
+    //socketId 값 저장
+  @observable
+  mySocketId = "";
 
     //3. state 데이터 리턴 - @computed get으로 함수 구현
     // @computed
@@ -79,7 +84,15 @@ class Store {
     get getSearchList() {
         return this.searchList ? this.searchList.slice() : [];
     }
+@computed
+  get getMySocketId(){
+    return this.mySocketId;
+  }
 
+  @action
+  setMySocketId(mySocketId){
+    this.mySocketId = mySocketId;
+  }
     @action
     setRoomName(roomName) {
         this.roomName = roomName;
