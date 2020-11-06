@@ -6,11 +6,15 @@ import RoomCreateApi from "../../roomCreate/Api/RoomCreateApi";
 //import { actionFieldDecorator } from "mobx/lib/internal";
 import RoomApiModel from "../../roomCreate/Api/model/RoomApiModel";
 import tagData from "../tagData";
+import io from "socket.io-client";
 
 //1.Mobx Store 클래스 선언
 class Store {
   roomApi = new RoomApi();
+  roomCreateApi = new RoomCreateApi();
   //2. 관리해야하는 state 객체 @observable 선언 및 초기화
+  mySocket = io.connect("http://localhost:8000");
+
   @observable
   roomName = "";
 
@@ -43,10 +47,6 @@ class Store {
 
   @observable
   searchList = [];
-
-  //socketId 값 저장
-  @observable
-  mySocketId = "";
 
   //3. state 데이터 리턴 - @computed get으로 함수 구현
   // @computed
@@ -91,10 +91,7 @@ class Store {
   get getSearchList() {
     return this.searchList ? this.searchList.slice() : [];
   }
-  @computed
-  get getMySocketId() {
-    return this.mySocketId;
-  }
+
 
   //4. state 데이터 변경 @action 함수 구현
   @action
@@ -118,8 +115,10 @@ class Store {
       room.breakTime,
       room.maxPeopleNum,
       room.tag,
-      room.maxTerm
+      room.maxTerm,
+      this.mySocket.id
     );
+    console.log(roomApiModel);
     const result = this.roomCreateApi.roomCreate(roomApiModel);
     this.rooms.push(room);
     if (result == null) this.errorMessage = "Create error!!";
