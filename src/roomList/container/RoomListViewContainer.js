@@ -21,11 +21,18 @@ class RoomListViewContainer extends Component {
 
   }
 
-  render() {
-    //const rooms = this.props.Store.getTileRooms;
-    const rooms = this.props.Store.getRoomList;
-    return <RoomListView rooms={rooms} />;
-  }
+    setRoom = (owner) => {
+        this.props.Store.setRoom(owner);
+    };
+
+    render() {
+        //const rooms = this.props.Store.getTileRooms;
+        const rooms = this.props.Store.getRoomList;
+        const room = this.props.Store.getRoom;
+        return (
+            <RoomListView rooms={rooms} room={room} setRoom={this.setRoom} />
+        );
+    }
 }
 
 export default RoomListViewContainer;
