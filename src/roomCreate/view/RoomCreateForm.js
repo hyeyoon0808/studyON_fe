@@ -54,9 +54,15 @@ const RoomCreateForm = (props) => {
             className="form_tag"
             color="secondary"
           >
+            <MenuItem value={"취준"}>취업 준비</MenuItem>
+            <MenuItem value={"토익"}>토익</MenuItem>
             <MenuItem value={"공무원"}>공무원 준비</MenuItem>
-            <MenuItem value={"ncs"}>NCS 준비</MenuItem>
-            <MenuItem value={"수능"}>수능 준비</MenuItem>
+            <MenuItem value={"코딩"}>코딩 연습</MenuItem>
+            <MenuItem value={"기술사"}>기술사 준비</MenuItem>
+            <MenuItem value={"자격증"}>자격증 공부</MenuItem>
+            <MenuItem value={"수능"}>수능 공부</MenuItem>
+            <MenuItem value={"고시"}>고시 준비</MenuItem>
+            <MenuItem value={"오프라인"}>오프라인</MenuItem>
           </Select>
         </div>
 
