@@ -1,7 +1,7 @@
 import moment from "moment";
 
 class RoomApiModel {
-  userId = 98799;
+  userId = 0;
   title = "기본 제목";
   description = "기본 공지";
   startTime = moment().toString();
@@ -9,10 +9,10 @@ class RoomApiModel {
   breakTime = "5";
   //currentPeopleNum = 1;
   maxPeopleNum = 4;
-  tag = "ncs";
+  tag = "토익";
   //currentTerm = 1;
   maxTerm = 6;
-  owner = 98799;
+  owner = this.userId;
 
   constructor(
     title,
@@ -39,7 +39,7 @@ class RoomApiModel {
   }
   getJson() {
     let json = {
-      userId: 9282,
+      userId: 2345,
       roomInfo: {
         title: this.title,
         description: this.description,
@@ -56,8 +56,9 @@ class RoomApiModel {
     };
     return json;
   }
-  // setRoomId(roomId) {
-  //   this.roomId = roomId;
+
+  // setRoomId(userId) {
+  //   this.userId = userId;
   // }
 }
 

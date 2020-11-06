@@ -10,6 +10,7 @@ import tagData from "../tagData";
 //1.Mobx Store 클래스 선언
 class Store {
   roomApi = new RoomApi();
+  roomCreateApi = new RoomCreateApi();
   //2. 관리해야하는 state 객체 @observable 선언 및 초기화
   @observable
   roomName = "";
@@ -118,7 +119,8 @@ class Store {
       room.breakTime,
       room.maxPeopleNum,
       room.tag,
-      room.maxTerm
+      room.maxTerm,
+      room.owner
     );
     const result = this.roomCreateApi.roomCreate(roomApiModel);
     this.rooms.push(room);
@@ -128,6 +130,11 @@ class Store {
   @action
   setRoom(owner) {
     this.room = this.rooms.find((room) => room.owner === owner);
+  }
+
+  @action
+  setRoomName(roomName) {
+    this.roomName = roomName;
   }
 
   @action
