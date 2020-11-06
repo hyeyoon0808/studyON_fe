@@ -2,17 +2,17 @@ import { inject, observer } from "mobx-react";
 import React, { Component } from "react";
 import SearchBar from "../view/SearchBar";
 
-@inject("RoomStore")
+@inject("Store")
 @observer
 class SearchBarContainer extends Component {
   setRoomName = (e) => {
-    this.props.RoomStore.setRoomName(e.target.value);
+    this.props.Store.setRoomName(e.target.value);
   };
   addRoomList = () => {
-    this.props.RoomStore.addRoomList();
+    this.props.Store.addRoomList();
   };
   findMatches = () => {
-    this.props.RoomStore.findMatches();
+    this.props.Store.findMatches();
   };
   render() {
     const roomName = this.props.getRoomName;

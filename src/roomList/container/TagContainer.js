@@ -2,14 +2,14 @@ import { inject, observer } from "mobx-react";
 import React, { Component } from "react";
 import TagView from "../view/TagView";
 
-@inject("RoomStore")
+@inject("Store")
 @observer
 class TagContainer extends Component {
   checkedTagList = (event, id) => {
-    this.props.RoomStore.checkedTagList(event.target.checked, id);
+    this.props.Store.checkedTagList(event.target.checked, id);
   };
   render() {
-    const tagList = this.props.RoomStore.getTagList;
+    const tagList = this.props.Store.getTagList;
     return <TagView tagList={tagList} checkedTagList={this.checkedTagList} />;
   }
 }
