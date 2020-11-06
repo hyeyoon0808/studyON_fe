@@ -28,6 +28,10 @@ class Store {
   @observable
   tagList = tagData;
 
+  //socketId 값 저장
+  @observable
+  mySocketId = "";
+
   //3. state 데이터 리턴 - @computed get으로 함수 구현
   // @computed
   // get getRoomList() {
@@ -62,6 +66,16 @@ class Store {
     return this.tagList ? this.tagList.slice() : [];
   }
 
+  @computed
+  get getMySocketId(){
+    return this.mySocketId;
+  }
+
+  @action
+  setMySocketId(mySocketId){
+    this.mySocketId = mySocketId;
+  }
+  
   @action
   setRoomName(roomName) {
     this.roomName = roomName;
