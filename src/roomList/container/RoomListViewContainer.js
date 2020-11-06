@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import RoomListView from "../view/RoomListView";
 
-@inject("Store")
+@inject("RoomStore")
 @observer
 class RoomListViewContainer extends Component {
   componentDidMount() {
-    const { Store } = this.props;
+    const { RoomStore } = this.props;
     //Store.initRoomList();
-    Store.roomList();
+    RoomStore.roomList();
   }
 
   render() {
     //const rooms = this.props.Store.getTileRooms;
-    const rooms = this.props.Store.getRoomList;
+    const rooms = this.props.RoomStore.getRoomList;
     return <RoomListView rooms={rooms} />;
   }
 }

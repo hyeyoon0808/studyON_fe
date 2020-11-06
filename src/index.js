@@ -6,10 +6,10 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import "antd/dist/antd.css";
 import { Provider } from "mobx-react";
-import Store from "./roomList/store/Store";
+import RoomStore from "./roomList/store/RoomStore";
 
 ReactDOM.render(
-  <Provider Store={Store}>
+  <Provider RoomStore={RoomStore}>
     <BrowserRouter>
       <App />
     </BrowserRouter>

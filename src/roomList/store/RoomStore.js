@@ -1,20 +1,25 @@
 import { observable, computed, action } from "mobx";
+import RoomApi from "../Api/RoomApi";
+import RoomCreateApi from "../../roomCreate/Api/RoomCreateApi";
 //import tileData from "../tileData.json";
 //import axios from "axios";
 //import { actionFieldDecorator } from "mobx/lib/internal";
-import RoomApi from "../Api/RoomApi";
+import RoomApiModel from "../../roomCreate/Api/model/RoomApiModel";
 import tagData from "../tagData";
 import tileData from "../tileData";
+import TimePicker from "rc-time-picker";
 
 //1.Mobx Store 클래스 선언
-class Store {
+class RoomStore {
   roomApi = new RoomApi();
+  roomCreateApi = new RoomCreateApi();
+
   //2. 관리해야하는 state 객체 @observable 선언 및 초기화
   @observable
-  roomName = "";
+  rooms = [];
 
   @observable
-  rooms = [];
+  room = {};
 
   @observable
   user = {};
@@ -29,10 +34,6 @@ class Store {
   tagList = tagData;
 
   //3. state 데이터 리턴 - @computed get으로 함수 구현
-  // @computed
-  // get getRoomList() {
-  //   return this.roomList ? this.roomList.slice() : [];
-  // }
   @computed
   get getRoomList() {
     return this.rooms ? this.rooms.slice() : [];
@@ -62,26 +63,33 @@ class Store {
     return this.tagList ? this.tagList.slice() : [];
   }
 
+  //4. state 데이터 변경 @action 함수 구현
   @action
   setRoomName(roomName) {
     this.roomName = roomName;
   }
 
   @action
-  addRoomList() {
-    const tmpData = {
-      img: "./pomodoro.png",
-      title: "테스트 방",
-      author: "테스트",
-    };
-    this.roomList = [...this.roomList, tmpData];
+  async roomList() {
+    this.rooms = await this.roomApi.roomList();
+    console.log(this.rooms);
   }
 
   @action
-  async roomList() {
-    console.log("roomlist-store");
-    this.rooms = await this.roomApi.roomList();
-    console.log(this.rooms);
+  async roomCreate(room) {
+    const roomApiModel = new RoomApiModel(
+      room.title,
+      room.description,
+      room.startTime,
+      room.studyTime,
+      room.breakTime,
+      room.maxPeopleNum,
+      room.tag,
+      room.maxTerm
+    );
+    const result = this.roomCreateApi.roomCreate(roomApiModel);
+    this.rooms.push(room);
+    if (result == null) this.errorMessage = "Create error!!";
   }
 
   @action
@@ -109,7 +117,15 @@ class Store {
       tag.id === id ? { ...tag, checked } : tag
     );
   };
+
+  @action
+  setRoomProp(name, value) {
+    this.room = {
+      ...this.room,
+      [name]: value,
+    };
+  }
 }
 
 //5. 객체 생성해서 export
-export default new Store();
+export default new RoomStore();
