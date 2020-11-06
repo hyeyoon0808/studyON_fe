@@ -130,6 +130,11 @@ class Store {
   }
 
   @action
+  setRoomName(roomName) {
+    this.roomName = roomName;
+  }
+
+  @action
   async userDetail() {
     this.user = await this.userApi.userDetail();
   }
