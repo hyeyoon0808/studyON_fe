@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import "./Login.css";
-import { KAKAO_AUTH_URL, ACCESS_TOKEN, login } from "../index";
+import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL, KAKAO_AUTH_URL, NAVER_AUTH_URL, ACCESS_TOKEN } from '../constants';
 import { Link, Redirect } from "react-router-dom";
-//import Alert from 'react-s-alert';
-import styled from "styled-components";
+import fbLogo from '../img/fb-logo.png';
+import googleLogo from '../img/google-logo.png';
+import githubLogo from '../img/github-logo.png';
+import kakaoLogo from '../img/kakaolink_btn_medium.png';
+import naverLogo from '../img/naver_green.png';
 import ButtonTemplate from "../../icon/view/ButtonTemplate";
+import Alert from 'react-s-alert';
 
 class Login extends Component {
     componentDidMount() {
@@ -63,6 +67,7 @@ class Login extends Component {
 
 class SocialLogin extends Component {
     render() {
+      console.log(KAKAO_AUTH_URL);
         return (
             <div className="social-login">
                 <a
@@ -102,21 +107,21 @@ class LoginForm extends Component {
 
         const loginRequest = Object.assign({}, this.state);
 
-        login(loginRequest)
-            .then((response) => {
-                localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-                //Alert.success(" 로그인 되었습니다 ! ");
-                alert(" 로그인 되었습니다 ! ");
+        //login(loginRequest)
+            // .then((response) => {
+            //     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+            //     //Alert.success(" 로그인 되었습니다 ! ");
+            //     alert(" 로그인 되었습니다 ! ");
 
-                this.props.history.push("/");
-            })
-            .catch((error) => {
-                // Alert.error((error && error.message) || '아이디 또는 비밀번호가 일치하지 않습니다!');
-                alert(
-                    (error && error.message) ||
-                        "아이디 또는 비밀번호가 일치하지 않습니다!"
-                );
-            });
+            //     this.props.history.push("/");
+            // })
+            // .catch((error) => {
+            //     // Alert.error((error && error.message) || '아이디 또는 비밀번호가 일치하지 않습니다!');
+            //     alert(
+            //         (error && error.message) ||
+            //             "아이디 또는 비밀번호가 일치하지 않습니다!"
+            //     );
+            // });
     }
 
     render() {

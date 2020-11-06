@@ -6,15 +6,14 @@ import RoomCreateApi from "../../roomCreate/Api/RoomCreateApi";
 //import { actionFieldDecorator } from "mobx/lib/internal";
 import RoomApiModel from "../../roomCreate/Api/model/RoomApiModel";
 import tagData from "../tagData";
-import tileData from "../tileData";
-import TimePicker from "rc-time-picker";
 
 //1.Mobx Store 클래스 선언
-class RoomStore {
+class Store {
   roomApi = new RoomApi();
-  roomCreateApi = new RoomCreateApi();
-
   //2. 관리해야하는 state 객체 @observable 선언 및 초기화
+  @observable
+  roomName = "";
+
   @observable
   rooms = [];
 
@@ -24,8 +23,14 @@ class RoomStore {
   @observable
   user = {};
 
-  // @observable
-  // tileRooms = tileData;
+  @observable
+  tagList = tagData;
+
+  //3. state 데이터 리턴 - @computed get으로 함수 구현
+  @computed
+  get getRoomList() {
+    return this.rooms ? this.rooms.slice() : [];
+  }
 
   @observable
   roomName = "";
@@ -33,7 +38,21 @@ class RoomStore {
   @observable
   tagList = tagData;
 
+  @observable
+  selectedTag = "";
+
+  @observable
+  searchList = [];
+
+  //socketId 값 저장
+  @observable
+  mySocketId = "";
+
   //3. state 데이터 리턴 - @computed get으로 함수 구현
+  // @computed
+  // get getRoomList() {
+  //   return this.roomList ? this.roomList.slice() : [];
+  // }
   @computed
   get getRoomList() {
     return this.rooms ? this.rooms.slice() : [];
@@ -59,14 +78,28 @@ class RoomStore {
   }
 
   @computed
+  get getRoom() {
+    return this.room ? { ...this.room } : {};
+  }
+
+  @computed
   get getTagList() {
     return this.tagList ? this.tagList.slice() : [];
   }
 
+  @computed
+  get getSearchList() {
+    return this.searchList ? this.searchList.slice() : [];
+  }
+  @computed
+  get getMySocketId() {
+    return this.mySocketId;
+  }
+
   //4. state 데이터 변경 @action 함수 구현
   @action
-  setRoomName(roomName) {
-    this.roomName = roomName;
+  setMySocketId(mySocketId) {
+    this.mySocketId = mySocketId;
   }
 
   @action

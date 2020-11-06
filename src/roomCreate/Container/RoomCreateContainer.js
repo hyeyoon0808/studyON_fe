@@ -4,7 +4,7 @@ import Header from "../../header/view/Header";
 import Footer from "../../footer/view/Footer";
 import { observer, inject } from "mobx-react";
 
-@inject("RoomStore")
+@inject("Store")
 @observer
 class RoomCreateContainer extends Component {
   onSetRoom = (name, value) => {
