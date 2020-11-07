@@ -102,8 +102,9 @@ class Store {
   @action
   async roomList() {
     this.rooms = await this.roomApi.roomList();
-    console.log(this.rooms);
+    this.searchList = this.rooms;
   }
+
 
   @action
   async roomCreate(room) {
@@ -127,6 +128,11 @@ class Store {
   @action
   setRoom(owner) {
     this.room = this.rooms.find((room) => room.owner === owner);
+  }
+
+  @action
+  setRoomName(roomName) {
+      this.roomName = roomName;
   }
 
   @action
@@ -159,10 +165,10 @@ class Store {
       // return room.tag === this.selectedTag.title;
     });
 
-        if (this.tagList.every((tag) => tag.checked === false)) {
-            this.rooms = this.searchList;
-        }
-    };
+    if (this.tagList.every((tag) => tag.checked === false)) {
+        this.rooms = this.searchList;
+    }
+  };
 
     @action
     setRoomProp(name, value) {
