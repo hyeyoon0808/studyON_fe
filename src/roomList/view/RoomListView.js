@@ -73,8 +73,10 @@ export default function RoomListView(props) {
                                     <span>
                                         {" "}
                                         {room.tag
-                                            .split(" ")
-                                            .map((tag) => `#${tag} `)}
+                                            ? room.tag
+                                                  .split(" ")
+                                                  .map((tag) => `#${tag} `)
+                                            : null}
                                     </span>
                                 }
                                 actionIcon={
