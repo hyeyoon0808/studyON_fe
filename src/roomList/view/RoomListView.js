@@ -14,6 +14,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import ButtonTemplate from "../../icon/view/ButtonTemplate";
+import Divider from "@material-ui/core/Divider";
 
 const UseStyles = makeStyles((theme) => ({
     root: {
@@ -41,7 +42,6 @@ const UseStyles = makeStyles((theme) => ({
 export default function RoomListView(props) {
     const classes = UseStyles();
     const { rooms, room, setRoom } = props;
-
     const [open, setOpen] = useState(false);
     const handleClickOpen = (owner) => {
         setOpen(true);
@@ -52,6 +52,7 @@ export default function RoomListView(props) {
         setOpen(false);
     };
 
+    console.log(rooms);
     return (
         <div className={classes.root}>
             <GridList cols={5} cellHeight={180} className={classes.gridList}>
@@ -68,7 +69,14 @@ export default function RoomListView(props) {
                             />
                             <GridListTileBar
                                 title={room.title}
-                                subtitle={<span># {room.tag}</span>}
+                                subtitle={
+                                    <span>
+                                        {" "}
+                                        {room.tag
+                                            .split(" ")
+                                            .map((tag) => `#${tag} `)}
+                                    </span>
+                                }
                                 actionIcon={
                                     <IconButton
                                         aria-label={`info about ${room.title}`}
@@ -87,16 +95,40 @@ export default function RoomListView(props) {
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
+                className="dialog"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Use Google's location service?"}
+                    {`${room.title}에 입장하시겠습니까?`}
                 </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Let Google help apps determine location. This means
-                        sending anonymous location data to Google, even when no
-                        apps are running.
-                    </DialogContentText>
+                <DialogContent className="big-input-block">
+                    <div class="input-block">
+                        <span>공부 시작 시간</span>
+                        <span>{room.startTime}</span>
+                    </div>
+                    <div class="input-block">
+                        <span>공부 시간</span>
+                        <span>{room.studyTime} 분</span>
+                    </div>
+                    <div class="input-block">
+                        <span>쉬는 시간</span>
+                        <span>{room.breakTime} 분</span>
+                    </div>
+                    <div class="input-block">
+                        <span>현재 인원</span>
+                        <span>1 바꿔야됨</span>
+                    </div>
+                    <div class="input-block">
+                        <span>최대 인원</span>
+                        <span>{room.maxPeopleNum} 명</span>
+                    </div>
+                    <div class="input-block">
+                        <span>현재 싸이클</span>
+                        <span>1 바꿔야됨</span>
+                    </div>
+                    <div class="input-block">
+                        <span>총 싸이클 횟수</span>
+                        <span>{room.maxTerm} 회</span>
+                    </div>
                 </DialogContent>
                 <DialogActions>
                     <Link to={`/room-entrance/${room.owner}`}>
