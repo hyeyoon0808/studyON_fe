@@ -4,13 +4,13 @@ import { login } from '../util/APIUtil';
 import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL, KAKAO_AUTH_URL, NAVER_AUTH_URL, ACCESS_TOKEN } from '../constants';
 
 import { Link, Redirect } from "react-router-dom";
-// import fbLogo from '../img/fb-logo.png';
-// import googleLogo from '../img/google-logo.png';
-// import githubLogo from '../img/github-logo.png';
-// import kakaoLogo from '../img/kakaolink_btn_medium.png';
-// import naverLogo from '../img/naver_green.png';
+import fbLogo from '../img/fb-logo.png';
+import googleLogo from '../img/google-logo.png';
+import githubLogo from '../img/github-logo.png';
+import kakaoLogo from '../img/kakaolink_btn_medium.png';
+import naverLogo from '../img/naver_green.png';
 import ButtonTemplate from "../../icon/view/ButtonTemplate";
-// import Alert from 'react-s-alert';
+ import Alert from 'react-s-alert';
 
 class Login extends Component {
     componentDidMount() {
