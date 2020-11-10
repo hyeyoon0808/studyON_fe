@@ -14,6 +14,8 @@ const RoomEntranceView = ({ match, rooms }) => {
   const params_id = match.params.id;
   //const data = tileData.find((tile) => tile.id === params_id);
   const data = rooms.find((tile) => tile.owner === params_id);
+  console.log(params_id);
+  console.log(rooms);
   // const data = {};
   return (
     <div className="RoomEntrance_wrap" key={data.owner}>
