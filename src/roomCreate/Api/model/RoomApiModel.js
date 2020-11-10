@@ -59,10 +59,6 @@ class RoomApiModel {
     };
     return json;
   }
-
-  // setRoomId(userId) {
-  //   this.userId = userId;
-  // }
 }
 
 export default RoomApiModel;

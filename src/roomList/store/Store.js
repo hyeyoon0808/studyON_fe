@@ -92,7 +92,6 @@ class Store {
     return this.searchList ? this.searchList.slice() : [];
   }
 
-
   //4. state 데이터 변경 @action 함수 구현
   @action
   setMySocketId(mySocketId) {
@@ -105,9 +104,9 @@ class Store {
     this.searchList = this.rooms;
   }
 
-
   @action
   async roomCreate(room) {
+    room.owner = this.mySocket.id;
     const roomApiModel = new RoomApiModel(
       room.title,
       room.description,
@@ -132,7 +131,7 @@ class Store {
 
   @action
   setRoomName(roomName) {
-      this.roomName = roomName;
+    this.roomName = roomName;
   }
 
   @action
@@ -166,17 +165,17 @@ class Store {
     });
 
     if (this.tagList.every((tag) => tag.checked === false)) {
-        this.rooms = this.searchList;
+      this.rooms = this.searchList;
     }
   };
 
-    @action
-    setRoomProp(name, value) {
-        this.room = {
-            ...this.room,
-            [name]: value,
-        };
-    }
+  @action
+  setRoomProp(name, value) {
+    this.room = {
+      ...this.room,
+      [name]: value,
+    };
+  }
 }
 
 //5. 객체 생성해서 export
