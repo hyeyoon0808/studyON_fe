@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "../home/view/Home";
 import Login from "../user/view/Login";
-import RoomCreate from "../roomCreate/Container/RoomCreate";
+import RoomCreateContainer from "../roomCreate/Container/RoomCreateContainer";
 import RoomList from "../roomList/view/RoomList";
 import Signup from "../user/view/Signup";
 import PrivateRoute from '../myPage/PrivateRoute';
@@ -74,7 +74,7 @@ class MainRouter extends Component {
             <Route path="/signup" component={Signup}
             render={(props) => <Signup authenticated={this.state.authenticated} {...props} />}>
             </Route>
-            <Route path="/room-create" component={RoomCreate} />
+            <Route path="/room-create" component={RoomCreateContainer} />
             <Route path="/room-list" component={RoomList} />
             <Route
               path="/room-entrance/:id"
