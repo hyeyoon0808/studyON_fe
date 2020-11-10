@@ -21,6 +21,7 @@ class Header extends Component {
             className="header_logo"
           />
             <div className="button_myPages">
+              
               <Button>
                 <PersonOutlineIcon />
                 <Link to="/profile" className="button_login_text">
