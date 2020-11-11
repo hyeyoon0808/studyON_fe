@@ -7,30 +7,3 @@
     margin: 0 auto;
     margin-bottom: 1rem;
 }
-.big-input-block {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    .input-block {
-        display: flex;
-        flex-direction: column;
-        margin-right: 1rem;
-        padding: 10px 10px 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        margin-bottom: 20px;
-        transition: 0.3s;
-        width: 350px;
-    }
-}
-
-.dialog {
-    margin: 0 auto;
-}
-
-.MuiDialog-paperWidthSm {
-    max-width: 100% !important;
-}
-.MuiPaper-root {
-    width: 800px !important;
-}
