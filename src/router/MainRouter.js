@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "../home/view/Home";
-import Login from "../user/view/Login";
+import Login from "../oauth/view/Login";
+import AppHeader from '../header/view/Header';
 import RoomCreateContainer from "../roomCreate/Container/RoomCreateContainer";
 import RoomList from "../roomList/view/RoomList";
-import Signup from "../user/view/Signup";
-import PrivateRoute from '../myPage/PrivateRoute';
-import { getCurrentUser } from '../user/util/APIUtil';
-import { ACCESS_TOKEN } from '../user/constants';
+import Signup from "../oauth/view/Signup";
+import PrivateRoute from '../common/PrivateRoute';
+import { getCurrentUser } from '../oauth/util/APIUtils';
+import { ACCESS_TOKEN } from '../oauth/constants';
 import Alert from 'react-s-alert';
 import RoomEntranceView from "../roomEntrance/view/RoomEntranceView";
 import MyPages from "../myPage/view/MyPages";
-import NotFound from "../myPage/NotFound";
-import OAuth2RedirectHandler from '../user/OAuthRedirectHandler';
+import OAuth2RedirectHandler from '../oauth/view/OAuth2RedirectHandler';
 import ScrollToTop from "../assets/ScrollToTop";
 import RoomListViewContainer from "../roomList/container/RoomListViewContainer";
 import RoomEntranceContainer from "../roomEntrance/container/RoomEntranceContainer";
@@ -64,11 +64,16 @@ class MainRouter extends Component {
 
   render() {
     return (
+      <div className="app">
+        <div className="app-top-box">
+          <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout} />
+        </div>
       <div>
         <ScrollToTop>
           {/* <BrowserRouter> */}
           <Switch>
             <Route exact path="/" component={Home} />
+            <PrivateRoute path="/profile" component={MyPages} authenticated={this.state.authenticated} currentUser={this.state.currentUser}/>
             <Route path="/login" component={Login}
               render={(props) => <Login authenticated={this.state.authenticated} {...props} />}></Route>
             <Route path="/signup" component={Signup}
@@ -80,12 +85,12 @@ class MainRouter extends Component {
               path="/room-entrance/:id"
               component={RoomEntranceContainer}
             />
-            <PrivateRoute path="/profile" component={MyPages} authenticated={this.state.authenticated} currentUser={this.state.currentUser}/>
+            
             <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route> 
-            <Route component={NotFound}></Route>
           </Switch>
           {/* </BrowserRouter> */}
         </ScrollToTop>
+      </div>
       </div>
     );
   }

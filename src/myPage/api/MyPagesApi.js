@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class MyPagesApi {
-    URL = "/profile"
+    URL = "/mypages"
 
     userDetail() {
         return axios
