@@ -1,5 +1,6 @@
 import { Card } from "antd";
 import React from "react";
+import Timer from "./Timer";
 
 const tabListNoTitle = [
     {
@@ -20,7 +21,7 @@ class TabsCard extends React.Component {
     state = {
         noTitleKey: "timer",
         contentListNoTitle: {
-            timer: <p>타이머~~</p>,
+            timer: <Timer />,
             notice_board: (
                 <div>
                     {this.props.roomData.description.split("\n").map((line) => {
