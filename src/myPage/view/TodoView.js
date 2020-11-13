@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Card, Input } from 'antd';
 import { MinusCircleOutlined, EditOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { Checkbox } from "antd";
 
 class TodoView extends Component {
+
     render() {
         const { Meta } = Card;
 
@@ -39,7 +41,14 @@ class TodoView extends Component {
                             todos.map((todo) => {
                                 return (
                                     <div key={todo.id} onClick={() => onSelectTodo(todo.id)}>
-                                        {todo.title}</div>
+                                        <Checkbox
+                                            onChange={(e) =>
+                                                onSetTodoProp("isChecked", e.target.checked)
+                                            }
+                                        >
+                                            {todo.title}
+                                        </Checkbox>
+                                    </div>
                                 )
                             }
                             )) : (<p>empty</p>)}
