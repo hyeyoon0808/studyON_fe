@@ -11,8 +11,7 @@ class TodoStore {
     todo = {};
 
     @observable
-    date = DateFunction()
-
+    date = DateFunction();
 
     @observable
     dateTodo = [];
@@ -45,7 +44,6 @@ class TodoStore {
     @action
     setDates(date) {
         this.date = date;
-        console.log(date);
     }
 
     @action

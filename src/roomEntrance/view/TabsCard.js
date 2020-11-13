@@ -21,7 +21,7 @@ class TabsCard extends React.Component {
     state = {
         noTitleKey: "timer",
         contentListNoTitle: {
-            timer: <Timer />,
+            timer: <Timer mySocket={this.props.mySocket} owner={this.props.owner}/>,
             notice_board: (
                 <div>
                     {this.props.roomData.description.split("\n").map((line) => {

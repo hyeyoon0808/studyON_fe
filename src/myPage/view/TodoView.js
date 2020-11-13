@@ -4,7 +4,6 @@ import { MinusCircleOutlined, EditOutlined, PlusCircleOutlined } from '@ant-desi
 import { Checkbox } from "antd";
 
 class TodoView extends Component {
-
     render() {
         const { Meta } = Card;
 

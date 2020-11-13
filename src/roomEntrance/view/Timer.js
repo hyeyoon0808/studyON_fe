@@ -10,7 +10,8 @@ import Button from "@material-ui/core/Button";
 
 import "../scss/Timer.scss";
 
-export default function Timer() {
+export default function Timer(props) {
+    const {mySocket, owner} = props;
     const [tag, setTag] = useState(false);
     const [yourID, setYourID] = useState();
     const [role, setRole] = useState("");
@@ -47,7 +48,8 @@ export default function Timer() {
     };
 
     useEffect(() => {
-        socketRef.current = io.connect("http://localhost:8000");
+        console.log(mySocket.id);
+        socketRef.current = mySocket;
         socketRef.current.on("your id", (id) => {
             setYourID(id);
         });
@@ -59,7 +61,11 @@ export default function Timer() {
     }, []);
 
     function sendTimerSign(bool) {
-        if (bool) socketRef.current.emit("timer start sign", "timer start!!");
+        console.log("dddddd");
+        console.log(socketRef.current.id);
+        console.log("okay");
+        if (bool) {socketRef.current.emit("timer start sign", owner,"timer start!!");
+        console.log("okay")}
         else socketRef.current.emit("timer stop sign", "timer stop!!");
     }
 
@@ -77,9 +83,7 @@ export default function Timer() {
     return (
         <div className="App">
             <h1>
-                CountdownCircleTimer
-                <br />
-                React Component
+                StudyON Timer
             </h1>
             <div className="timer-wrapper">
                 <CountdownCircleTimer

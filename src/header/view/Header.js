@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Link, NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "../scss/Navbar.scss";
 import Navbar from "./Navbar/Navbar";
 import Button from "@material-ui/core/Button";
@@ -8,7 +8,6 @@ import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 class Header extends Component {
-  
   render() {
     return (
       <div>
@@ -20,28 +19,26 @@ class Header extends Component {
             alt=""
             className="header_logo"
           />
+          {this.props.authenticated ? (
             <div className="button_myPages">
-            { this.props.authenticated ? (
-                <ul>
-                    <li>
-                        <NavLink to="/profile">Profile</NavLink>
-                    </li>
-                    <li>
-                        <a onClick={this.props.onLogout}>Logout</a>
-                    </li>
-                </ul>
-            ): (
-                <ul>
-                    <li>
-                        <NavLink to="/login">Login</NavLink>        
-                    </li>
-                    <li>
-                        <NavLink to="/signup">Signup</NavLink>        
-                    </li>
-                </ul>
-            )}
-              
+              <Button>
+                <PersonOutlineIcon />
+                <NavLink to="/profile" className="button_login_text">
+                  Mypage
+                </NavLink>
+              </Button>
+              {/* <LogoutButton onLogout={this.props.onLogout} /> */}
             </div>
+          ) : (
+            <div className="button_login">
+              <Button>
+                <AccountCircleIcon />
+                <NavLink to="/login" className="button_login_text">
+                  Login
+                </NavLink>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     );
