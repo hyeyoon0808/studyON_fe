@@ -16,6 +16,7 @@ import OAuth2RedirectHandler from '../oauth/oauth2/OAuth2RedirectHandler';
 import ScrollToTop from "../assets/ScrollToTop";
 import RoomListViewContainer from "../roomList/container/RoomListViewContainer";
 import RoomEntranceContainer from "../roomEntrance/container/RoomEntranceContainer";
+import MyPageContainer from "../myPage/container/MyPageContainer";
 
 class MainRouter extends Component {
   constructor(props) {
@@ -36,17 +37,17 @@ class MainRouter extends Component {
     });
 
     getCurrentUser()
-    .then(response => {
-      this.setState({
-        currentUser: response,
-        authenticated: true,
-        loading: false
+      .then(response => {
+        this.setState({
+          currentUser: response,
+          authenticated: true,
+          loading: false
+        });
+      }).catch(error => {
+        this.setState({
+          loading: false
+        });
       });
-    }).catch(error => {
-      this.setState({
-        loading: false
-      });  
-    });    
   }
 
   handleLogout() {
@@ -63,7 +64,7 @@ class MainRouter extends Component {
   }
 
   render() {
-    if(this.state.loading) {
+    if (this.state.loading) {
       return <LoadingIndicator />
     }
     return (
@@ -72,27 +73,27 @@ class MainRouter extends Component {
           <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout} />
         </div>
         <div>
-        <ScrollToTop>
-          {/* <BrowserRouter> */}
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <PrivateRoute path="/profile" component={MyPages} authenticated={this.state.authenticated} currentUser={this.state.currentUser}/>
-            <Route path="/login" component={Login}
-              render={(props) => <Login authenticated={this.state.authenticated} {...props} />}>
-            </Route>
-            <Route path="/signup" component={Signup}
-              render={(props) => <Signup authenticated={this.state.authenticated} {...props} />}>
-            </Route>
-            <Route path="/room-create" component={RoomCreate} />
-            <Route path="/room-list" component={RoomList} />
-            <Route
-              path="/room-entrance/:id"
-              component={RoomEntranceContainer}
-            />
-            <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route> 
-          </Switch>
-          {/* </BrowserRouter> */}
-        </ScrollToTop>
+          <ScrollToTop>
+            {/* <BrowserRouter> */}
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <PrivateRoute path="/profile" component={MyPages} authenticated={this.state.authenticated} currentUser={this.state.currentUser} />
+              <Route path="/login" component={Login}
+                render={(props) => <Login authenticated={this.state.authenticated} {...props} />}>
+              </Route>
+              <Route path="/signup" component={Signup}
+                render={(props) => <Signup authenticated={this.state.authenticated} {...props} />}>
+              </Route>
+              <Route path="/room-create" component={RoomCreate} />
+              <Route path="/room-list" component={RoomList} />
+              <Route
+                path="/room-entrance/:id"
+                component={RoomEntranceContainer}
+              />
+              <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>
+            </Switch>
+            {/* </BrowserRouter> */}
+          </ScrollToTop>
         </div>
       </div>
     );

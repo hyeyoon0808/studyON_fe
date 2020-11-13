@@ -21,6 +21,8 @@ class TodoContainer extends Component {
         //TodoStore의 setTodoProp(name, value) 호출
         //const {TodoStore} = this.props;
         this.props.TodoStore.setTodoProp(name, value);
+        let todo = this.props.TodoStore.todo
+        console.log(todo);
     };
 
     onAddTodo = () => {
@@ -33,8 +35,10 @@ class TodoContainer extends Component {
     onAddTodos = () => {
         let todos = this.props.TodoStore.todos;
         let date = this.props.TodoStore.date;
-        console.log(date);
+        let dateTodo = this.props.TodoStore.dateTodo;
+        // console.log(date);
         todos = { ...todos, id: date };
+        dateTodo = { date, todos }
         this.props.TodoStore.addTodos(todos);
         console.log(todos);
     };
