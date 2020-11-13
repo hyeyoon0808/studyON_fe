@@ -64,6 +64,7 @@
     "react-big-calendar": "^0.28.1",
     "react-calendar": "^3.1.0",
     "react-calendar-heatmap": "^1.8.1",
+    "react-countdown-circle-timer": "^2.3.7",
     "react-dev-utils": "^10.2.1",
     "react-dom": "^16.14.0",
     "react-draft-wysiwyg": "^1.14.5",
