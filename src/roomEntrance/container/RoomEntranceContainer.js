@@ -25,11 +25,12 @@ class RoomEntranceContainer extends Component {
 
   }
   render() {
+    const {Store} = this.props;
     //const roomList = this.props.Store.getRoomList;
     const rooms = this.props.Store.getRoomList;
     console.log(this.props.match);
     console.log(rooms);
-    return <RoomEntranceView rooms={rooms} match={this.props.match} />;
+    return <RoomEntranceView mySocket={Store.mySocket} rooms={rooms} match={this.props.match} owner={this.props.match.params.id}/>;
   }
 }
 
