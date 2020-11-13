@@ -11,18 +11,18 @@ import Button from "@material-ui/core/Button";
 import "../scss/Timer.scss";
 
 export default function Timer(props) {
-    const {mySocket, owner} = props;
+    const {mySocket, owner, room} = props;
     const [tag, setTag] = useState(false);
     const [yourID, setYourID] = useState();
     const [role, setRole] = useState("");
-    const [study, setStudy] = useState(1500);
-    const [breakTime, setBreak] = useState(300);
+    const [study, setStudy] = useState(room.studyTime * 60);
+    const [breakTime, setBreak] = useState(room.breakTime * 60000);
     const [key, setKey] = useState(0);
     const socketRef = useRef();
     const [remainingTime, setRemainingTime] = useState();
     const [open, setOpen] = React.useState(false);
     const [timer, setTimer] = useState();
-    const [term, setTerm] = useState(1);
+    const [term, setTerm] = useState(room.maxTerm);
 
     const handleOpen = () => {
         setOpen(true);
@@ -65,18 +65,20 @@ export default function Timer(props) {
         console.log(socketRef.current.id);
         console.log("okay");
         if (bool) {socketRef.current.emit("timer start sign", owner,"timer start!!");
-        console.log("okay")}
+        console.log("got it")}
         else socketRef.current.emit("timer stop sign", "timer stop!!");
     }
 
     function handleStudyTime(e) {
         setStudy(e.target.value * 60);
+        //setStudy(room.studyTime * 60);
         setRemainingTime(study);
         setKey(!key);
     }
 
     function handleBreakTime(e) {
-        setBreak(e.target.value * 60000);
+        //setBreak(e.target.value * 60000);
+        setBreak(room.breakTime * 60000);
         setKey(!key);
     }
 
@@ -95,7 +97,7 @@ export default function Timer(props) {
                         setTerm((preTerm) => preTerm + 1);
                         console.log("term: ", term);
                         setOpen(true);
-                        setTimeout(handleClose, 3000);
+                        setTimeout(handleClose, 5000);
                         return [true, breakTime];
                     }}
                 >
