@@ -9,8 +9,9 @@ class CalendarContainer extends Component {
         // bind with an arrow function
         console.log(arg.dateStr);
         const tdate = arg.dateStr;
-        this.props.setDate(tdate);
-        this.props.TodoStore.setDates(tdate);
+        this.setState({ date: tdate });
+        this.props.TodoStore.setDates(this.state.date);
+        console.log(this.state.date);
     };
     render() {
         return <NewCalendar handleDateClick={this.handleDateClick} />;

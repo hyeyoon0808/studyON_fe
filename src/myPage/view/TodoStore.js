@@ -1,4 +1,5 @@
 import { observable, computed, action } from "mobx";
+import DateFunction from "./calendar/DateFunction"
 
 //1.Mobx Store 클래서 선언
 class TodoStore {
@@ -10,7 +11,7 @@ class TodoStore {
     todo = {};
 
     @observable
-    date = {};
+    date = DateFunction();
 
     @observable
     dateTodo = [];
@@ -24,6 +25,11 @@ class TodoStore {
     @computed
     get getTodos() {
         return this.todos ? this.todos.slice() : [];
+    }
+
+    @computed
+    get getDate() {
+        return this.date;
     }
 
     //4.state 데이터 변경 @action 함수 구현

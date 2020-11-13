@@ -5,16 +5,16 @@ import Profile from "../images/Profile.png";
 import Header from "../../header/view/Header";
 import TodoContainer from "./TodoContainer";
 import CalendarContainer from "./calendar/CalendarContainer";
+import { requirePropFactory } from '@material-ui/core';
+// import DateFunction from "./calendar/DateFunction"
+import { inject, observer } from 'mobx-react';
 
+@inject("TodoStore")
+@observer
 class MyPages extends Component {
-    constructor(props) {
-        super(props);
-        console.log(props);
-        this.state ={
-          date: null,
-        }
-    }
+    
     render(){
+      const date = this.props.TodoStore.getDate;
         return (
           <div className="mypage">
             <Header />
@@ -34,11 +34,11 @@ class MyPages extends Component {
       
             <div className="row2">
               <div className="todo">
-                <strong style={{ fontSize: "11px" }}>{this.props.date}</strong>
+                <strong style={{ fontSize: "11px" }}>{date}</strong>
                 <TodoContainer />
        
               </div>
-              <CalendarContainer date={this.state.date} />
+              <CalendarContainer date={date} />
               {/* <div className="calendar">
       
                 </div> */}
