@@ -9,7 +9,7 @@ function onChange(e) {
   console.log(`checked = ${e.target.checked}`);
 }
 
-const RoomEntranceView = ({ mySocket, match, rooms, owner }) => {
+const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
   console.log(rooms);
   const params_id = match.params.id;
   //const data = tileData.find((tile) => tile.id === params_id);
@@ -31,7 +31,7 @@ const RoomEntranceView = ({ mySocket, match, rooms, owner }) => {
           </div>
 
           <div className="RoomEntrance_right">
-            <TabsCard roomData={data} mySocket={mySocket} owner={owner}/>
+            <TabsCard roomData={data} mySocket={mySocket} owner={owner} room={room}/>
           </div>
         </div>
       </div>
