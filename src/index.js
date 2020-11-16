@@ -8,14 +8,15 @@ import "antd/dist/antd.css";
 import { Provider } from "mobx-react";
 import Store from "./roomList/store/Store";
 import TodoStore from "./myPage/view/TodoStore";
+import UserStore from "./oauth/store/UserStore";
 
 ReactDOM.render(
-  <Provider Store={Store} TodoStore={TodoStore}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById("root")
+    <Provider Store={Store} TodoStore={TodoStore} UserStore={UserStore}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
