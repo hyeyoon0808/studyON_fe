@@ -1,11 +1,12 @@
 import { Card } from "antd";
 import React from "react";
 import Timer from "./Timer";
+import { Checkbox } from "antd";
 
 const tabListNoTitle = [
     {
-        key: "timer",
-        tab: "타이머",
+        key: "my_todo_list",
+        tab: "할 일",
     },
     {
         key: "notice_board",
@@ -16,12 +17,16 @@ const tabListNoTitle = [
         tab: "멤버",
     },
 ];
+function onChange(e) {
+    console.log(`checked = ${e.target.checked}`);
+}
 
 class TabsCard extends React.Component {
     state = {
-        noTitleKey: "timer",
+        noTitleKey: "my_todo_list",
         contentListNoTitle: {
-            timer: <Timer mySocket={this.props.mySocket} owner={this.props.owner} room={this.props.room}/>,
+            // timer: <Timer mySocket={this.props.mySocket} owner={this.props.owner} room={this.props.room}/>,
+            my_todo_list: <Checkbox onChange={onChange}>todo....</Checkbox>,
             notice_board: (
                 <div>
                     {this.props.roomData.description.split("\n").map((line) => {
