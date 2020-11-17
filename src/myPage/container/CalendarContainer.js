@@ -5,12 +5,6 @@ import NewCalendar from "../view/NewCalendar";
 @inject("TodoStore")
 @observer
 class CalendarContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      color: "#ffffff",
-    };
-  }
   handleDateClick = (arg) => {
     //console.log(arg.dateStr);
     const tdate = arg.dateStr;
@@ -27,34 +21,37 @@ class CalendarContainer extends Component {
 
   handleClick = () => {
     this.props.TodoStore.setAchievements("만족");
-    this.setState({ color: "#32a852" });
+    this.props.TodoStore.setColors("#32a852");
     let title_achieve = this.props.TodoStore.title_achieve;
     this.onSetAchieveProp("title", title_achieve);
-    let date = this.props.TodoStore.date;
+    let color_achieve = this.props.TodoStore.color_achieve;
+    this.onSetAchieveProp("color", color_achieve);
     let achievement = this.props.TodoStore.achievement;
     this.props.TodoStore.addAchievement(achievement);
   };
   handleClick2 = () => {
     this.props.TodoStore.setAchievements("보통");
-    this.setState({ color: "#fcba03" });
+    this.props.TodoStore.setColors("#fcba03");
     let title_achieve = this.props.TodoStore.title_achieve;
     this.onSetAchieveProp("title", title_achieve);
-    let date = this.props.TodoStore.date;
+    let color_achieve = this.props.TodoStore.color_achieve;
+    this.onSetAchieveProp("color", color_achieve);
     let achievement = this.props.TodoStore.achievement;
     this.props.TodoStore.addAchievement(achievement);
   };
   handleClick3 = () => {
     this.props.TodoStore.setAchievements("불만족");
-    this.setState({ color: "#a83232" });
+    this.props.TodoStore.setColors("#a83232");
     let title_achieve = this.props.TodoStore.title_achieve;
     this.onSetAchieveProp("title", title_achieve);
-    let date = this.props.TodoStore.date;
+    let color_achieve = this.props.TodoStore.color_achieve;
+    this.onSetAchieveProp("color", color_achieve);
     let achievement = this.props.TodoStore.achievement;
     this.props.TodoStore.addAchievement(achievement);
   };
 
   render() {
-    const { color } = this.state;
+    //const { color } = this.state;
     let achievements = this.props.TodoStore.achievements;
     console.log(achievements);
     let achievement_event = achievements.map((achievement) => {
@@ -69,7 +66,6 @@ class CalendarContainer extends Component {
         <NewCalendar
           handleDateClick={this.handleDateClick}
           achievement={achievement_event}
-          color={color}
         />
       </>
     );

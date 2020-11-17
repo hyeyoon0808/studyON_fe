@@ -25,10 +25,13 @@ class TodoStore {
   title_achieve = "불만족";
 
   @observable
+  color_achieve = "#a83232";
+
+  @observable
   achievement = {};
 
   @observable
-  achievements = [{ title: "보통", date: "2020-11-14" }];
+  achievements = [{ title: "보통", date: "2020-11-14", color: "" }];
 
   @observable
   errorMessage = "";
@@ -66,6 +69,11 @@ class TodoStore {
   @action
   setAchievements(title_achieve) {
     this.title_achieve = title_achieve;
+  }
+
+  @action
+  setColors(color_achieve) {
+    this.color_achieve = color_achieve;
   }
 
   @action
