@@ -4,14 +4,9 @@ import TabsCard from "./TabsCard";
 import { Card } from "antd";
 import Timer from "./Timer";
 import { Checkbox } from "antd";
-import PopUp from "./popup/PopUp"
+import AchievementView from "./AchievementView";
 import ButtonTemplate from "../../icon/view/ButtonTemplate";
 import { Link } from "react-router-dom";
-// import tileData from "../../roomList/tileData";
-
-// function onChange(e) {
-//     console.log(`checked = ${e.target.checked}`);
-// }
 
 const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
   console.log(rooms);
@@ -22,9 +17,9 @@ const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
   console.log(rooms);
   // const data = {};
 
-  const [popUp, setPopUp] = useState(false)
+  const [popUp, setPopUp] = useState(false);
 
-  const duringPopUp = popUp ? "during-popup" : ""
+  const duringPopUp = popUp ? "during-popup" : "";
 
   return (
     <>
@@ -52,27 +47,19 @@ const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
     </>
   );
             </Card> */}
-            <TabsCard
-              roomData={data}
-              className="RoomEntrance_left_item"
-            />
+            <TabsCard roomData={data} className="RoomEntrance_left_item" />
 
-            <Card
-              title="Acheivement"
-              className="RoomEntrance_left_item"
-            >
-              <button onClick={() => setPopUp(true)} className={duringPopUp}>Acheivement</button>
+            <Card title="Acheivement" className="RoomEntrance_left_item">
+              <button onClick={() => setPopUp(true)} className={duringPopUp}>
+                Acheivement
+              </button>
             </Card>
           </div>
 
           <div className="RoomEntrance_right">
             {/* <TabsCard roomData={data} mySocket={mySocket} owner={owner} room={room}/> */}
             <Card title="TIMER">
-              <Timer
-                mySocket={mySocket}
-                owner={owner}
-                room={room}
-              />
+              <Timer mySocket={mySocket} owner={owner} room={room} />
             </Card>
             <div className="exit_button">
               <Link to="/room-list">
@@ -82,7 +69,7 @@ const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
           </div>
         </div>
         <div>
-          {popUp && <PopUp setPopUp={setPopUp} mySocket={mySocket} />}
+          {popUp && <AchievementView setPopUp={setPopUp} mySocket={mySocket} />}
         </div>
       </div>
     </>

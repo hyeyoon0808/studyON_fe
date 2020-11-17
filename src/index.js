@@ -7,9 +7,9 @@ import { BrowserRouter } from "react-router-dom";
 import "antd/dist/antd.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Provider } from "mobx-react";
-import Store from "./roomList/store/Store";
-import TodoStore from "./myPage/store/TodoStore";
-import UserStore from "./oauth/store/UserStore";
+import Store from "./store/Store";
+import TodoStore from "./store/TodoStore";
+import UserStore from "./store/UserStore";
 
 ReactDOM.render(
   <Provider Store={Store} TodoStore={TodoStore} UserStore={UserStore}>
