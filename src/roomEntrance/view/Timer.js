@@ -14,6 +14,7 @@ export default function Timer(props) {
     const {mySocket, owner, room} = props;
     const [playing, setPlaying] = useState(false);
     const [yourID, setYourID] = useState();
+    const [count, setCount] = useState(0);
     const [role, setRole] = useState(owner);
     const [study, setStudy] = useState(room.studyTime * 60);
     const [breakTime, setBreak] = useState(room.breakTime * 60000);
@@ -46,6 +47,17 @@ export default function Timer(props) {
         );
     };
 
+    function sendTimerSign(bool) {
+        console.log("dddddd");
+        console.log(socketRef.current.id);
+        console.log("okay");
+        //if(socketRef.current.id === role){
+            if (bool) {socketRef.current.emit("timer start sign", owner,socketRef.current.id +"가 timer start!! "+owner);
+            console.log("got it")}
+            else socketRef.current.emit("timer stop sign", "timer stop!!");
+        //}
+    }
+
     useEffect(() => {
         console.log(mySocket.id);
         socketRef.current = mySocket;
@@ -59,15 +71,11 @@ export default function Timer(props) {
         });
     }, []);
 
-    function sendTimerSign(bool) {
-        console.log("dddddd");
-        console.log(socketRef.current.id);
-        console.log("okay");
-        if(socketRef.current.id === role){
-        if (bool) {socketRef.current.emit("timer start sign", owner,socketRef.current.id +"가 timer start!! "+owner);
-        console.log("got it")}
-        else socketRef.current.emit("timer stop sign", "timer stop!!");
-        }
+
+    function countAlarm(){
+        setCount(count+1);
+        socketRef.current.emit("alarm off", socketRef.current.id, count);
+        setOpen(false)
     }
 
     function handleStudyTime(e) {
@@ -126,7 +134,7 @@ export default function Timer(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button
-                        onClick={() => setOpen(false)}
+                        onClick={countAlarm}
                         color="primary"
                         autoFocus
                     >
