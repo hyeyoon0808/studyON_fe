@@ -1,0 +1,122 @@
+button{
+    border: 2px solid #011627;
+    border-radius: 0.3em;    
+    padding: 0.5em;
+    
+    transition: 0.3s;
+}
+
+button:focus{
+    outline: none;
+}
+
+button:hover{
+    background-color: #20351f;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.during-popup{
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+}
+
+.PopUp{
+    position: fixed;
+
+    left: 25%;
+    top: 30%;
+
+    width: 50%;
+    
+    border: 1px solid #011627;
+    border-radius: 1em;
+    box-shadow: -2px 5px 5px #E71D36;
+
+    background-color:#FDFFFC;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+    color: #011627;
+
+    /* flex-direction: row; */
+    /* flex-wrap: wrap; */
+}
+.study-king-container{
+    display: flex;
+    flex-direction: row;
+    justify-content : space-between;
+    align-items: center;
+}
+.popup-x{
+    width: 3em;
+    height: 2em;
+
+    border: none;
+    border-top-right-radius: 1em;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    
+    align-self: flex-end;
+    justify-self: flex-start;
+    background-color: #c42e2e;
+    color: #ffffff;
+
+}
+
+.left_btn{
+    margin: 0.5em;
+    display: inline-flex;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: #D2B48C
+}
+
+.center_btn{
+    margin: 0.5em;
+    display: inline-flex;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color:#9ACD32
+}
+
+.right_btn{
+    margin: 0.5em;
+    display: inline-flex;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color:#32cd32;
+}
+.pu-img{
+    width: 20%;
+}
+
+.pu-content-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .today-king {
+    display: grid;
+} */
+
+.study-king {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 0;
+}
+
+/* .three-btn {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+} */
