@@ -1,6 +1,6 @@
 import { observable, computed, action } from "mobx";
-import DateFunction from "../container/DateFunction";
-import TodoApi from "../api/TodoApi";
+import DateFunction from "../myPage/container/DateFunction";
+import TodoApi from "../myPage/api/TodoApi";
 
 class TodoStore {
   todoApi = new TodoApi();
