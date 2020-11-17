@@ -35,9 +35,6 @@ class MyPages extends Component {
             <TodoContainer />
           </div>
           <CalendarContainer date={date} />
-          {/* <div className="calendar">
-      
-                </div> */}
         </div>
       </div>
     );

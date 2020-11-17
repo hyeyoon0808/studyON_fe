@@ -7,10 +7,10 @@ class TodoStore {
 
   //observable
   @observable
-  todos = [];
+  todos = [{ title: "default", isChecked: true }];
 
   @observable
-  todo = {};
+  todo = { title: "", isChecked: false };
 
   @observable
   date = DateFunction();
@@ -18,8 +18,17 @@ class TodoStore {
   @observable
   dateTodo = [];
 
+  // @observable
+  // achievement = ["2020-11-14", "2020-11-15"];
+
   @observable
-  achievement = ["2020-11-14", "2020-11-15"];
+  title_achieve = "불만족";
+
+  @observable
+  achievement = {};
+
+  @observable
+  achievements = [{ title: "보통", date: "2020-11-14" }];
 
   @observable
   errorMessage = "";
@@ -54,11 +63,18 @@ class TodoStore {
     this.date = date;
   }
 
-  //   @action
-  //   addTodo(todo) {
-  //     this.todos.push(todo);
-  //     this.todo = {};
-  //   }
+  @action
+  setAchievements(title_achieve) {
+    this.title_achieve = title_achieve;
+  }
+
+  @action
+  setAcheiveProp(name, value) {
+    this.achievement = {
+      ...this.achievement,
+      [name]: value,
+    };
+  }
 
   @action
   async addTodo() {
@@ -69,11 +85,6 @@ class TodoStore {
     }
   }
 
-  //   @action
-  //   removeTodo(id) {
-  //     this.todos = this.todos.filter((element) => element.id !== id);
-  //     this.todo = {};
-  //   }
   @action
   async removeTodo(todoNum) {
     this.todos = this.todos.filter((element) => element.todoNum !== this.todo);
@@ -85,17 +96,8 @@ class TodoStore {
     }
   }
 
-  //   @action
-  //   modifyTodo(todo) {
-  //     this.todos = this.todos.map((element) =>
-  //       element.id === todo.id ? todo : element
-  //     );
-  //     this.todo = {};
-  //   }
-
   @action
   async modifyTodo(todoApiModel) {
-    //todos에서 local todo.todoNum와 같은 객체 수정
     this.todos = this.todos.map((element) =>
       element.todoNum === todoApiModel.todoNum
         ? JSON.stringify(todoApiModel)
@@ -109,15 +111,10 @@ class TodoStore {
     }
   }
 
-  //   @action
-  //   selectTodo(id) {
-  //     this.todo = this.todos.find((element) => element.id === id);
-  //   }
   @action
   async selectTodo(todoNum) {
     console.log("selectTodo");
     console.log(todoNum);
-    //todos에서 id가 같은 todo객체 변경
     // this.todo = this.todos.find((element) => element.id === id);
     this.todo = await this.todoApi.todoDetail(todoNum);
     console.log(this.todo);
@@ -127,8 +124,19 @@ class TodoStore {
   }
 
   @action
-  addAchievement(date) {
-    this.achievement.push(date);
+  async selectAll() {
+    console.log("select all");
+    const todos = await this.todoApi.todoList();
+    console.log(todos);
+    this.todos = todos;
+
+    if (this.todos == null) {
+      return "empty list";
+    }
+  }
+  @action
+  addAchievement(achievement) {
+    this.achievements.push(achievement);
   }
 }
 
