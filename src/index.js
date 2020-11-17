@@ -5,6 +5,7 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import "antd/dist/antd.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Provider } from "mobx-react";
 import Store from "./roomList/store/Store";
 import TodoStore from "./myPage/store/TodoStore";

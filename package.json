@@ -74,6 +74,7 @@
     "react-icons": "^3.11.0",
     "react-kakao-login": "^1.2.3",
     "react-mobx": "0.0.4",
+    "react-responsive-carousel": "^3.2.10",
     "react-router-dom": "^5.2.0",
     "react-s-alert": "^1.4.1",
     "react-scroll": "^1.8.1",
