@@ -6,7 +6,7 @@ import "../scss/calendar.scss";
 
 export default class NewCalendar extends React.Component {
   render() {
-    const { handleDateClick } = this.props;
+    const { handleDateClick, color } = this.props;
     let achievement = this.props.achievement;
     return (
       <div className="calendar_wrap">
@@ -15,7 +15,8 @@ export default class NewCalendar extends React.Component {
           plugins={[dayGridPlugin, interactionPlugin]}
           events={achievement}
           dateClick={handleDateClick}
-          backgroundColor={"#378006"}
+          eventColor={color}
+          //backgroundColor={"#fcba03"}
         />
       </div>
     );

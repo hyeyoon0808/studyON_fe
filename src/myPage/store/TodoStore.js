@@ -18,14 +18,17 @@ class TodoStore {
   @observable
   dateTodo = [];
 
-  @observable
-  achievement = ["2020-11-14", "2020-11-15"];
+  // @observable
+  // achievement = ["2020-11-14", "2020-11-15"];
 
   @observable
   title_achieve = "불만족";
 
-  // @observable
-  // achievement = [{ title_achieve: "보통", date_achieve: "2020-11-14" }];
+  @observable
+  achievement = {};
+
+  @observable
+  achievements = [{ title: "보통", date: "2020-11-14" }];
 
   @observable
   errorMessage = "";
@@ -63,6 +66,14 @@ class TodoStore {
   @action
   setAchievements(title_achieve) {
     this.title_achieve = title_achieve;
+  }
+
+  @action
+  setAcheiveProp(name, value) {
+    this.achievement = {
+      ...this.achievement,
+      [name]: value,
+    };
   }
 
   @action
@@ -123,16 +134,9 @@ class TodoStore {
       return "empty list";
     }
   }
-
-  // @action
-  // addAchievement(date) {
-  //   this.achievement.push(date);
-  // }
-
   @action
-  addAchievement(title_achieve, date) {
-    this.achievement.push(title_achieve);
-    this.achievement.push(date);
+  addAchievement(achievement) {
+    this.achievements.push(achievement);
   }
 }
 

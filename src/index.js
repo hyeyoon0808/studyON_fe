@@ -8,9 +8,10 @@ import "antd/dist/antd.css";
 import { Provider } from "mobx-react";
 import Store from "./roomList/store/Store";
 import TodoStore from "./myPage/store/TodoStore";
+import UserStore from "./oauth/store/UserStore";
 
 ReactDOM.render(
-  <Provider Store={Store} TodoStore={TodoStore}>
+  <Provider Store={Store} TodoStore={TodoStore} UserStore={UserStore}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
