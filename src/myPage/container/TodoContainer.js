@@ -8,10 +8,14 @@ import generateId from "../view/IDGenerator";
 class TodoContainer extends Component {
   componentDidMount() {
     console.log("todoContainer: ");
+    const { todoStore } = this.props;
+    if (todoStore) {
+      todoStore.selectAll();
+    }
   }
 
-  onSelectTodo = (id) => {
-    this.props.TodoStore.selectTodo(id);
+  onSelectTodo = (todoNum) => {
+    this.props.TodoStore.selectTodo(todoNum);
   };
 
   onSetTodoProp = (name, value) => {

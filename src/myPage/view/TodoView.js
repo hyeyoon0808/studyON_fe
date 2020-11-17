@@ -6,13 +6,10 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 import { Checkbox } from "antd";
+import { decorate } from "mobx";
 
 class TodoView extends Component {
   render() {
-    const { Meta } = Card;
-
-    const { TextArea } = Input;
-
     const {
       todo,
       todos,
@@ -23,9 +20,6 @@ class TodoView extends Component {
       onSelectTodo,
     } = this.props;
 
-    // const onChange = e => {
-    //     console.log(e);
-    // };
     return (
       <div>
         <Card
@@ -36,7 +30,9 @@ class TodoView extends Component {
             <MinusCircleOutlined key="delete" onClick={onRemoveTodo} />,
           ]}
         >
-          <strong style={{ fontSize: "25px" }}>Todo List</strong>
+          <strong style={{ fontSize: "25px", textDecoration: "line-through" }}>
+            Todo List
+          </strong>
           <div>
             {Array.isArray(todos) && todos.length ? (
               todos.map((todo) => {
