@@ -60,7 +60,9 @@ const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
             <Card
               title="Acheivement"
               className="RoomEntrance_left_item"
-            ></Card>
+            >
+              <button onClick={() => setPopUp(true)} className={duringPopUp}>Acheivement</button>
+            </Card>
           </div>
 
           <div className="RoomEntrance_right">
@@ -78,6 +80,9 @@ const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
               </Link>
             </div>
           </div>
+        </div>
+        <div>
+          {popUp && <PopUp setPopUp={setPopUp} mySocket={mySocket} />}
         </div>
       </div>
     </>
