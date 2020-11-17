@@ -74,7 +74,7 @@ export default function RoomListView(props) {
                                         {" "}
                                         {room.tag
                                             ? room.tag
-                                                  .split(" ")
+                                                  .split(",")
                                                   .map((tag) => `#${tag} `)
                                             : null}
                                     </span>

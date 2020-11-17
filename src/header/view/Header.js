@@ -13,8 +13,8 @@ import { inject, observer } from "mobx-react";
 class Header extends Component {
     render() {
         const { UserStore } = this.props;
-        const isLogin = this.props.UserStore.getAuthenticated;
-        console.log(isLogin);
+
+        // console.log(isLogin);
         return (
             <div className="header">
                 <Navbar className="navbar" />
