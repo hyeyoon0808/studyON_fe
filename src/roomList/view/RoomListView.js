@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -39,10 +39,14 @@ const UseStyles = makeStyles((theme) => ({
     },
 }));
 
+
+
 export default function RoomListView(props) {
     const classes = UseStyles();
-    const { rooms, room, setRoom } = props;
+    const { rooms, room, setRoom, mySocket } = props;
     const [open, setOpen] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
+    const socketRef = useRef();
     const handleClickOpen = (owner) => {
         setOpen(true);
         setRoom(owner);
@@ -52,6 +56,14 @@ export default function RoomListView(props) {
         setOpen(false);
     };
 
+    useEffect(() => {
+        socketRef.current = mySocket;
+        socketRef.current.on("start", (isPlaying) => {
+            setIsPlaying(isPlaying);
+        });
+    }, []);
+
+    
     console.log(rooms);
     return (
         <div className={classes.root}>
