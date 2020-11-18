@@ -1,16 +1,14 @@
 class TodoApiModel {
-  userId = "";
-  date = "";
-  todoNum = 0;
-  title = "";
-  isChecked = false;
+  userId = 0;
+  desc = "";
+  todoDate = "";
+  isComplete = false;
 
-  constructor(userId, date, todoNum, title, isChecked) {
+  constructor(userId, desc, todoDate, isComplete) {
     this.userId = userId;
-    this.date = date;
-    this.todoNum = todoNum;
-    this.title = title;
-    this.isChecked = isChecked;
+    this.desc = desc;
+    this.todoDate = todoDate;
+    this.isComplete = isComplete;
   }
 }
 
