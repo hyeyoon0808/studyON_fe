@@ -3,7 +3,7 @@ import "../scss/RoomEntrance.scss";
 import TabsCard from "./TabsCard";
 import { Card } from "antd";
 import Timer from "./Timer";
-import AcheivementBoard from "./AcheivementBoard";
+import AcheivementBoard from "./AchievementBoard";
 import { Checkbox } from "antd";
 import AchievementView from "./AchievementView";
 import ButtonTemplate from "../../icon/view/ButtonTemplate";
