@@ -8,6 +8,7 @@ import { Checkbox } from "antd";
 import AchievementView from "./AchievementView";
 import ButtonTemplate from "../../icon/view/ButtonTemplate";
 import { Link } from "react-router-dom";
+import AchievementContainer from "../container/AchievementContainer";
 
 const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
   console.log(rooms);
@@ -15,11 +16,9 @@ const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
   //const data = tileData.find((tile) => tile.id === params_id);
   const data = rooms.find((tile) => tile.owner === params_id);
   console.log(params_id);
-  console.log(rooms);
   // const data = {};
 
   const [popUp, setPopUp] = useState(false);
-
   const duringPopUp = popUp ? "during-popup" : "";
 
   return (
@@ -76,7 +75,14 @@ const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
           </div>
         </div>
         <div>
-          {popUp && <AchievementView setPopUp={setPopUp} mySocket={mySocket} />}
+          {/* {popUp && <AchievementView setPopUp={setPopUp} mySocket={mySocket} />} */}
+          {popUp && (
+            <AchievementContainer
+              popUp={popUp}
+              setPopUp={setPopUp}
+              mySocket={mySocket}
+            />
+          )}
         </div>
       </div>
     </>

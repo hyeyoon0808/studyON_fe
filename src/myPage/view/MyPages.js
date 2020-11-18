@@ -3,6 +3,7 @@ import "../scss/MyPages.scss";
 import { Card } from "antd";
 import Profile from "../images/Profile.png";
 import Header from "../../header/view/Header";
+import Footer from "../../footer/view/Footer";
 import TodoContainer from "../container/TodoContainer";
 import CalendarContainer from "../container/CalendarContainer";
 import { inject, observer } from "mobx-react";
@@ -36,6 +37,7 @@ class MyPages extends Component {
           </div>
           <CalendarContainer date={date} />
         </div>
+        {/* <Footer /> */}
       </div>
     );
   }
