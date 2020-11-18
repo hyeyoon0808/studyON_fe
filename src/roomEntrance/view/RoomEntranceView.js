@@ -3,6 +3,7 @@ import "../scss/RoomEntrance.scss";
 import TabsCard from "./TabsCard";
 import { Card } from "antd";
 import Timer from "./Timer";
+import Acheivement from "./Acheivement";
 import { Checkbox } from "antd";
 import AchievementView from "./AchievementView";
 import ButtonTemplate from "../../icon/view/ButtonTemplate";
@@ -49,10 +50,16 @@ const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
             </Card> */}
             <TabsCard roomData={data} className="RoomEntrance_left_item" />
 
-            <Card title="Acheivement" className="RoomEntrance_left_item">
-              <button onClick={() => setPopUp(true)} className={duringPopUp}>
-                Acheivement
-              </button>
+            <Card
+              title="Acheivement"
+              className="RoomEntrance_left_item"
+            >
+              <Acheivement 
+                mySocket={mySocket}
+                owner={owner}
+                room={room}
+              />
+              <button onClick={() => setPopUp(true)} className={duringPopUp}>Acheivement</button>
             </Card>
           </div>
 
