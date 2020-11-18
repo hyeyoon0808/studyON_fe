@@ -1,16 +1,23 @@
 import { observable, computed, action } from "mobx";
 import DateFunction from "../myPage/container/DateFunction";
 import TodoApi from "../myPage/api/TodoApi";
+import TodoApiModel from "../myPage/api/model/TodoApiModel";
 
 class TodoStore {
   todoApi = new TodoApi();
 
   //observable
   @observable
-  todos = [{ title: "default", isChecked: true }];
+  todos = [];
 
+  //기존에 { title: "default", isChecked: true } 이 형태였음 => 고칠 것
   @observable
-  todo = { title: "", isChecked: false };
+  todo = {
+    userId: "",
+    desc: "",
+    todoDate: "",
+    isComplete: false,
+  };
 
   @observable
   date = DateFunction();
@@ -18,14 +25,11 @@ class TodoStore {
   @observable
   dateTodo = [];
 
-  // @observable
-  // achievement = ["2020-11-14", "2020-11-15"];
-
   @observable
   title_achieve = "불만족";
 
   @observable
-  color_achieve = "#a83232";
+  color_achieve = "";
 
   @observable
   achievement = {};
@@ -85,9 +89,17 @@ class TodoStore {
   }
 
   @action
-  async addTodo() {
-    let result = this.todoApi.todoCreate(this.todo);
-    this.todos = await this.todoApi.todoList();
+  async addTodo(todo) {
+    //todo.userId = 0;
+    const todoApiModel = new TodoApiModel(
+      todo.userId,
+      todo.desc,
+      todo.todoDate,
+      todo.isComplete
+    );
+    console.log(todoApiModel);
+    const result = this.todoApi.todoCreate(todoApiModel);
+    this.todos.push(todo);
     if (result == null) {
       this.errorMessage = "Error Occured while creating new todo";
     }

@@ -18,6 +18,7 @@ class TodoView extends Component {
       onRemoveTodo,
       onModifyTodo,
       onSelectTodo,
+      onTodoCheck,
     } = this.props;
 
     return (
@@ -38,13 +39,7 @@ class TodoView extends Component {
               todos.map((todo) => {
                 return (
                   <div key={todo.id} onClick={() => onSelectTodo(todo.id)}>
-                    <Checkbox
-                      onChange={(e) =>
-                        onSetTodoProp("isChecked", e.target.checked)
-                      }
-                    >
-                      {todo.title}
-                    </Checkbox>
+                    <Checkbox onChange={onTodoCheck}>{todo.desc}</Checkbox>
                   </div>
                 );
               })
@@ -56,9 +51,9 @@ class TodoView extends Component {
             placeholder="enter your todo"
             // allowClear onChange={onChange}
             fluid
-            label="Title"
-            value={todo && todo.title ? todo.title : ""}
-            onChange={(e) => onSetTodoProp("title", e.target.value)}
+            label="desc"
+            value={todo && todo.desc ? todo.desc : ""}
+            onChange={(e) => onSetTodoProp("desc", e.target.value)}
             autoFocus
           />
         </Card>

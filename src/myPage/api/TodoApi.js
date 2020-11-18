@@ -1,13 +1,13 @@
 import axios from "axios";
 
 class TodoApi {
-  URL = "/api/todos/";
+  // URL = "/api/todos/";
+  URL = "/todo";
 
-  todoCreate(todo) {
-    let todoJson = todo;
-    console.log(todoJson);
+  todoCreate(TodoApiModel) {
+    console.log(TodoApiModel);
     return axios
-      .post(this.URL, todoJson)
+      .post(this.URL, TodoApiModel)
       .then((response) => (response && response.data) || null);
   }
 
@@ -17,9 +17,9 @@ class TodoApi {
       .then((response) => (response && response.data) || null);
   }
 
-  todoList() {
+  todoList(userId, todoDate) {
     return axios
-      .get(this.URL)
+      .get(this.URL + `?userId=${userId}&todoDate=${todoDate}`)
       .then((response) => (response && response.data) || null);
   }
 
