@@ -132,14 +132,14 @@ class TodoStore {
   }
 
   @action
-  async selectTodo(todoNum) {
+  async selectTodo(id) {
     console.log("selectTodo");
-    console.log(todoNum);
-    // this.todo = this.todos.find((element) => element.id === id);
-    this.todo = await this.todoApi.todoDetail(todoNum);
+    // console.log(todoNum);
+    this.todo = this.todos.find((element) => element.id === id);
+    // this.todo = await this.todoApi.todoDetail(todoNum);
     console.log(this.todo);
     if (this.todo == null) {
-      this.errorMessage = `Error : There is no Todo named ${todoNum}`;
+      this.errorMessage = `Error : There is no Todo named ${id}`;
     }
   }
 
