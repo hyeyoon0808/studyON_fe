@@ -3,7 +3,7 @@ import "../scss/RoomEntrance.scss";
 import TabsCard from "./TabsCard";
 import { Card } from "antd";
 import Timer from "./Timer";
-import Acheivement from "./Acheivement";
+import AcheivementBoard from "./AcheivementBoard";
 import { Checkbox } from "antd";
 import AchievementView from "./AchievementView";
 import ButtonTemplate from "../../icon/view/ButtonTemplate";
@@ -53,7 +53,7 @@ const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
               title="Acheivement"
               className="RoomEntrance_left_item"
             >
-              <Acheivement 
+              <AcheivementBoard
                 mySocket={mySocket}
                 owner={owner}
                 room={room}
