@@ -29,7 +29,7 @@ class RoomListViewContainer extends Component {
         const room = this.props.Store.getRoom;
         console.log(room);
         return (
-            <RoomListView rooms={rooms} room={room} setRoom={this.setRoom} />
+            <RoomListView rooms={rooms} room={room} setRoom={this.setRoom} mySocket={this.props.Store.mySocket}/>
         );
     }
 }

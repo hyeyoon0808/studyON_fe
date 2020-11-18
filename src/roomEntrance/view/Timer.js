@@ -7,12 +7,15 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-
+import soundUrl from "../images/sound.mp3";
+import Sound from 'react-sound';
 import "../scss/Timer.scss";
+
 
 export default function Timer(props) {
     const {mySocket, owner, room} = props;
     const [playing, setPlaying] = useState(false);
+    const [audioOn, setAudioOn] = useState('');
     const [yourID, setYourID] = useState();
     const [count, setCount] = useState(0);
     const [role, setRole] = useState(owner);
@@ -91,6 +94,8 @@ export default function Timer(props) {
         setKey(!key);
     }
 
+    
+
     return (
         <div className="App">
             <h1>
@@ -113,11 +118,6 @@ export default function Timer(props) {
                     {children}
                 </CountdownCircleTimer>
             </div>
-            {/* <div>
-        <h4>Role</h4>
-        <button onClick={()=> setRole('client')}>Client</button>
-        <button onClick={()=> setRole('server')}>Server</button>
-      </div> */}
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -142,6 +142,15 @@ export default function Timer(props) {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+            {/* <Sound
+                url="audioFile"
+                playStatus={Sound.status.PLAYING}
+                playFromPosition={300}
+                onLoading={this.handleSongLoading}
+                onPlaying={this.handleSongPlaying}
+                onFinishedPlaying={this.handleSongFinishedPlaying}
+            /> */}
 
             <div>
                 <input
