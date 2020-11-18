@@ -16,16 +16,22 @@ export const SidebarData = [
     icon: <AiIcons.AiFillBook />,
     cName: "nav-text",
   },
-  {
-    title: "Create Room",
-    path: "/room-create",
-    icon: <BsFillPeopleFill />,
-    cName: "nav-text",
-  },
-  {
-    title: "Room List",
-    path: "/room-list",
-    icon: <BsFillPersonLinesFill />,
-    cName: "nav-text",
-  },
+  // {
+  //   title: "Create Room",
+  //   path: "/room-create",
+  //   icon: <BsFillPeopleFill />,
+  //   cName: "nav-text",
+  // },
+  // {
+  //   title: "Room List",
+  //   path: "/room-list",
+  //   icon: <BsFillPersonLinesFill />,
+  //   cName: "nav-text",
+  // },
 ];
+
+export const MenuData = [{
+  name: 'Room',
+  icon1: <BsFillPeopleFill />,
+  cName1: 'nav-text1'
+},]

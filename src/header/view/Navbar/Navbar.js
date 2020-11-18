@@ -2,13 +2,36 @@ import React, { useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { SidebarData } from "./SidebarData";
+import { SidebarData, MenuData } from "./SidebarData";
 import "../../scss/Navbar.scss";
 import { IconContext } from "react-icons";
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Collapse from '@material-ui/core/Collapse';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '10%',
+    maxWidth: 30,
+    backgroundColor: theme.palette.background.paper,
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
+}));
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const handleClick = (e) => {
+    setOpen(!open);
+    e.stopPropagation()
+  }
+
   return (
     <>
       <IconContext.Provider value={{ color: "black" }}>
@@ -35,6 +58,35 @@ function Navbar() {
                   </Link>
                 </li>
               );
+            })}
+            {MenuData.map((MenuData, index1) => {
+              return (
+                <div>
+                  <div key={index1} className={MenuData.cName1} onClick={(e) => handleClick(e)}>
+                    <div className="aa">
+                      {MenuData.icon1}
+                      <span style={{ margin: '16px' }}>{MenuData.name}</span>
+                    </div>
+                    {/* {open ? <ExpandLess /> : <ExpandMore />} */}
+                  </div>
+                  <Collapse in={open} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                      <Link to="/room-create">
+                        <ListItem button className={classes.nested}>
+                          <ListItemText primary="Create" style={{ color: 'black' }} />
+                        </ListItem>
+                      </Link>
+                    </List>
+                    <List component="div" disablePadding>
+                      <Link to="/room-list">
+                        <ListItem button className={classes.nested}>
+                          <ListItemText primary="Search" style={{ color: 'black' }} />
+                        </ListItem>
+                      </Link>
+                    </List>
+                  </Collapse>
+                </div>
+              )
             })}
           </ul>
         </nav>
