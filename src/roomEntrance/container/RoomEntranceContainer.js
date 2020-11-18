@@ -11,8 +11,8 @@ class RoomEntranceContainer extends Component {
     const currentUser=UserStore.getCurrentUser;
     console.log("roomentrance did mount!!!");
     // Store.roomList();
-    Store.mySocket.emit("enter room", {owner: this.props.match.params.id, userId: Store.mySocket.id});
-    //Store.mySocket.emit("enter room", {owner: this.props.match.params.id, userId: this.props.currentUser.id});
+    //Store.mySocket.emit("enter room", {owner: this.props.match.params.id, userId: Store.mySocket.id});
+    Store.mySocket.emit("enter room", {owner: this.props.match.params.id, userId: currentUser.name});
     Store.mySocket.on("enter event", (res) => {
       console.log(res + "가 입장!");
     })
@@ -27,17 +27,16 @@ class RoomEntranceContainer extends Component {
 
 
   }
-  render() {
-    const {Store} = this.props;
-    
+  render() {    
     //const roomList = this.props.Store.getRoomList;
     const mySocket=this.props.Store.mySocket;
     const room = this.props.Store.getRoom;
     const rooms = this.props.Store.getRoomList;
+    const currentUser=this.props.UserStore.getCurrentUser;
     console.log(this.props.match);
     console.log(rooms);
     
-    return <RoomEntranceView mySocket={mySocket} room={room} rooms={rooms} match={this.props.match} owner={this.props.match.params.id}/>;
+    return <RoomEntranceView mySocket={mySocket} room={room} rooms={rooms} match={this.props.match} owner={this.props.match.params.id} currentUser={currentUser}/>;
   }
 }
 

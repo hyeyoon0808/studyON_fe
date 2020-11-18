@@ -13,7 +13,7 @@ import "../scss/Timer.scss";
 
 
 export default function Timer(props) {
-    const {mySocket, owner, room} = props;
+    const {mySocket, owner, room, currentUser} = props;
     const [playing, setPlaying] = useState(false);
     const [audioOn, setAudioOn] = useState('');
     const [yourID, setYourID] = useState();
@@ -77,7 +77,7 @@ export default function Timer(props) {
 
     function countAlarm(){
         setCount(count+1);
-        socketRef.current.emit("alarm off", socketRef.current.id, count);
+        socketRef.current.emit("alarm off", owner, currentUser.name, count);
         setOpen(false)
     }
 

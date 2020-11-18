@@ -3,14 +3,14 @@ import "../scss/RoomEntrance.scss";
 import TabsCard from "./TabsCard";
 import { Card } from "antd";
 import Timer from "./Timer";
-import Acheivement from "./Acheivement";
+import AcheivementBoard from "./AchievementBoard";
 import { Checkbox } from "antd";
 import AchievementView from "./AchievementView";
 import ButtonTemplate from "../../icon/view/ButtonTemplate";
 import { Link } from "react-router-dom";
 import AchievementContainer from "../container/AchievementContainer";
 
-const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
+const RoomEntranceView = ({ mySocket, room, rooms, match, owner, currentUser }) => {
   console.log(rooms);
   const params_id = match.params.id;
   //const data = tileData.find((tile) => tile.id === params_id);
@@ -50,22 +50,23 @@ const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
             <TabsCard roomData={data} className="RoomEntrance_left_item" />
 
             <Card
-              title="Acheivement"
+              title="실적 게시판"
               className="RoomEntrance_left_item"
             >
-              <Acheivement 
+              <AcheivementBoard
                 mySocket={mySocket}
                 owner={owner}
                 room={room}
+                currentUser={currentUser}
               />
-              <button onClick={() => setPopUp(true)} className={duringPopUp}>Acheivement</button>
+              <button onClick={() => setPopUp(true)} className={duringPopUp}>실적 게시판</button>
             </Card>
           </div>
 
           <div className="RoomEntrance_right">
             {/* <TabsCard roomData={data} mySocket={mySocket} owner={owner} room={room}/> */}
             <Card title="TIMER">
-              <Timer mySocket={mySocket} owner={owner} room={room} />
+              <Timer mySocket={mySocket} owner={owner} room={room} currentUser={currentUser}/>
             </Card>
             <div className="exit_button">
               <Link to="/room-list">

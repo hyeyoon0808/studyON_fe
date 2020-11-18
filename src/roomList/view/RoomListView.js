@@ -45,7 +45,7 @@ export default function RoomListView(props) {
     const classes = UseStyles();
     const { rooms, room, setRoom, mySocket } = props;
     const [open, setOpen] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(true);
+    const [isPlaying, setIsPlaying] = useState(false);
     const socketRef = useRef();
     const handleClickOpen = (owner) => {
         setOpen(true);
