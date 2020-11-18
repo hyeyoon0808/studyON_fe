@@ -39,13 +39,13 @@ class TodoView extends Component {
               todos.map((todo) => {
                 return (
                   <div key={todo.id} onClick={() => onSelectTodo(todo.id)}>
-                    <Checkbox onChange={onTodoCheck}>{todo.desc}</Checkbox>
+                    <Checkbox onChange={onTodoCheck} />{todo.desc}
                   </div>
                 );
               })
             ) : (
-              <p>empty</p>
-            )}
+                <p>empty</p>
+              )}
           </div>
           <Input
             placeholder="enter your todo"
