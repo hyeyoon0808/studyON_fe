@@ -11,50 +11,49 @@ import { inject, observer } from "mobx-react";
 @inject("UserStore")
 @observer
 class Header extends Component {
-    render() {
-        const { UserStore } = this.props;
+  render() {
+    const { UserStore } = this.props;
 
-        // console.log(isLogin);
-        return (
-            <div className="header">
-                <Navbar className="navbar" />
-                <img
-                    src={require("../images/logo_mini1.gif")}
-                    alt=""
-                    className="header_logo"
-                />
-                {UserStore.getAuthenticated ? (
-                    <div className="button_login">
-                        <Button>
-                            <PersonOutlineIcon />
-                            <NavLink
-                                to="/profile"
-                                className="button_login_text"
-                            >
-                                Mypage
-                            </NavLink>
-                        </Button>
-                        <Button onClick={UserStore.handleLogout}>
-                            <AccountCircleIcon />
-                            <NavLink to="/" className="button_login_text">
-                                Logout
-                            </NavLink>
-                        </Button>
-                        {/* <LogoutButton onLogout={this.props.onLogout} /> */}
-                    </div>
-                ) : (
-                    <div className="button_login">
-                        <Button>
-                            <AccountCircleIcon />
-                            <NavLink to="/login" className="button_login_text">
-                                Login
-                            </NavLink>
-                        </Button>
-                    </div>
-                )}
-            </div>
-        );
-    }
+    // console.log(isLogin);
+    return (
+      <div className="header">
+        <Navbar className="navbar" />
+        <NavLink to="/">
+          <img
+            src={require("../images/logo_mini1.gif")}
+            alt=""
+            className="header_logo"
+          />
+        </NavLink>
+        {UserStore.getAuthenticated ? (
+          <div className="button_login">
+            <Button>
+              <PersonOutlineIcon />
+              <NavLink to="/profile" className="button_login_text">
+                Mypage
+              </NavLink>
+            </Button>
+            <Button onClick={UserStore.handleLogout}>
+              <AccountCircleIcon />
+              <NavLink to="/" className="button_login_text">
+                Logout
+              </NavLink>
+            </Button>
+            {/* <LogoutButton onLogout={this.props.onLogout} /> */}
+          </div>
+        ) : (
+          <div className="button_login">
+            <Button>
+              <AccountCircleIcon />
+              <NavLink to="/login" className="button_login_text">
+                Login
+              </NavLink>
+            </Button>
+          </div>
+        )}
+      </div>
+    );
+  }
 }
 
 export default Header;

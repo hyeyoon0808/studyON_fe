@@ -28,18 +28,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AchievementView = (props) => {
-  // function that takes boolean as param to conditionally display popup
   const { setPopUp, mySocket } = props;
-
   // const [studyKings, setStudyKings] = useState();
-
   const classes = useStyles();
-
   const studyKings = studyKing;
   // useEffect(() => {
   //     mySocket.on("study king", studyKings);
   //     setStudyKings(studyKings);
   // })
+
+  const { onClickSatisfy, onClickUsually, onClickDissatisfy } = props;
 
   return (
     <div className="PopUp">
@@ -66,13 +64,13 @@ const AchievementView = (props) => {
       </div>
       {/* button controls */}
       <div classes="three-btn">
-        <button onClick={() => setPopUp(false)} className="left_btn">
+        <button onClick={onClickDissatisfy} className="left_btn">
           불만족!
         </button>
-        <button onClick={() => setPopUp(false)} className="center_btn">
+        <button onClick={onClickUsually} className="center_btn">
           보통!
         </button>
-        <button onClick={() => setPopUp(false)} className="right_btn">
+        <button onClick={onClickSatisfy} className="right_btn">
           만족!
         </button>
       </div>
