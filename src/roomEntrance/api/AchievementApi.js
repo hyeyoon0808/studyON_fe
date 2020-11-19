@@ -3,15 +3,9 @@ import axios from "axios";
 class AchievementApi {
   URL = "/todo-oneday";
 
-  todoDetail(id) {
+  achievementList(month, userId) {
     return axios
-      .get(this.URL + `/${id}`)
-      .then((response) => (response && response.data) || null);
-  }
-
-  todoList(userId, todoDate) {
-    return axios
-      .get(this.URL + `?userId=${userId}&todoDate=${todoDate}`)
+      .get(this.URL + `?month=${month}&userId=${userId}`)
       .then((response) => (response && response.data) || null);
   }
 

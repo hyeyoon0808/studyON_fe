@@ -12,7 +12,6 @@ class TodoStore {
   @observable
   todos = [];
 
-  //기존에 { title: "default", isChecked: true } 이 형태였음 => 고칠 것
   @observable
   todo = {
     userId: "",
@@ -22,19 +21,19 @@ class TodoStore {
   };
 
   @observable
-  dateTodo = {};
+  dateTodo = {}; //하루의 todo 리스트 조회
+
+  @observable
+  monthAchievement = []; //한달 동안의 성취도 조회
 
   @observable
   date = DateFunction();
 
   @observable
-  title_achieve = "불만족";
+  achievement = {}; //{title: "good", date: "2020-11-15"}
 
   @observable
-  achievement = {};
-
-  @observable
-  achievements = [{ title: "보통", date: "2020-11-14", color: "" }];
+  achievements = []; //achievement 합친 배열
 
   @observable
   errorMessage = "";
@@ -72,11 +71,6 @@ class TodoStore {
   @action
   setDates(date) {
     this.date = date;
-  }
-
-  @action
-  setAchievements(title_achieve) {
-    this.title_achieve = title_achieve;
   }
 
   @action
@@ -156,13 +150,24 @@ class TodoStore {
   @action
   async todoList(userId, todoDate) {
     this.dateTodo = await this.todoApi.todoList(userId, todoDate);
-    console.log(this.dateTodo);
+    //console.log(this.dateTodo);
   }
+
   @action
   async achievementSave(id, achievment) {
     console.log(id, achievment);
     this.achievementApi.achievementSave(id, achievment);
     console.log(this.dateTodo);
+  }
+
+  @action
+  async achievementList(month, userId) {
+    console.log(month, userId);
+    this.monthAchievement = await this.achievementApi.achievementList(
+      month,
+      userId
+    );
+    return this.monthAchievement;
   }
 }
 
