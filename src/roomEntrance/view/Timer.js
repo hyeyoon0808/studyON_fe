@@ -12,11 +12,7 @@ import Sound from "react-sound";
 import "../scss/Timer.scss";
 
 export default function Timer(props) {
-<<<<<<< HEAD
-    const { mySocket, owner, room, updateIsPlaying } = props;
-=======
-    const {mySocket, owner, room, currentUser} = props;
->>>>>>> 323f5857dbe98e402775dfba9eefd136c40a7982
+    const { mySocket, owner, room, currentUser, updateIsPlaying } = props;
     const [playing, setPlaying] = useState(false);
     const [audioOn, setAudioOn] = useState("");
     const [yourID, setYourID] = useState();
@@ -71,7 +67,7 @@ export default function Timer(props) {
     }
 
     useEffect(() => {
-        console.log("mysocket", mySocket.id);
+        console.log(mySocket.id);
         socketRef.current = mySocket;
         socketRef.current.on("your id", (id) => {
             setYourID(id);
@@ -83,18 +79,10 @@ export default function Timer(props) {
         });
     }, []);
 
-<<<<<<< HEAD
     function countAlarm() {
         setCount(count + 1);
-        socketRef.current.emit("alarm off", socketRef.current.id, count);
-        setOpen(false);
-=======
-
-    function countAlarm(){
-        setCount(count+1);
         socketRef.current.emit("alarm off", owner, currentUser.name, count);
-        setOpen(false)
->>>>>>> 323f5857dbe98e402775dfba9eefd136c40a7982
+        setOpen(false);
     }
 
     function handleStudyTime(e) {
@@ -135,7 +123,6 @@ export default function Timer(props) {
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
-                style={{ width: "50%", margin: "0 auto" }}
             >
                 <DialogTitle id="alert-dialog-title">
                     {"쉬는시간 시작"}
@@ -146,11 +133,7 @@ export default function Timer(props) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button
-                        style={{ backgroundColor: "#ff8080" }}
-                        onClick={countAlarm}
-                        autoFocus
-                    >
+                    <Button onClick={countAlarm} color="primary" autoFocus>
                         Okay
                     </Button>
                 </DialogActions>

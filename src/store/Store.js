@@ -31,9 +31,6 @@ class Store {
     roomName = "";
 
     @observable
-    tagList = tagData;
-
-    @observable
     selectedTag = "";
 
     @observable
