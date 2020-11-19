@@ -12,7 +12,7 @@ class TodoView extends Component {
   render() {
     const {
       todo,
-      todos,
+      dateTodo,
       onSetTodoProp,
       onAddTodo,
       onRemoveTodo,
@@ -35,17 +35,28 @@ class TodoView extends Component {
             Todo List
           </strong>
           <div>
-            {Array.isArray(todos) && todos.length ? (
-              todos.map((todo) => {
+            {Array.isArray(dateTodo.todos) && dateTodo.todos.length ? (
+              dateTodo.todos.map((todo) => {
                 return (
                   <div key={todo.id} onClick={() => onSelectTodo(todo.id)}>
-                    <Checkbox onChange={onTodoCheck}>{todo.desc}</Checkbox>
+                    <Checkbox onChange={onTodoCheck} />
+                    {todo.desc}
                   </div>
                 );
               })
             ) : (
               <p>empty</p>
             )}
+
+            {/* 가데이터
+            {dateTodo.todos.map((todo) => {
+              return (
+                <div key={todo.id} onClick={() => onSelectTodo(todo.id)}>
+                  <Checkbox onChange={onTodoCheck} />
+                  {todo.desc}
+                </div>
+              );
+            })} */}
           </div>
           <Input
             placeholder="enter your todo"

@@ -11,9 +11,9 @@ class TodoApi {
       .then((response) => (response && response.data) || null);
   }
 
-  todoDetail(todoNum) {
+  todoDetail(id) {
     return axios
-      .get(this.URL + `${todoNum}/`)
+      .get(this.URL + `/${id}`)
       .then((response) => (response && response.data) || null);
   }
 
@@ -25,15 +25,14 @@ class TodoApi {
 
   todoModify(todoApiModel) {
     let todoJson = JSON.stringify(todoApiModel);
-
     return axios
       .put(this.URL, todoJson)
       .then((response) => (response && response.data) || null);
   }
 
-  todoDelete(todoNum) {
+  todoDelete(id) {
     return axios
-      .delete(this.URL + `${todoNum}/`)
+      .delete(this.URL + `/${id}`)
       .then((response) => (response && response.data) || null);
   }
 }

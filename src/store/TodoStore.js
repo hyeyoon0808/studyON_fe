@@ -2,9 +2,11 @@ import { observable, computed, action } from "mobx";
 import DateFunction from "../myPage/container/DateFunction";
 import TodoApi from "../myPage/api/TodoApi";
 import TodoApiModel from "../myPage/api/model/TodoApiModel";
+import AchievementApi from "../roomEntrance/api/AchievementApi";
 
 class TodoStore {
   todoApi = new TodoApi();
+  achievementApi = new AchievementApi();
 
   //observable
   @observable
@@ -20,16 +22,13 @@ class TodoStore {
   };
 
   @observable
+  dateTodo = {};
+
+  @observable
   date = DateFunction();
 
   @observable
-  dateTodo = [];
-
-  @observable
   title_achieve = "불만족";
-
-  @observable
-  color_achieve = "";
 
   @observable
   achievement = {};
@@ -49,6 +48,11 @@ class TodoStore {
   @computed
   get getTodos() {
     return this.todos ? this.todos.slice() : [];
+  }
+
+  @computed
+  get getDateTodo() {
+    return this.dateTodo ? { ...this.dateTodo } : {};
   }
 
   @computed
@@ -73,11 +77,6 @@ class TodoStore {
   @action
   setAchievements(title_achieve) {
     this.title_achieve = title_achieve;
-  }
-
-  @action
-  setColors(color_achieve) {
-    this.color_achieve = color_achieve;
   }
 
   @action
@@ -106,13 +105,14 @@ class TodoStore {
   }
 
   @action
-  async removeTodo(todoNum) {
-    this.todos = this.todos.filter((element) => element.todoNum !== this.todo);
+  async removeTodo(id) {
+    this.dateTodo.todos = this.dateTodo.todos.filter(
+      (element) => element.id !== this.todo
+    );
     this.todo = {};
-
-    let result = this.todoApi.todoDelete(todoNum);
+    let result = this.todoApi.todoDelete(id);
     if (result == null) {
-      this.errorMessage = `Error : There is no Todo with todoNum ${todoNum} `;
+      this.errorMessage = `Error : There is no Todo with todoNum ${id} `;
     }
   }
 
@@ -132,31 +132,37 @@ class TodoStore {
   }
 
   @action
-  async selectTodo(todoNum) {
-    console.log("selectTodo");
-    console.log(todoNum);
-    // this.todo = this.todos.find((element) => element.id === id);
-    this.todo = await this.todoApi.todoDetail(todoNum);
+  async selectTodo(id) {
+    console.log("id: " + id);
+    this.todo = this.dateTodo.todos.find((element) => element.id === id);
+    //this.todo = await this.todoApi.todoDetail(id);
     console.log(this.todo);
     if (this.todo == null) {
-      this.errorMessage = `Error : There is no Todo named ${todoNum}`;
+      this.errorMessage = `Error : There is no Todo named ${id}`;
     }
   }
 
-  @action
-  async selectAll() {
-    console.log("select all");
-    const todos = await this.todoApi.todoList();
-    console.log(todos);
-    this.todos = todos;
+  // @action
+  // async selectAll() {
+  //   console.log("select all");
+  //   const dateTodo = await this.todoApi.todoList();
+  //   this.dateTodo.push(dateTodo);
+  //   this.todos = todos;
+  //   if (this.todos == null) {
+  //     return "empty list";
+  //   }
+  // }
 
-    if (this.todos == null) {
-      return "empty list";
-    }
+  @action
+  async todoList(userId, todoDate) {
+    this.dateTodo = await this.todoApi.todoList(userId, todoDate);
+    console.log(this.dateTodo);
   }
   @action
-  addAchievement(achievement) {
-    this.achievements.push(achievement);
+  async achievementSave(id, achievment) {
+    console.log(id, achievment);
+    this.achievementApi.achievementSave(id, achievment);
+    console.log(this.dateTodo);
   }
 }
 
