@@ -9,27 +9,34 @@ import AchievementView from "./AchievementView";
 import ButtonTemplate from "../../icon/view/ButtonTemplate";
 import { Link } from "react-router-dom";
 
-const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
-  console.log(rooms);
-  const params_id = match.params.id;
-  //const data = tileData.find((tile) => tile.id === params_id);
-  const data = rooms.find((tile) => tile.owner === params_id);
-  console.log(params_id);
-  console.log(rooms);
-  // const data = {};
+const RoomEntranceView = ({
+    mySocket,
+    room,
+    rooms,
+    match,
+    owner,
+    updateIsPlaying,
+}) => {
+    console.log(rooms);
+    const params_id = match.params.id;
+    //const data = tileData.find((tile) => tile.id === params_id);
+    const data = rooms.find((tile) => tile.owner === params_id);
+    console.log(params_id);
+    console.log(rooms);
+    // const data = {};
 
-  const [popUp, setPopUp] = useState(false);
+    const [popUp, setPopUp] = useState(false);
 
-  const duringPopUp = popUp ? "during-popup" : "";
+    const duringPopUp = popUp ? "during-popup" : "";
 
-  return (
-    <>
-      <div className="RoomEntrance_wrap" key={data.owner}>
-        <div className="RoomEntrance_title">{data.title}</div>
+    return (
+        <>
+            <div className="RoomEntrance_wrap" key={data.owner}>
+                <div className="RoomEntrance_title">{data.title}</div>
 
-        <div className="RoomEntrance_container">
-          <div className="RoomEntrance_left">
-            {/* <Card title="MY TODO LIST" className="RoomEntrance_left_item">
+                <div className="RoomEntrance_container">
+                    <div className="RoomEntrance_left">
+                        {/* <Card title="MY TODO LIST" className="RoomEntrance_left_item">
               <Checkbox onChange={onChange}>todo....</Checkbox>
             </Card>
             <Card title="Acheivement" className="RoomEntrance_left_item">
@@ -48,39 +55,57 @@ const RoomEntranceView = ({ mySocket, room, rooms, match, owner }) => {
     </>
   );
             </Card> */}
-            <TabsCard roomData={data} className="RoomEntrance_left_item" />
+                        <TabsCard
+                            roomData={data}
+                            className="RoomEntrance_left_item"
+                        />
 
-            <Card
-              title="Acheivement"
-              className="RoomEntrance_left_item"
-            >
-              <Acheivement 
-                mySocket={mySocket}
-                owner={owner}
-                room={room}
-              />
-              <button onClick={() => setPopUp(true)} className={duringPopUp}>Acheivement</button>
-            </Card>
-          </div>
+                        <Card
+                            title="Acheivement"
+                            className="RoomEntrance_left_item"
+                        >
+                            <Acheivement
+                                mySocket={mySocket}
+                                owner={owner}
+                                room={room}
+                            />
+                            <button
+                                onClick={() => setPopUp(true)}
+                                className={duringPopUp}
+                            >
+                                Achievement
+                            </button>
+                        </Card>
+                    </div>
 
-          <div className="RoomEntrance_right">
-            {/* <TabsCard roomData={data} mySocket={mySocket} owner={owner} room={room}/> */}
-            <Card title="TIMER">
-              <Timer mySocket={mySocket} owner={owner} room={room} />
-            </Card>
-            <div className="exit_button">
-              <Link to="/room-list">
-                <ButtonTemplate text={"방 나가기"} />
-              </Link>
+                    <div className="RoomEntrance_right">
+                        {/* <TabsCard roomData={data} mySocket={mySocket} owner={owner} room={room}/> */}
+                        <Card title="TIMER">
+                            <Timer
+                                updateIsPlaying={updateIsPlaying}
+                                mySocket={mySocket}
+                                owner={owner}
+                                room={room}
+                            />
+                        </Card>
+                        <div className="exit_button">
+                            <Link to="/room-list">
+                                <ButtonTemplate text={"방 나가기"} />
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    {popUp && (
+                        <AchievementView
+                            setPopUp={setPopUp}
+                            mySocket={mySocket}
+                        />
+                    )}
+                </div>
             </div>
-          </div>
-        </div>
-        <div>
-          {popUp && <AchievementView setPopUp={setPopUp} mySocket={mySocket} />}
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 };
 
 export default RoomEntranceView;

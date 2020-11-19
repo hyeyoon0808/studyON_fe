@@ -26,6 +26,7 @@
 
 .dialog {
     margin: 0 auto;
+    // font-family: "GmarketSansTTF Medium";
 }
 
 .MuiDialog-paperWidthSm {
@@ -33,4 +34,8 @@
 }
 .MuiPaper-root {
     width: 800px !important;
+}
+
+.content-title {
+    font-family: "GmarketSansTTF Medium";
 }

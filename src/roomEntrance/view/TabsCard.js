@@ -2,6 +2,7 @@ import { Card } from "antd";
 import React from "react";
 import Timer from "./Timer";
 import { Checkbox } from "antd";
+import ButtonTemplate from "../../icon/view/ButtonTemplate";
 
 const tabListNoTitle = [
     {
@@ -28,7 +29,7 @@ class TabsCard extends React.Component {
             // timer: <Timer mySocket={this.props.mySocket} owner={this.props.owner} room={this.props.room}/>,
             my_todo_list: <Checkbox onChange={onChange}>todo....</Checkbox>,
             notice_board: (
-                <div>
+                <div style={{ minHeight: "300px", position: "relative" }}>
                     {this.props.roomData.description.split("\n").map((line) => {
                         return (
                             <span>
@@ -60,6 +61,16 @@ class TabsCard extends React.Component {
                     }}
                 >
                     {this.state.contentListNoTitle[this.state.noTitleKey]}
+                    {this.state.noTitleKey === "notice_board" ? (
+                        <ButtonTemplate
+                            style={{
+                                position: "absoulte",
+                                bottom: 0,
+                                float: "right",
+                            }}
+                            text={"수정"}
+                        />
+                    ) : null}
                 </Card>
             </>
         );
