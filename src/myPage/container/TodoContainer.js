@@ -8,14 +8,14 @@ import generateId from "../view/IDGenerator";
 class TodoContainer extends Component {
   componentDidMount() {
     console.log("todoContainer: ");
-    const { todoStore } = this.props;
-    if (todoStore) {
-      todoStore.selectAll();
-    }
+    const { TodoStore } = this.props;
+    let currentUser = this.props.UserStore.currentUser;
+    let date = this.props.TodoStore.date;
+    TodoStore.todoList(currentUser.id, date);
   }
 
-  onSelectTodo = (todoNum) => {
-    this.props.TodoStore.selectTodo(todoNum);
+  onSelectTodo = (id) => {
+    this.props.TodoStore.selectTodo(id);
   };
 
   onSetTodoProp = (name, value) => {
@@ -35,8 +35,11 @@ class TodoContainer extends Component {
   };
 
   onRemoveTodo = () => {
-    let todo = this.props.TodoStore.todo;
-    this.props.TodoStore.removeTodo(todo.todoNum);
+    //let todo = this.props.TodoStore.todo;
+    let dateTodo = this.props.TodoStore.dateTodo;
+    dateTodo.todos.find((todo) => {
+      return this.props.TodoStore.removeTodo(todo.id);
+    });
   };
 
   onModifyTodo = () => {
@@ -52,11 +55,13 @@ class TodoContainer extends Component {
 
   render() {
     const { todo } = this.props.TodoStore;
-    const todos = this.props.TodoStore.getTodos;
+    // const todos = this.props.TodoStore.getTodos;
+    const dateTodo = this.props.TodoStore.getDateTodo;
     return (
       <TodoView
         todo={todo}
-        todos={todos}
+        // todos={todos}
+        dateTodo={dateTodo}
         onSetTodoProp={this.onSetTodoProp}
         onAddTodo={this.onAddTodo}
         onRemoveTodo={this.onRemoveTodo}
