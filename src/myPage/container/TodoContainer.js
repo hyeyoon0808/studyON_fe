@@ -3,7 +3,7 @@ import { observer, inject } from "mobx-react";
 import TodoView from "../view/TodoView";
 import generateId from "../view/IDGenerator";
 
-@inject("TodoStore")
+@inject("TodoStore", "UserStore")
 @observer
 class TodoContainer extends Component {
   componentDidMount() {
@@ -24,10 +24,14 @@ class TodoContainer extends Component {
   };
 
   onAddTodo = () => {
+    let currentUser = this.props.UserStore.currentUser;
+    this.onSetTodoProp("userId", currentUser.id);
+    let date = this.props.TodoStore.date;
+    this.onSetTodoProp("todoDate", date);
     let todo = this.props.TodoStore.todo;
-    console.log(JSON.stringify(todo));
     //todo = { ...todo, id: generateId(5) };
     this.props.TodoStore.addTodo(todo);
+    console.log(JSON.stringify(todo));
   };
 
   onRemoveTodo = () => {
@@ -38,6 +42,12 @@ class TodoContainer extends Component {
   onModifyTodo = () => {
     let todo = this.props.TodoStore.todo;
     this.props.TodoStore.modifyTodo(todo);
+  };
+
+  onTodoCheck = (e) => {
+    this.onSetTodoProp("isComplete", e.target.checked);
+    let todo = this.props.TodoStore.todo;
+    console.log(todo);
   };
 
   render() {
@@ -52,6 +62,7 @@ class TodoContainer extends Component {
         onRemoveTodo={this.onRemoveTodo}
         onModifyTodo={this.onModifyTodo}
         onSelectTodo={this.onSelectTodo}
+        onTodoCheck={this.onTodoCheck}
       />
     );
   }

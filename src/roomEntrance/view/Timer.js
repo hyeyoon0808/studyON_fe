@@ -12,7 +12,11 @@ import Sound from "react-sound";
 import "../scss/Timer.scss";
 
 export default function Timer(props) {
+<<<<<<< HEAD
     const { mySocket, owner, room, updateIsPlaying } = props;
+=======
+    const {mySocket, owner, room, currentUser} = props;
+>>>>>>> 323f5857dbe98e402775dfba9eefd136c40a7982
     const [playing, setPlaying] = useState(false);
     const [audioOn, setAudioOn] = useState("");
     const [yourID, setYourID] = useState();
@@ -79,10 +83,18 @@ export default function Timer(props) {
         });
     }, []);
 
+<<<<<<< HEAD
     function countAlarm() {
         setCount(count + 1);
         socketRef.current.emit("alarm off", socketRef.current.id, count);
         setOpen(false);
+=======
+
+    function countAlarm(){
+        setCount(count+1);
+        socketRef.current.emit("alarm off", owner, currentUser.name, count);
+        setOpen(false)
+>>>>>>> 323f5857dbe98e402775dfba9eefd136c40a7982
     }
 
     function handleStudyTime(e) {
