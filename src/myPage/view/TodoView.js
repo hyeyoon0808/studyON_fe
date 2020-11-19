@@ -60,7 +60,7 @@ class TodoView extends Component {
           </div>
           <Input
             placeholder="enter your todo"
-            // allowClear onChange={onChange}
+            //allowClear onChange={onChange}
             fluid
             label="desc"
             value={todo && todo.desc ? todo.desc : ""}
