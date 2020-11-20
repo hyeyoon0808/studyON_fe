@@ -37,6 +37,11 @@ class RoomEntranceContainer extends Component {
             owner: this.props.match.params.id,
         });
     }
+    updateIsPlaying = () => {
+        const { Store } = this.props;
+        let room = this.props.Store.room;
+        Store.updateIsPlaying(room);
+    };
     render() {
         //const roomList = this.props.Store.getRoomList;
         const mySocket = this.props.Store.mySocket;

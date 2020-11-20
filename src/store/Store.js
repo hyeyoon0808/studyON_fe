@@ -106,7 +106,7 @@ class Store {
 
     @action
     async updateIsPlaying(room) {
-        room.owner = this.mySocket.id;
+        // room.owner = this.mySocket.id;
         room.isPlaying = true;
         const roomApiModel = new RoomApiModel(
             room.title,
@@ -117,7 +117,7 @@ class Store {
             room.maxPeopleNum,
             room.tag,
             room.maxTerm,
-            this.mySocket.id,
+            room.owner,
             room.isPlaying
         );
         console.log(roomApiModel);
