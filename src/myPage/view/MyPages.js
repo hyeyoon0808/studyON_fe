@@ -8,7 +8,7 @@ import TodoContainer from "../container/TodoContainer";
 import CalendarContainer from "../container/CalendarContainer";
 import { inject, observer } from "mobx-react";
 
-@inject("TodoStore")
+@inject("TodoStore", "UserStore")
 @observer
 class MyPages extends Component {
   render() {
@@ -25,7 +25,7 @@ class MyPages extends Component {
             <Card className="profileCard">
               <p>Name: {this.props.currentUser.name}</p>
               <p>Email: {this.props.currentUser.email}</p>
-              <p>Your Point: </p>
+              <p>Your Point: {this.props.UserStore.getCurPoint}</p>
             </Card>
           </div>
         </div>
