@@ -30,7 +30,7 @@ class TodoStore {
   date = DateFunction();
 
   @observable
-  achievement = {}; //{title: "good", date: "2020-11-15"}
+  achievement = {}; //{title: "good", date: "2020-11-15", color: "#ffffff"}
 
   @observable
   achievements = []; //achievement 합친 배열
@@ -105,15 +105,7 @@ class TodoStore {
       todo.todoDate,
       todo.complete
     );
-    // this.dateTodo.todos = this.dateTodo.todos.map((element) =>
-    //   element.id === todoApiModel ? JSON.stringify(todoApiModel) : element
-    // );
-
     this.todoApi.todoModify(todoApiModel, todo.id);
-    // this.todo = {};
-    // if (result == null) {
-    //   this.errorMessage = `Error : cannot modify Todo No.${id}`;
-    // }
   }
 
   @action
@@ -139,16 +131,16 @@ class TodoStore {
     }
   }
 
-  // @action
-  // async selectAll() {
-  //   console.log("select all");
-  //   const dateTodo = await this.todoApi.todoList();
-  //   this.dateTodo.push(dateTodo);
-  //   this.todos = todos;
-  //   if (this.todos == null) {
-  //     return "empty list";
-  //   }
-  // }
+  @action
+  async selectAll() {
+    console.log("select all");
+    const dateTodo = await this.todoApi.todoList();
+    this.dateTodo.push(dateTodo);
+    // this.todos = todos;
+    if (this.todos == null) {
+      return "empty list";
+    }
+  }
 
   @action
   async todoList(userId, todoDate) {

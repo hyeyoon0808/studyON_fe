@@ -11,6 +11,14 @@ class TodoContainer extends Component {
     let currentUser = this.props.UserStore.currentUser;
     let date = this.props.TodoStore.date;
     TodoStore.todoList(currentUser.id, date);
+    this.props.TodoStore.todo = {};
+  }
+
+  componentDidUpdate() {
+    const { TodoStore } = this.props;
+    let currentUser = this.props.UserStore.currentUser;
+    let date = this.props.TodoStore.date;
+    TodoStore.todoList(currentUser.id, date);
   }
 
   onSelectTodo = (id) => {
@@ -30,7 +38,6 @@ class TodoContainer extends Component {
     let todo = this.props.TodoStore.todo;
     //todo = { ...todo, id: generateId(5) };
     this.props.TodoStore.addTodo(todo);
-    console.log(JSON.stringify(todo));
   };
 
   onRemoveTodo = () => {
