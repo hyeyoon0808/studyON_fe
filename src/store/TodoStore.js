@@ -17,7 +17,7 @@ class TodoStore {
     userId: "",
     desc: "",
     todoDate: "",
-    isComplete: false,
+    complete: false,
   };
 
   @observable
@@ -83,12 +83,11 @@ class TodoStore {
 
   @action
   async addTodo(todo) {
-    //todo.userId = 0;
     const todoApiModel = new TodoApiModel(
       todo.userId,
       todo.desc,
       todo.todoDate,
-      todo.isComplete
+      todo.complete
     );
     console.log(todoApiModel);
     const result = this.todoApi.todoCreate(todoApiModel);
@@ -96,6 +95,25 @@ class TodoStore {
     if (result == null) {
       this.errorMessage = "Error Occured while creating new todo";
     }
+  }
+
+  @action
+  async modifyTodo(todo) {
+    const todoApiModel = new TodoApiModel(
+      todo.userId,
+      todo.desc,
+      todo.todoDate,
+      todo.complete
+    );
+    // this.dateTodo.todos = this.dateTodo.todos.map((element) =>
+    //   element.id === todoApiModel ? JSON.stringify(todoApiModel) : element
+    // );
+
+    this.todoApi.todoModify(todoApiModel, todo.id);
+    // this.todo = {};
+    // if (result == null) {
+    //   this.errorMessage = `Error : cannot modify Todo No.${id}`;
+    // }
   }
 
   @action
@@ -107,21 +125,6 @@ class TodoStore {
     let result = this.todoApi.todoDelete(id);
     if (result == null) {
       this.errorMessage = `Error : There is no Todo with todoNum ${id} `;
-    }
-  }
-
-  @action
-  async modifyTodo(todoApiModel) {
-    this.todos = this.todos.map((element) =>
-      element.todoNum === todoApiModel.todoNum
-        ? JSON.stringify(todoApiModel)
-        : element
-    );
-    this.todo = {};
-
-    let result = this.todoApi.todoModify(todoApiModel);
-    if (result == null) {
-      this.errorMessage = `Error : cannot modify Todo No.${todoApiModel.title}`;
     }
   }
 
