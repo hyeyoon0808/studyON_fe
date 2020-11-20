@@ -16,25 +16,27 @@ class RoomEntranceContainer extends Component {
             owner: this.props.match.params.id,
             userId: currentUser.name,
         });
-        Store.mySocket.on("enter event", (res) => {
+        Store.mySocket.on("enter event", (owner, res) => {
             console.log(res + "가 입장!");
+            Store.mySocket.emit("send user", owner, res);
         });
         Store.mySocket.on("leave event", (res) => {
             console.log(res + "가 나감!");
         });
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const { Store } = this.props;
+        Store.mySocket.on("enter event", (owner, res) => {
+            Store.mySocket.emit("send user", owner, res);
+        });
+    }
     componentWillUnmount() {
         const { Store } = this.props;
         Store.mySocket.emit("leave room", {
             owner: this.props.match.params.id,
         });
     }
-    updateIsPlaying = () => {
-        const { Store } = this.props;
-        let room = this.props.Store.room;
-        Store.updateIsPlaying(room);
-    };
     render() {
         //const roomList = this.props.Store.getRoomList;
         const mySocket = this.props.Store.mySocket;

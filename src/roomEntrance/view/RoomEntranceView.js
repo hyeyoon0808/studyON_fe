@@ -53,10 +53,11 @@ const RoomEntranceView = ({
         </div>
         </div>
     </>
-    );
-  </Card> */}
+  );
+            </Card> */}
                         <TabsCard
                             roomData={data}
+                            mySocket={mySocket}
                             className="RoomEntrance_left_item"
                         />
 
