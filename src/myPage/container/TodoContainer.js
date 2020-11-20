@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
 import TodoView from "../view/TodoView";
-import generateId from "../view/IDGenerator";
 
 @inject("TodoStore", "UserStore")
 @observer
@@ -44,11 +43,12 @@ class TodoContainer extends Component {
 
   onModifyTodo = () => {
     let todo = this.props.TodoStore.todo;
-    this.props.TodoStore.modifyTodo(todo);
+    console.log("////", todo.id);
+    this.props.TodoStore.modifyTodo(todo, todo.id);
   };
 
   onTodoCheck = (e) => {
-    this.onSetTodoProp("isComplete", e.target.checked);
+    this.onSetTodoProp("complete", e.target.checked);
     let todo = this.props.TodoStore.todo;
     console.log(todo);
   };
