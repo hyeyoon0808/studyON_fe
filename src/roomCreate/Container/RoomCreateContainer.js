@@ -4,7 +4,7 @@ import Header from "../../header/view/Header";
 import Footer from "../../footer/view/Footer";
 import { observer, inject } from "mobx-react";
 
-@inject("Store")
+@inject("Store", "UserStore")
 @observer
 class RoomCreateContainer extends Component {
   onSetRoom = (name, value) => {
@@ -21,6 +21,20 @@ class RoomCreateContainer extends Component {
     // console.log(owner);
   };
 
+  subHundredPoint = () => {
+    const { UserStore } = this.props;
+    let curPoint = UserStore.getCurPoint;
+    const setCurPoint = UserStore.setCurPoint;
+    curPoint = curPoint - 100;
+    console.log(curPoint);
+    setCurPoint(curPoint);
+  }
+
+  onHandleClick = (e) => {
+    this.onAddRoom(e);
+    this.subHundredPoint();
+  }
+
   render() {
     //const { roomInfo } = this.state;
     const { room, mySocket } = this.props.Store;
@@ -29,8 +43,8 @@ class RoomCreateContainer extends Component {
         <Header />
         <RoomCreateForm
           room={room}
+          onHandleClick={this.onHandleClick}
           onSetRoom={this.onSetRoom}
-          onAddRoom={this.onAddRoom}
           mySocket={mySocket}
         />
       </div>

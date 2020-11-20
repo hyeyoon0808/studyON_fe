@@ -122,7 +122,7 @@ const UseStyles = makeStyles((theme) => ({
 
 export default function RoomListView(props) {
     const classes = UseStyles();
-    const { rooms, room, setRoom, mySocket } = props;
+    const { rooms, room, setRoom, mySocket, subFiftyPoint } = props;
     const [open, setOpen] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const socketRef = useRef();
@@ -173,8 +173,8 @@ export default function RoomListView(props) {
                                         {" "}
                                         {room.tag
                                             ? room.tag
-                                                  .split(",")
-                                                  .map((tag) => `#${tag} `)
+                                                .split(",")
+                                                .map((tag) => `#${tag} `)
                                             : null}
                                     </span>
                                 }
@@ -245,29 +245,29 @@ export default function RoomListView(props) {
                     </DialogContent>
                     <DialogActions>
                         <Link to={`/room-entrance/${room.owner}`}>
-                            <ButtonTemplate text={"방 입장"} />
+                            <ButtonTemplate text={"방 입장"} onClick={subFiftyPoint} />
                         </Link>
                     </DialogActions>
                 </Dialog>
             ) : (
-                <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                    className="dialog"
-                >
-                    <DialogTitle
-                        id="alert-dialog-title"
-                        className="dialog-title"
+                    <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                        className="dialog"
                     >
-                        이미 공부 시작된 방입니다!
+                        <DialogTitle
+                            id="alert-dialog-title"
+                            className="dialog-title"
+                        >
+                            이미 공부 시작된 방입니다!
                     </DialogTitle>
-                    <DialogActions>
-                        <ButtonTemplate onClick={handleClose} text={"나가기"} />
-                    </DialogActions>
-                </Dialog>
-            )}
+                        <DialogActions>
+                            <ButtonTemplate onClick={handleClose} text={"나가기"} />
+                        </DialogActions>
+                    </Dialog>
+                )}
         </div>
     );
 }

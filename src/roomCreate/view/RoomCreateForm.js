@@ -11,7 +11,7 @@ import tagData from "../../roomList/tagData";
 import Chip from "@material-ui/core/Chip";
 
 const RoomCreateForm = (props) => {
-  const { mySocket, room, onAddRoom, onSetRoom } = props;
+  const { mySocket, room, onSetRoom, onHandleClick } = props;
   const [tagName, setTagName] = React.useState([]);
 
   const handleChange = (event) => {
@@ -76,7 +76,7 @@ const RoomCreateForm = (props) => {
               <MenuItem
                 key={tag.id}
                 value={tag.title}
-                // style={getStyles(name, personName, theme)}
+              // style={getStyles(name, personName, theme)}
               >
                 {tag.title}
               </MenuItem>
@@ -103,7 +103,7 @@ const RoomCreateForm = (props) => {
           <TimePicker
             value={room.startTime}
             onChange={(e) => onSetRoom("startTime", e)}
-            //name="startTime"
+          //name="startTime"
           />
         </div>
         <div>
@@ -150,7 +150,7 @@ const RoomCreateForm = (props) => {
           variant="contained"
           color="secondary"
           type="submit"
-          onClick={onAddRoom}
+          onClick={onHandleClick}
         >
           <Link to={`/room-entrance/${mySocket.id}`} className="button_text">
             등록
