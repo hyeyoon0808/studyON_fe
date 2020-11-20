@@ -2,6 +2,7 @@ import { Card } from "antd";
 import React from "react";
 import Timer from "./Timer";
 import { Checkbox } from "antd";
+import RoomMember from "./RoomMember";
 
 const tabListNoTitle = [
     {
@@ -21,7 +22,22 @@ function onChange(e) {
     console.log(`checked = ${e.target.checked}`);
 }
 
+
+
 class TabsCard extends React.Component {
+    state ={
+        name:"hello",
+    }
+    member() {
+        this.props.mySocket.on("방 멤버", (res) => {
+            console.log("test"+ res + "test");
+            this.setState({name: res});
+            console.log("test"+ this.state.name + "test");
+          })
+    }
+
+    
+    
     state = {
         noTitleKey: "my_todo_list",
         contentListNoTitle: {
@@ -39,7 +55,14 @@ class TabsCard extends React.Component {
                     })}
                 </div>
             ),
-            member: <p>멤버~~</p>,
+            member: <>
+            {/* <RoomMember
+                        mySocket={this.props.mySocket}
+                    /> */}
+                    <div>
+                        {this.state.name}
+                    </div>
+                    </>
         },
     };
 
