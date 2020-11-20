@@ -23,6 +23,7 @@ class TodoContainer extends Component {
 
   onSelectTodo = (id) => {
     this.props.TodoStore.selectTodo(id);
+    console.log("id", id);
   };
 
   onSetTodoProp = (name, value) => {
@@ -36,28 +37,27 @@ class TodoContainer extends Component {
     let date = this.props.TodoStore.date;
     this.onSetTodoProp("todoDate", date);
     let todo = this.props.TodoStore.todo;
-    //todo = { ...todo, id: generateId(5) };
     this.props.TodoStore.addTodo(todo);
+    this.props.TodoStore.todo = {};
   };
 
   onRemoveTodo = () => {
-    //let todo = this.props.TodoStore.todo;
-    let dateTodo = this.props.TodoStore.dateTodo;
-    dateTodo.todos.find((todo) => {
-      return this.props.TodoStore.removeTodo(todo.id);
-    });
+    let todo = this.props.TodoStore.todo;
+    console.log("removeId: ", todo.id);
+    this.props.TodoStore.removeTodo(todo.id);
   };
 
   onModifyTodo = () => {
     let todo = this.props.TodoStore.todo;
-    console.log("////", todo.id);
+    console.log("modifyId: ", todo.id);
     this.props.TodoStore.modifyTodo(todo, todo.id);
+    this.props.TodoStore.todo = {};
   };
 
   onTodoCheck = (e) => {
     this.onSetTodoProp("complete", e.target.checked);
     let todo = this.props.TodoStore.todo;
-    console.log(todo);
+    this.props.TodoStore.modifyTodo(todo, todo.id);
   };
 
   render() {
