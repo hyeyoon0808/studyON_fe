@@ -39,7 +39,7 @@ class TodoView extends Component {
               dateTodo.todos.map((todo) => {
                 return (
                   <div key={todo.id} onClick={() => onSelectTodo(todo.id)}>
-                    <Checkbox onChange={onTodoCheck} />
+                    <Checkbox onChange={onTodoCheck} checked={todo.complete} />
                     {todo.desc}
                   </div>
                 );

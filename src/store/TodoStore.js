@@ -131,16 +131,16 @@ class TodoStore {
     }
   }
 
-  @action
-  async selectAll() {
-    console.log("select all");
-    const dateTodo = await this.todoApi.todoList();
-    this.dateTodo.push(dateTodo);
-    // this.todos = todos;
-    if (this.todos == null) {
-      return "empty list";
-    }
-  }
+  // @action
+  // async selectAll() {
+  //   console.log("select all");
+  //   const dateTodo = await this.todoApi.todoList();
+  //   this.dateTodo.push(dateTodo);
+  //   // this.todos = todos;
+  //   if (this.todos == null) {
+  //     return "empty list";
+  //   }
+  // }
 
   @action
   async todoList(userId, todoDate) {
