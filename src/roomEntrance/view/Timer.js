@@ -24,7 +24,7 @@ export default function Timer(props) {
     const socketRef = useRef();
     const [remainingTime, setRemainingTime] = useState();
     const [open, setOpen] = React.useState(false);
-    const [term, setTerm] = useState(room.maxTerm);
+    const [term, setTerm] = useState();
 
     const handleOpen = () => {
         setOpen(true);
