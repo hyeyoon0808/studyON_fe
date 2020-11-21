@@ -58,6 +58,7 @@ const RoomEntranceView = ({
                         <TabsCard
                             roomData={data}
                             mySocket={mySocket}
+                            owner={owner}
                             className="RoomEntrance_left_item"
                         />
 

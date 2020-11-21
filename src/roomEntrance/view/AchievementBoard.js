@@ -8,6 +8,7 @@ export default function Timer(props) {
     const [key, setKey] = useState(0);
     const [name, setName] = useState("");
     const [messages, setMessages] = useState([]);
+    const [todochecked, setTodoChecked] = useState([]);
     const socketRef = useRef();
 
 
@@ -17,6 +18,9 @@ export default function Timer(props) {
         socketRef.current = mySocket;
         socketRef.current.on("show user name", (name, count) => {
             setMessages((oldMsgs) => [...oldMsgs, name+"가 "+(count+1)+"째 알람을 눌렀습니다."]);
+        });
+        socketRef.current.on("show todo checked", (todoDesc, userName)=>{
+            setMessages((oldTodos) => [...oldTodos, userName+"가 "+todoDesc+"를 완료했습니다."]);
         });
     }, []);
     
@@ -28,6 +32,7 @@ export default function Timer(props) {
             </h1>
         <div>
         {messages.map((m, index) => {
+            
             return (
                 //알람누른 유저 메세지 (유저 & 카운트 갯수)
                 <div>{m}</div>
