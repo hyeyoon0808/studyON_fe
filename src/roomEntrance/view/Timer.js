@@ -26,28 +26,28 @@ export default function Timer(props) {
     const [open, setOpen] = React.useState(false);
     const [term, setTerm] = useState(1);
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    const children = ({ remainingTime }) => {
-        const minutes = Math.floor(remainingTime / 60);
-        const seconds = remainingTime % 60;
-        console.log("count");
-        return (
-            <div className="timer">
-                <div className="text">Remaining</div>
-                <div className="value">
-                    {minutes}:{seconds}
-                </div>
-                <div className="text">minutes</div>
-            </div>
-        );
-    };
+  const children = ({ remainingTime }) => {
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = remainingTime % 60;
+    console.log("count");
+    return (
+      <div className="timer">
+        <div className="text">Remaining</div>
+        <div className="value">
+          {minutes}:{seconds}
+        </div>
+        <div className="text">minutes</div>
+      </div>
+    );
+  };
 
     function sendTimerSign(bool) {
         console.log("dddddd");
@@ -81,40 +81,25 @@ export default function Timer(props) {
             // socketRef.current.emit("term is over", owner, currentUser.name, term);
         //}
     }, []);
-    // useEffect(() => {
-    //     socketRef.current = mySocket;
-    //     socketRef.current.on("your id", (id) => {
-    //         setYourID(id);
-    //     });
 
-    //     socketRef.current.on("timer start", (message) => {
-    //         console.log(message);
-    //         setPlaying(true);
-    //     });
-    //     setTerm(term);
-    //     //if(room.maxTerm === term){
-    //         socketRef.current.emit("term is over", owner, currentUser.name, term);
-    //     //}
-    // }, [room.MaxTerm]);
+  function countAlarm() {
+    setCount(count + 1);
+    socketRef.current.emit("alarm off", owner, currentUser.name, count);
+    setOpen(false);
+  }
 
-    function countAlarm() {
-        setCount(count + 1);
-        socketRef.current.emit("alarm off", owner, currentUser.name, count);
-        setOpen(false);
-    }
+  function handleStudyTime(e) {
+    setStudy(e.target.value * 60);
+    //setStudy(room.studyTime * 60);
+    setRemainingTime(study);
+    setKey(!key);
+  }
 
-    function handleStudyTime(e) {
-        setStudy(e.target.value * 60);
-        //setStudy(room.studyTime * 60);
-        setRemainingTime(study);
-        setKey(!key);
-    }
-
-    function handleBreakTime(e) {
-        //setBreak(e.target.value * 60000);
-        setBreak(room.breakTime * 60000);
-        setKey(!key);
-    }
+  function handleBreakTime(e) {
+    //setBreak(e.target.value * 60000);
+    setBreak(room.breakTime * 60000);
+    setKey(!key);
+  }
 
     function breakTimeStart(){
         setTerm((preTerm) => preTerm + 1);
@@ -156,42 +141,41 @@ export default function Timer(props) {
                     <DialogContentText id="alert-dialog-description">
                         공부 끝! 쉬는 시간 시작입니다-!
                     </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={countAlarm} color="primary" autoFocus>
-                        Okay
-                    </Button>
-                </DialogActions>
-            </Dialog>
+          <Sound
+            url={soundUrl}
+            playStatus={Sound.status.PLAYING}
+            playFromPosition={300}
+            // onLoading={this.handleSongLoading}
+            // onPlaying={this.handleSongPlaying}
+            // onFinishedPlaying={this.handleSongFinishedPlaying}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={countAlarm} color="primary" autoFocus>
+            Okay
+          </Button>
+        </DialogActions>
+      </Dialog>
 
-            {/* <Sound
-                url="audioFile"
-                playStatus={Sound.status.PLAYING}
-                playFromPosition={300}
-                onLoading={this.handleSongLoading}
-                onPlaying={this.handleSongPlaying}
-                onFinishedPlaying={this.handleSongFinishedPlaying}
-            /> */}
-
-            <div>
-                <input
-                    type="number"
-                    min="1"
-                    max="60"
-                    name="study"
-                    placeholder="Study time"
-                    onChange={handleStudyTime}
-                />
-                <input
-                    type="number"
-                    min="1"
-                    max="60"
-                    name="break"
-                    placeholder="Break time"
-                    onChange={handleBreakTime}
-                />
-                <button onClick={() => sendTimerSign(true)}>START</button>
-            </div>
-        </div>
-    );
+      <div>
+        <input
+          type="number"
+          min="1"
+          max="60"
+          name="study"
+          placeholder="Study time"
+          onChange={handleStudyTime}
+        />
+        <input
+          type="number"
+          min="1"
+          max="60"
+          name="break"
+          placeholder="Break time"
+          onChange={handleBreakTime}
+        />
+        <button onClick={() => sendTimerSign(true)}>START</button>
+      </div>
+    </div>
+  );
 }
