@@ -196,7 +196,7 @@ class Store {
   @action
   async removeRoom(id) {
     this.rooms = this.searchList.filter(
-      (room) => room.id !== this.room
+      (room) => room.owner !== this.room
     );
     this.room = {};
     let result = this.roomApi.roomDelete(id);

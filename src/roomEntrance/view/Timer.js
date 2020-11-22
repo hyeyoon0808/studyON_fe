@@ -103,7 +103,7 @@ export default function Timer(props) {
         console.log("term: ", term, room.maxTerm);
         console.log("term: ", room.maxTerm);
         if(room.maxTerm == term){
-            socketRef.current.emit("term is over", owner, currentUser.name, term, room.maxTerm);
+            socketRef.current.emit("term is over", owner, currentUser.name, term, room.maxTerm, room.owner);
         }
         setOpen(true);
         setTimeout(handleClose, 5000);
