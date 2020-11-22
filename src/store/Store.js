@@ -194,6 +194,18 @@ class Store {
   };
 
   @action
+  async removeRoom(id) {
+    this.rooms = this.searchList.filter(
+      (room) => room.owner !== this.room
+    );
+    this.room = {};
+    let result = this.roomApi.roomDelete(id);
+    if (result == null) {
+      this.errorMessage = `Error : There is no Room with roomId ${id} `;
+    }
+  }
+
+  @action
   setRoomProp(name, value) {
     this.room = {
       ...this.room,

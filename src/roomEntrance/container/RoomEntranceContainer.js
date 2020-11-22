@@ -23,6 +23,7 @@ class RoomEntranceContainer extends Component {
       Store.user = res;
       console.log("현재 방 유저리스트 id >> ", res);
       Store.addUserList(room);
+      
     });
 
     Store.mySocket.on("leave event", (res) => {
