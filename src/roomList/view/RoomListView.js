@@ -37,7 +37,6 @@ const UseStyles = makeStyles((theme) => ({
   img: {
     width: "252px",
     position: "absolute",
-    top: "-60px",
   },
 }));
 
@@ -79,7 +78,7 @@ export default function RoomListView(props) {
               onClick={() => handleClickOpen(room.owner)}
             >
               <img
-                src={require("../../home/images/studyon.png")}
+                src={require("./roomimage.jpeg")}
                 alt=""
                 className={classes.img}
               />
