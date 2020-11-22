@@ -12,19 +12,19 @@ import Sound from "react-sound";
 import "../scss/Timer.scss";
 
 export default function Timer(props) {
-  const { mySocket, owner, room, currentUser, updateIsPlaying } = props;
-  const [playing, setPlaying] = useState(false);
-  const [audioOn, setAudioOn] = useState("");
-  const [yourID, setYourID] = useState();
-  const [count, setCount] = useState(0);
-  const [role, setRole] = useState(owner);
-  const [study, setStudy] = useState(room.studyTime * 60);
-  const [breakTime, setBreak] = useState(room.breakTime * 60000);
-  const [key, setKey] = useState(0);
-  const socketRef = useRef();
-  const [remainingTime, setRemainingTime] = useState();
-  const [open, setOpen] = React.useState(false);
-  const [term, setTerm] = useState();
+    const { mySocket, owner, room, currentUser, updateIsPlaying } = props;
+    const [playing, setPlaying] = useState(false);
+    const [audioOn, setAudioOn] = useState("");
+    const [yourID, setYourID] = useState();
+    const [count, setCount] = useState(0);
+    const [role, setRole] = useState(owner);
+    const [study, setStudy] = useState(room.studyTime * 60);
+    const [breakTime, setBreak] = useState(room.breakTime * 60000);
+    const [key, setKey] = useState(0);
+    const socketRef = useRef();
+    const [remainingTime, setRemainingTime] = useState();
+    const [open, setOpen] = React.useState(false);
+    const [term, setTerm] = useState(1);
 
   const handleOpen = () => {
     setOpen(true);
@@ -49,35 +49,38 @@ export default function Timer(props) {
     );
   };
 
-  function sendTimerSign(bool) {
-    console.log("dddddd");
-    console.log(socketRef.current.id);
-    console.log("okay");
-    //if(socketRef.current.id === role){
-    if (bool) {
-      socketRef.current.emit(
-        "timer start sign",
-        owner,
-        socketRef.current.id + "가 timer start!! " + owner
-      );
-      updateIsPlaying();
-      console.log("got it");
-    } else socketRef.current.emit("timer stop sign", "timer stop!!");
-    //}
-  }
+    function sendTimerSign(bool) {
+        console.log("dddddd");
+        console.log(socketRef.current.id);
+        console.log("okay");
+        //if(socketRef.current.id === role){
+        if (bool) {
+            socketRef.current.emit(
+                "timer start sign",
+                owner,
+                socketRef.current.id + "가 timer start!! " + owner
+            );
+            //updateIsPlaying();
+            console.log("got it");
+        } else socketRef.current.emit("timer stop sign", "timer stop!!");
+        //}
+    }
 
-  useEffect(() => {
-    console.log(mySocket.id);
-    socketRef.current = mySocket;
-    socketRef.current.on("your id", (id) => {
-      setYourID(id);
-    });
+    useEffect(() => {
+        socketRef.current = mySocket;
+        socketRef.current.on("your id", (id) => {
+            setYourID(id);
+        });
 
-    socketRef.current.on("timer start", (message) => {
-      console.log(message);
-      setPlaying(true);
-    });
-  }, []);
+        socketRef.current.on("timer start", (message) => {
+            console.log(message);
+            setPlaying(true);
+        });
+        setTerm(term);
+        //if(room.maxTerm === term){
+            // socketRef.current.emit("term is over", owner, currentUser.name, term);
+        //}
+    }, []);
 
   function countAlarm() {
     setCount(count + 1);
@@ -98,38 +101,46 @@ export default function Timer(props) {
     setKey(!key);
   }
 
-  return (
-    <div className="App">
-      <h1>StudyON Timer</h1>
-      <div className="timer-wrapper">
-        <CountdownCircleTimer
-          isPlaying={playing}
-          duration={study}
-          key={key}
-          colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
-          onComplete={() => {
-            setTerm((preTerm) => preTerm + 1);
-            console.log("term: ", term);
-            setOpen(true);
-            setTimeout(handleClose, 5000);
-            return [true, breakTime];
-          }}
-        >
-          {children}
-        </CountdownCircleTimer>
-      </div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"쉬는시간 시작"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            공부 끝! 쉬는 시간 시작입니다-!
-          </DialogContentText>
+    function breakTimeStart(){
+        setTerm((preTerm) => preTerm + 1);
+        console.log("term: ", term, room.maxTerm);
+        console.log("term: ", room.maxTerm);
+        if(room.maxTerm === term){
+            console.log("term matched!");
+        }
+        socketRef.current.emit("term is over", owner, currentUser.name, term, room.maxTerm);
+        setOpen(true);
+        setTimeout(handleClose, 5000);
+        return [true, breakTime];
+    }
 
+    return (
+        <div className="App">
+            <h1>StudyON Timer</h1>
+            <div className="timer-wrapper">
+                <CountdownCircleTimer
+                    isPlaying={playing}
+                    duration={study}
+                    key={key}
+                    colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+                    onComplete={breakTimeStart}
+                >
+                    {children}
+                </CountdownCircleTimer>
+            </div>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"쉬는시간 시작"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        공부 끝! 쉬는 시간 시작입니다-!
+                    </DialogContentText>
           <Sound
             url={soundUrl}
             playStatus={Sound.status.PLAYING}
