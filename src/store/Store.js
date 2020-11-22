@@ -191,6 +191,22 @@ class Store {
   };
 
   @action
+  async removeRoom(id) {
+    this.rooms = this.searchList.filter((room) => {
+      return room.tag.includes(this.selectedTag.title);
+      // return room.tag === this.selectedTag.title;
+    });
+    this.dateTodo.todos = this.dateTodo.todos.filter(
+      (element) => element.id !== this.todo
+    );
+    this.todo = {};
+    let result = this.roomApi.roomDelete(id);
+    if (result == null) {
+      this.errorMessage = `Error : There is no Todo with todoNum ${id} `;
+    }
+  }
+
+  @action
   setRoomProp(name, value) {
     this.room = {
       ...this.room,

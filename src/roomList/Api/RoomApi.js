@@ -23,6 +23,12 @@ class RoomApi {
       .put(this.URL, RoomApiModel.getJson())
       .then((response) => (response && response.data) || null);
   }
+
+  roomDelete(id) {
+    return axios
+      .delete(this.URL + `/${id}`)
+      .then((response) => (response && response.data) || null);
+  }
 }
 
 export default RoomApi;

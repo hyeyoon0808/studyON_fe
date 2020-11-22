@@ -77,9 +77,6 @@ export default function Timer(props) {
             setPlaying(true);
         });
         setTerm(term);
-        //if(room.maxTerm === term){
-            // socketRef.current.emit("term is over", owner, currentUser.name, term);
-        //}
     }, []);
 
   function countAlarm() {
@@ -105,10 +102,9 @@ export default function Timer(props) {
         setTerm((preTerm) => preTerm + 1);
         console.log("term: ", term, room.maxTerm);
         console.log("term: ", room.maxTerm);
-        if(room.maxTerm === term){
-            console.log("term matched!");
+        if(room.maxTerm == term){
+            socketRef.current.emit("term is over", owner, currentUser.name, term, room.maxTerm);
         }
-        socketRef.current.emit("term is over", owner, currentUser.name, term, room.maxTerm);
         setOpen(true);
         setTimeout(handleClose, 5000);
         return [true, breakTime];

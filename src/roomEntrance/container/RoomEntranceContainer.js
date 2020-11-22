@@ -20,8 +20,9 @@ class RoomEntranceContainer extends Component {
       console.log(res + "가 입장!");
       Store.mySocket.emit("send user", owner, res);
       let room = Store.room;
-      console.log("현재 방 유저리스트 id >> ", room.userList);
       Store.addUserList(room);
+      console.log("현재 방 유저리스트 id >> ", room.userList);
+      
     });
 
     Store.mySocket.on("leave event", (res) => {
