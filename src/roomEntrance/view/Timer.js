@@ -24,7 +24,7 @@ export default function Timer(props) {
     const socketRef = useRef();
     const [remainingTime, setRemainingTime] = useState();
     const [open, setOpen] = React.useState(false);
-    const [term, setTerm] = useState();
+    const [term, setTerm] = useState(1);
 
     const handleOpen = () => {
         setOpen(true);
@@ -60,14 +60,13 @@ export default function Timer(props) {
                 owner,
                 socketRef.current.id + "가 timer start!! " + owner
             );
-            updateIsPlaying();
+            //updateIsPlaying();
             console.log("got it");
         } else socketRef.current.emit("timer stop sign", "timer stop!!");
         //}
     }
 
     useEffect(() => {
-        console.log(mySocket.id);
         socketRef.current = mySocket;
         socketRef.current.on("your id", (id) => {
             setYourID(id);
@@ -77,7 +76,26 @@ export default function Timer(props) {
             console.log(message);
             setPlaying(true);
         });
+        setTerm(term);
+        //if(room.maxTerm === term){
+            // socketRef.current.emit("term is over", owner, currentUser.name, term);
+        //}
     }, []);
+    // useEffect(() => {
+    //     socketRef.current = mySocket;
+    //     socketRef.current.on("your id", (id) => {
+    //         setYourID(id);
+    //     });
+
+    //     socketRef.current.on("timer start", (message) => {
+    //         console.log(message);
+    //         setPlaying(true);
+    //     });
+    //     setTerm(term);
+    //     //if(room.maxTerm === term){
+    //         socketRef.current.emit("term is over", owner, currentUser.name, term);
+    //     //}
+    // }, [room.MaxTerm]);
 
     function countAlarm() {
         setCount(count + 1);
@@ -98,6 +116,19 @@ export default function Timer(props) {
         setKey(!key);
     }
 
+    function breakTimeStart(){
+        setTerm((preTerm) => preTerm + 1);
+        console.log("term: ", term, room.maxTerm);
+        console.log("term: ", room.maxTerm);
+        if(room.maxTerm === term){
+            console.log("term matched!");
+        }
+        socketRef.current.emit("term is over", owner, currentUser.name, term, room.maxTerm);
+        setOpen(true);
+        setTimeout(handleClose, 5000);
+        return [true, breakTime];
+    }
+
     return (
         <div className="App">
             <h1>StudyON Timer</h1>
@@ -107,13 +138,7 @@ export default function Timer(props) {
                     duration={study}
                     key={key}
                     colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
-                    onComplete={() => {
-                        setTerm((preTerm) => preTerm + 1);
-                        console.log("term: ", term);
-                        setOpen(true);
-                        setTimeout(handleClose, 5000);
-                        return [true, breakTime];
-                    }}
+                    onComplete={breakTimeStart}
                 >
                     {children}
                 </CountdownCircleTimer>
