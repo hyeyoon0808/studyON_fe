@@ -4,6 +4,7 @@ import Timer from "./Timer";
 import { Checkbox } from "antd";
 import RoomMember from "./RoomMember";
 import TodoContainer from "../../myPage/container/TodoContainer";
+import { inject, observer } from "mobx-react";
 
 const tabListNoTitle = [
   {
@@ -38,8 +39,7 @@ class TabsCard extends React.Component {
   state = {
     noTitleKey: "my_todo_list",
     contentListNoTitle: {
-      // timer: <Timer mySocket={this.props.mySocket} owner={this.props.owner} room={this.props.room}/>,
-      my_todo_list: <TodoContainer owner={this.props.owner}/>,
+      my_todo_list: <TodoContainer owner={this.props.owner} />,
       notice_board: (
         <div>
           {this.props.roomData.description.split("\n").map((line) => {
