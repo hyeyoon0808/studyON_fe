@@ -203,7 +203,7 @@ export default function RoomListView(props) {
                         id="alert-dialog-title"
                         className="dialog-title"
                     >
-                        {`${room.title}에 입장하시겠습니까?`}
+                        {`${room.title} 입장`}
                     </DialogTitle>
                     <DialogContent className="big-input-block">
                         <div class="input-block">
@@ -241,6 +241,10 @@ export default function RoomListView(props) {
                                 총 싸이클 횟수
                             </span>
                             <span>{room.maxTerm} 회</span>
+                        </div>
+                        <div style={{ color: "red" }, { marginLeft: "120px" }}>
+                            <p><strong>포인트 50점이 차감됩니다</strong></p>
+                            <p style={{ fontSize: "20px" }}><strong>입장하시겠습니까?</strong></p>
                         </div>
                     </DialogContent>
                     <DialogActions>

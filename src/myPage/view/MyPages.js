@@ -23,9 +23,9 @@ class MyPages extends Component {
           <div className="profile">
             <strong style={{ fontSize: "25px" }}>Profile</strong>
             <Card className="profileCard">
-              <p>Name: {this.props.currentUser.name}</p>
-              <p>Email: {this.props.currentUser.email}</p>
-              <p>Your Point: {this.props.UserStore.getCurPoint}</p>
+              <p><strong>Name:</strong>&nbsp; {this.props.currentUser.name}</p>
+              <p><strong>Email:</strong>&nbsp; {this.props.currentUser.email}</p>
+              <p><strong>Your Point:</strong>&nbsp; {this.props.UserStore.getCurPoint}</p>
             </Card>
           </div>
         </div>
