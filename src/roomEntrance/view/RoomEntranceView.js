@@ -49,13 +49,6 @@ const RoomEntranceView = ({
 
         <div className="RoomEntrance_container">
           <div className="RoomEntrance_left">
-          {studyKings?.map((value) => {
-          return (
-            <div>
-              <p className="study-king">{value}</p>
-            </div>
-          );
-        })}
             <TabsCard
               roomData={data}
               mySocket={mySocket}
