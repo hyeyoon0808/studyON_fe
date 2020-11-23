@@ -24,4 +24,12 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+
+  app.use(
+    "/point-grade",
+    createProxyMiddleware({
+      target: "http://localhost:8100",
+      changeOrigin: true,
+    })
+  );
 };
