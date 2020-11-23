@@ -24,16 +24,17 @@ const RoomEntranceView = ({
   const socketRef = useRef();
 
   const [popUp, setPopUp] = useState(false);
-  const [message, setMessage]= useState("");
+  const [message, setMessage] = useState("");
   const duringPopUp = popUp ? "during-popup" : "";
 
   useEffect(() => {
     socketRef.current = mySocket;
     socketRef.current.on("room over, show study king", (owner) => {
-        setMessage("room is over "+owner);
-        console.log("study king----------------");
+      setMessage("room is over " + owner);
+      console.log("study king----------------");
+      setPopUp(true);
     });
-}, []);
+  }, []);
 
   return (
     <>
@@ -56,9 +57,9 @@ const RoomEntranceView = ({
                 room={room}
                 currentUser={currentUser}
               />
-              <button onClick={() => setPopUp(true)} className={duringPopUp}>
+              {/* <button onClick={() => setPopUp(true)} className={duringPopUp}>
                 실적게시판
-              </button>
+              </button> */}
             </Card>
           </div>
 
