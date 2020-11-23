@@ -25,6 +25,7 @@ export default function Timer(props) {
     const [remainingTime, setRemainingTime] = useState();
     const [open, setOpen] = React.useState(false);
     const [term, setTerm] = useState(1);
+    const [savedTerm, setSavedTerm] = useState(0);
 
   const handleOpen = () => {
     setOpen(true);
@@ -82,9 +83,8 @@ export default function Timer(props) {
   function countAlarm() {
     setCount(count + 1);
     socketRef.current.emit("alarm off", owner, currentUser.name, count, room.maxTerm);
-    if(room.maxTerm == (count-1)){
-        socketRef.current.emit("show study king", owner, currentUser.name, term, room.maxTerm, room.owner);
-    }
+    console.log("알람 누른 수: "+count+ room.maxTerm);
+    socketRef.current.emit("show study king", owner, currentUser.name, term, room.maxTerm);
     setOpen(false);
   }
 

@@ -29,13 +29,12 @@ const useStyles = makeStyles((theme) => ({
 
 const AchievementView = (props) => {
   const { setPopUp, mySocket } = props;
-  // const [studyKings, setStudyKings] = useState();
+  const [studyKings, setStudyKings] = useState();
   const classes = useStyles();
-  const studyKings = studyKing;
-  // useEffect(() => {
-  //     mySocket.on("study king", studyKings);
-  //     setStudyKings(studyKings);
-  // })
+  useEffect(() => {
+      mySocket.on("study king", studyKings);
+      setStudyKings(studyKings);
+  })
 
   const { onClickGood, onClickNormal, onClickBad } = props;
 
