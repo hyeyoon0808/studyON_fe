@@ -31,11 +31,15 @@ const AchievementView = (props) => {
   const { setPopUp, mySocket } = props;
   // const [studyKings, setStudyKings] = useState();
   const classes = useStyles();
-  const studyKings = studyKing;
-  // useEffect(() => {
-  //     mySocket.on("study king", studyKings);
-  //     setStudyKings(studyKings);
-  // })
+
+  const [studyKings, setStudyKings] = useState([]);
+  const [studyKing, setStudyKing] = useState("");
+  useEffect(() => {
+    mySocket.on("study king", (name) => {
+      setStudyKings((oldName) => [...oldName, name]);
+      setStudyKing(name);
+    });
+  })
 
   const { onClickGood, onClickNormal, onClickBad } = props;
 
