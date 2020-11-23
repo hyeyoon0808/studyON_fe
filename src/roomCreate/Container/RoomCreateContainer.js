@@ -12,10 +12,14 @@ class RoomCreateContainer extends Component {
 
   onAddRoom = (e) => {
     e.preventDefault();
+    const { Store, UserStore } = this.props;
     let room = this.props.Store.room;
     console.log(room);
-    this.props.Store.roomCreate(room);
-    this.props.UserStore.setUserPointProp("state", "makeRoom");
+    Store.roomCreate(room);
+    UserStore.setUserPointProp("state", "makeRoom");
+    UserStore.setUserPointProp("owner", true);
+    console.log("방장님 포인트 차감 -50");
+    UserStore.modifyPoint(UserStore.point);
   };
 
   render() {
