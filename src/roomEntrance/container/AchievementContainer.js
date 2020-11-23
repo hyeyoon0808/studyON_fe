@@ -40,7 +40,7 @@ class AchievementContainer extends Component {
   };
 
   render() {
-    const { setPopUp, mySocket } = this.props;
+    const { popUp, setPopUp, mySocket, studyKings} = this.props;
     let achievements = this.props.TodoStore.achievements;
     console.log(achievements);
     return (
@@ -51,6 +51,7 @@ class AchievementContainer extends Component {
           onClickGood={this.onClickGood}
           onClickNormal={this.onClickNormal}
           onClickBad={this.onClickBad}
+          studyKings={studyKings}
         />
       </div>
     );

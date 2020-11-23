@@ -14,7 +14,6 @@ import "../scss/Timer.scss";
 export default function Timer(props) {
     const { mySocket, owner, room, currentUser, updateIsPlaying } = props;
     const [playing, setPlaying] = useState(false);
-    const [audioOn, setAudioOn] = useState("");
     const [yourID, setYourID] = useState();
     const [count, setCount] = useState(0);
     const [role, setRole] = useState(owner);
@@ -25,7 +24,7 @@ export default function Timer(props) {
     const [remainingTime, setRemainingTime] = useState();
     const [open, setOpen] = React.useState(false);
     const [term, setTerm] = useState(1);
-    const [savedTerm, setSavedTerm] = useState(0);
+    const [savedTerm, setSavedTerm] = useState(room.maxTerm-2);
 
   const handleOpen = () => {
     setOpen(true);
@@ -82,9 +81,11 @@ export default function Timer(props) {
 
   function countAlarm() {
     setCount(count + 1);
-    socketRef.current.emit("alarm off", owner, currentUser.name, count, room.maxTerm);
-    console.log("알람 누른 수: "+count+ room.maxTerm);
-    socketRef.current.emit("show study king", owner, currentUser.name, term, room.maxTerm);
+    socketRef.current.emit("alarm off", owner, currentUser.name, count, savedTerm);
+    console.log("알람 누른 수: "+count+ savedTerm);
+    if(count == savedTerm){
+        socketRef.current.emit("show study king", owner, currentUser.name, term, savedTerm);
+    }
     setOpen(false);
   }
 
@@ -103,12 +104,16 @@ export default function Timer(props) {
 
     function breakTimeStart(){
         setTerm((preTerm) => preTerm + 1);
-        console.log("term: ", term, room.maxTerm);
-        console.log("term: ", room.maxTerm);
+        console.log("term: ", term, savedTerm);
+        console.log("term: ", savedTerm);
         if(room.maxTerm == term){
             socketRef.current.emit("term is over", owner, currentUser.name, term, room.maxTerm, room.owner);
         }
-        setOpen(true);
+        if(room.maxTerm > term){
+            console.log("heyyyyy");
+            setOpen(true);
+        }
+        
         setTimeout(handleClose, 5000);
         return [true, breakTime];
     }

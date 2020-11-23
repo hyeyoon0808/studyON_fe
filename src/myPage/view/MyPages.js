@@ -11,6 +11,23 @@ import { inject, observer } from "mobx-react";
 @inject("TodoStore", "UserStore")
 @observer
 class MyPages extends Component {
+  componentWillMount() {
+    console.log("mypageContainer--");
+    const { UserStore } = this.props;
+    let currentUser = this.props.UserStore.currentUser;
+    UserStore.checkPoint(currentUser.id);
+  }
+
+  onAddUser = () => {
+    const { UserStore } = this.props;
+    // let currentUser = UserStore.currentUser;
+    // UserStore.setUserPointProp("userId", currentUser.id);
+    // UserStore.setUserPointProp("state", "initial");
+    // UserStore.setUserPointProp("owner", false);
+    let point = UserStore.point;
+    UserStore.addUserPoint(point);
+  };
+
   render() {
     const date = this.props.TodoStore.getDate;
     return (
@@ -23,9 +40,16 @@ class MyPages extends Component {
           <div className="profile">
             <strong style={{ fontSize: "25px" }}>Profile</strong>
             <Card className="profileCard">
-              <p><strong>Name:</strong>&nbsp; {this.props.currentUser.name}</p>
-              <p><strong>Email:</strong>&nbsp; {this.props.currentUser.email}</p>
-              <p><strong>Your Point:</strong>&nbsp; {this.props.UserStore.getCurPoint}</p>
+              <p>
+                <strong>Name:</strong>&nbsp; {this.props.currentUser.name}
+              </p>
+              <p>
+                <strong>Email:</strong>&nbsp; {this.props.currentUser.email}
+              </p>
+              <p>
+                <strong>Your Point:</strong>&nbsp;
+                {this.props.UserStore.userPoint.point}
+              </p>
             </Card>
           </div>
         </div>

@@ -24,16 +24,23 @@ const RoomEntranceView = ({
   const socketRef = useRef();
 
   const [popUp, setPopUp] = useState(false);
-  const [message, setMessage]= useState("");
+  const [message, setMessage] = useState("");
+  const [studyKings, setStudyKings] = useState([]);
+  const [studyKing, setStudyKing] = useState("what");
   const duringPopUp = popUp ? "during-popup" : "";
 
   useEffect(() => {
     socketRef.current = mySocket;
     socketRef.current.on("room over, show study king", (owner) => {
-        setMessage("room is over "+owner);
-        console.log("study king----------------");
+      setMessage("room is over " + owner);
+      console.log("study king----------------");
+      setPopUp(true);
     });
-}, []);
+    socketRef.current.on("who is study king", (name) => {
+      setStudyKings((oldName) => [...oldName, name]);
+      setStudyKing(name);
+    });
+  }, []);
 
   return (
     <>
@@ -42,6 +49,13 @@ const RoomEntranceView = ({
 
         <div className="RoomEntrance_container">
           <div className="RoomEntrance_left">
+          {studyKings?.map((value) => {
+          return (
+            <div>
+              <p className="study-king">{value}</p>
+            </div>
+          );
+        })}
             <TabsCard
               roomData={data}
               mySocket={mySocket}
@@ -56,9 +70,9 @@ const RoomEntranceView = ({
                 room={room}
                 currentUser={currentUser}
               />
-              <button onClick={() => setPopUp(true)} className={duringPopUp}>
+              {/* <button onClick={() => setPopUp(true)} className={duringPopUp}>
                 실적게시판
-              </button>
+              </button> */}
             </Card>
           </div>
 
@@ -87,6 +101,7 @@ const RoomEntranceView = ({
               popUp={popUp}
               setPopUp={setPopUp}
               mySocket={mySocket}
+              studyKings={studyKings}
             />
           )}
         </div>
