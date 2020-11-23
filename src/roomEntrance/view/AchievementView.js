@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
-import studyKing from "./studyKing";
+//import studyKing from "./studyKing";
 // styling
 import "../scss/Achievement.css";
-import Column from "antd/lib/table/Column";
-import { Socket } from "socket.io-client";
 // images
 
 const useStyles = makeStyles((theme) => ({
@@ -28,20 +26,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AchievementView = (props) => {
-  const { setPopUp, mySocket } = props;
-  // const [studyKings, setStudyKings] = useState();
+  const { setPopUp, mySocket, onClickGood, onClickNormal, onClickBad, studyKings} = props;
   const classes = useStyles();
-
-  const [studyKings, setStudyKings] = useState([]);
-  const [studyKing, setStudyKing] = useState("");
-  useEffect(() => {
-    mySocket.on("study king", (name) => {
-      setStudyKings((oldName) => [...oldName, name]);
-      setStudyKing(name);
-    });
-  })
-
-  const { onClickGood, onClickNormal, onClickBad } = props;
+  const socketRef = useRef();
 
   return (
     <div className="PopUp">
@@ -50,14 +37,14 @@ const AchievementView = (props) => {
         X
       </button>
       <div className="today-king">
-        <h3>오늘의 공부왕</h3>
+  <h3>오늘의 공부왕</h3>
       </div>
       <div className="study-king-container">
         {studyKings?.map((value) => {
           return (
             <div className={classes.root}>
               <Avatar alt="T" src={require("./popup/tomato.jpg")} />
-              <p className="study-king">{value.name}</p>
+              <p className="study-king">{value}</p>
             </div>
           );
         })}

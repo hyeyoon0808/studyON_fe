@@ -70,10 +70,10 @@ class Store {
   }
 
   //4. state 데이터 변경 @action 함수 구현
-  // @action
-  // setMySocketId(mySocketId) {
-  //   this.mySocketId = mySocketId;
-  // }
+  @action
+  setMySocketId(mySocketId) {
+    this.mySocketId = mySocketId;
+  }
 
   @action
   async roomList() {
@@ -96,7 +96,7 @@ class Store {
       room.maxTerm,
       this.mySocket.id,
       room.isPlaying,
-      room.userList
+      room.userList,
     );
     console.log("createRoom", roomApiModel);
     const result = this.roomCreateApi.roomCreate(roomApiModel);
@@ -119,7 +119,7 @@ class Store {
       room.maxTerm,
       room.owner,
       room.isPlaying,
-      room.userList
+      room.userList,
     );
     console.log("updateIsPlaying", roomApiModel);
     const result = this.roomApi.updateIsPlaying(roomApiModel);
