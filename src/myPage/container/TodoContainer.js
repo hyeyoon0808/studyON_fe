@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
 import TodoView from "../view/TodoView";
 
-@inject("TodoStore", "UserStore")
+@inject("TodoStore", "UserStore", "Store")
 @observer
 class TodoContainer extends Component {
   componentDidMount() {
@@ -55,9 +55,20 @@ class TodoContainer extends Component {
   };
 
   onTodoCheck = (e) => {
+    let currentUser = this.props.UserStore.currentUser;
+    const { Store } = this.props;
     this.onSetTodoProp("complete", e.target.checked);
     let todo = this.props.TodoStore.todo;
     this.props.TodoStore.modifyTodo(todo, todo.id);
+    console.log(currentUser.name+ todo.desc+" checked" + e.target.checked)
+
+    if(e.target.checked === true){
+      Store.mySocket.emit("todo checked", ({
+        todoDesc: todo.desc,
+        userName: currentUser.name,
+        owner: this.props.owner,
+    }));
+    }
   };
 
   render() {

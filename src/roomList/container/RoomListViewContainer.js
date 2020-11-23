@@ -17,6 +17,10 @@ class RoomListViewContainer extends Component {
         //Store.initRoomList();
         Store.mySocket.emit("test", "test send");
         Store.roomList();
+        Store.mySocket.on("remove room", (id)=>{
+            console.log("방 id: " + id);
+            this.props.Store.removeRoom(id);
+        });
     }
 
     setRoom = (owner) => {
@@ -31,6 +35,12 @@ class RoomListViewContainer extends Component {
         console.log(curPoint);
         setCurPoint(curPoint);
     }
+
+    onRemoveTodo = () => {
+        let todo = this.props.TodoStore.todo;
+        console.log("removeId: ", todo.id);
+        this.props.TodoStore.removeTodo(todo.id);
+      };
 
     render() {
         //const rooms = this.props.Store.getTileRooms;

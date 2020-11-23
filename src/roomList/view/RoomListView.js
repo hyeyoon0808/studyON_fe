@@ -37,88 +37,8 @@ const UseStyles = makeStyles((theme) => ({
     img: {
         width: "252px",
         position: "absolute",
-        top: "-60px",
     },
 }));
-
-// function DialogView(room) {
-//     // const { room } = props;
-//     const [open, setOpen] = useState(false);
-//     // const isPlaying = room.isPlaying;
-//     const handleClose = () => {
-//         setOpen(false);
-//         console.log(room.isPlaying);
-//     };
-//     return room.isPlaying ? (
-//         <Dialog
-//             open={open}
-//             onClose={handleClose}
-//             aria-labelledby="alert-dialog-title"
-//             aria-describedby="alert-dialog-description"
-//             className="dialog"
-//         >
-//             <DialogTitle id="alert-dialog-title" className="dialog-title">
-//                 {`${room.title}에 입장하시겠습니까?`}
-//             </DialogTitle>
-//             <DialogContent className="big-input-block">
-//                 <div class="input-block">
-//                     <span className="content-title">공부 시작 시간</span>
-//                     <span>
-//                         {moment(room.startTime).format("YYYY-MM-DD hh:mm a")}
-//                     </span>
-//                 </div>
-//                 <div class="input-block">
-//                     <span className="content-title">공부 시간</span>
-//                     <span>{room.studyTime} 분</span>
-//                 </div>
-//                 <div class="input-block">
-//                     <span className="content-title">쉬는 시간</span>
-//                     <span>{room.breakTime} 분</span>
-//                 </div>
-//                 <div class="input-block">
-//                     <span className="content-title">현재 인원</span>
-//                     <span>1 바꿔야됨</span>
-//                 </div>
-//                 <div class="input-block">
-//                     <span className="content-title">최대 인원</span>
-//                     <span>{room.maxPeopleNum} 명</span>
-//                 </div>
-//                 <div class="input-block">
-//                     <span className="content-title">현재 싸이클</span>
-//                     <span>1 바꿔야됨</span>
-//                 </div>
-//                 <div class="input-block">
-//                     <span className="content-title">총 싸이클 횟수</span>
-//                     <span>{room.maxTerm} 회</span>
-//                 </div>
-//             </DialogContent>
-//             <DialogActions>
-//                 <Link to={`/room-entrance/${room.owner}`}>
-//                     <ButtonTemplate text={"방 입장"} />
-//                 </Link>
-//             </DialogActions>
-//         </Dialog>
-//     ) : (
-//         <Dialog
-//             open={open}
-//             onClose={handleClose}
-//             aria-labelledby="alert-dialog-title"
-//             aria-describedby="alert-dialog-description"
-//             className="dialog"
-//         >
-//             <DialogTitle id="alert-dialog-title" className="dialog-title">
-//                 이미 공부 시작된 방입니다!
-//             </DialogTitle>
-//             <DialogActions>
-//                 <ButtonTemplate onClick={handleClose} text={"나가기"} />
-//             </DialogActions>
-//         </Dialog>
-//     );
-// }
-
-// DialogView.propTypes = {
-//     open: PropTypes.bool.isRequired,
-// };
 
 export default function RoomListView(props) {
     const classes = UseStyles();
@@ -131,9 +51,6 @@ export default function RoomListView(props) {
         setOpen(true);
         setRoom(owner);
     };
-    // const handleClickOpen = (owner) => {
-    //     DialogView();
-    // };
 
     const handleClose = () => {
         setOpen(false);
@@ -162,7 +79,7 @@ export default function RoomListView(props) {
                             onClick={() => handleClickOpen(room.owner)}
                         >
                             <img
-                                src={require("../../home/images/studyon.png")}
+                                src={require("./roomimage.jpeg")}
                                 alt=""
                                 className={classes.img}
                             />
