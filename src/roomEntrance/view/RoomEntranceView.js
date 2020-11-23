@@ -17,7 +17,7 @@ const RoomEntranceView = ({
   match,
   owner,
   currentUser,
-  updateIsPlaying,
+  onUpdateIsPlaying,
 }) => {
   const params_id = match.params.id;
   const data = rooms.find((tile) => tile.owner === params_id);
@@ -84,7 +84,7 @@ const RoomEntranceView = ({
                 owner={owner}
                 room={room}
                 currentUser={currentUser}
-                updateIsPlaying={updateIsPlaying}
+                onUpdateIsPlaying={onUpdateIsPlaying}
               />
             </Card>
             <div className="exit_button">

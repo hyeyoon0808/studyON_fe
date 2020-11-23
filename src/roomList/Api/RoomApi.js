@@ -6,12 +6,9 @@ class RoomApi {
   roomList() {
     return axios
       .get(this.URL)
-      .then((response) => {
-        console.log(response.data);
-        return response.data;
-      })
-      .catch((error) => console.error(error));
+      .then((response) => (response && response.data) || null);
   }
+
   updateIsPlaying(RoomApiModel) {
     return axios
       .put(this.URL, RoomApiModel.getJson())
