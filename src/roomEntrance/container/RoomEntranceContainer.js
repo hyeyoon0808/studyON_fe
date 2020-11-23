@@ -21,14 +21,14 @@ class RoomEntranceContainer extends Component {
       Store.mySocket.emit("send user", owner, res);
       let room = Store.room;
       Store.user = res;
-      console.log("현재 방 유저리스트 id >> ", res);
-      Store.addUserList(room);
+      // console.log("현재 방 유저리스트 id >> ", res);
+      // Store.addUserList(room);
     });
 
-    //방 입장시 포인트 차감
+    //방 입장시 포인트 차감(일반유저)
     UserStore.setUserPointProp("state", "enterRoom");
     UserStore.modifyPoint(UserStore.point);
-    console.log(">>>>>>????", UserStore.point);
+    console.log("방 입장하면 포인트 -50 차감");
 
     //방 나가기
     Store.mySocket.on("leave event", (res) => {
@@ -48,7 +48,7 @@ class RoomEntranceContainer extends Component {
       owner: this.props.match.params.id,
     });
   }
-  updateIsPlaying = () => {
+  onUpdateIsPlaying = () => {
     const { Store } = this.props;
     let room = this.props.Store.room;
     Store.updateIsPlaying(room);
@@ -70,7 +70,7 @@ class RoomEntranceContainer extends Component {
         match={this.props.match}
         owner={this.props.match.params.id}
         currentUser={currentUser}
-        updateIsPlaying={this.updateIsPlaying}
+        onUpdateIsPlaying={this.onUpdateIsPlaying}
       />
     );
   }
