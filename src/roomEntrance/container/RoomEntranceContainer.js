@@ -23,9 +23,14 @@ class RoomEntranceContainer extends Component {
       Store.user = res;
       console.log("현재 방 유저리스트 id >> ", res);
       Store.addUserList(room);
-      
     });
 
+    //방 입장시 포인트 차감
+    UserStore.setUserPointProp("state", "enterRoom");
+    UserStore.modifyPoint(UserStore.point);
+    console.log(">>>>>>????", UserStore.point);
+
+    //방 나가기
     Store.mySocket.on("leave event", (res) => {
       console.log(res + "가 나감!");
     });
@@ -50,7 +55,6 @@ class RoomEntranceContainer extends Component {
   };
 
   render() {
-    //const roomList = this.props.Store.getRoomList;
     const mySocket = this.props.Store.mySocket;
     const room = this.props.Store.getRoom;
     const rooms = this.props.Store.getRoomList;
