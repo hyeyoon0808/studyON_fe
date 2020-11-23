@@ -81,7 +81,10 @@ export default function Timer(props) {
 
   function countAlarm() {
     setCount(count + 1);
-    socketRef.current.emit("alarm off", owner, currentUser.name, count);
+    socketRef.current.emit("alarm off", owner, currentUser.name, count, room.maxTerm);
+    if(room.maxTerm == (count-1)){
+        socketRef.current.emit("show study king", owner, currentUser.name, term, room.maxTerm, room.owner);
+    }
     setOpen(false);
   }
 

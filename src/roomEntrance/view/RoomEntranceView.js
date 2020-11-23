@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../scss/RoomEntrance.scss";
 import TabsCard from "./TabsCard";
 import { Card } from "antd";
@@ -21,9 +21,19 @@ const RoomEntranceView = ({
 }) => {
   const params_id = match.params.id;
   const data = rooms.find((tile) => tile.owner === params_id);
+  const socketRef = useRef();
 
   const [popUp, setPopUp] = useState(false);
+  const [message, setMessage]= useState("");
   const duringPopUp = popUp ? "during-popup" : "";
+
+  useEffect(() => {
+    socketRef.current = mySocket;
+    socketRef.current.on("room over, show study king", (owner) => {
+        setMessage("room is over "+owner);
+        console.log("study king----------------");
+    });
+}, []);
 
   return (
     <>
@@ -47,7 +57,7 @@ const RoomEntranceView = ({
                 currentUser={currentUser}
               />
               <button onClick={() => setPopUp(true)} className={duringPopUp}>
-                실적 게시판
+                실적게시판
               </button>
             </Card>
           </div>
