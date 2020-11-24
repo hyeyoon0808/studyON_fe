@@ -31,6 +31,7 @@ export default function Timer(props) {
   const [remainingTime, setRemainingTime] = useState();
   const [open, setOpen] = React.useState(false);
   const [term, setTerm] = useState(1);
+  const [studyOn, setStudyOn] = useState(false)
   const [savedTerm, setSavedTerm] = useState(room.maxTerm - 2);
 
   const handleOpen = () => {
@@ -40,6 +41,11 @@ export default function Timer(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleOn = () => {
+    setStudyOn(true);
+    sendTimerSign(true);
+  }
 
   const children = ({ remainingTime }) => {
     const minutes = Math.floor(remainingTime / 60);
@@ -51,7 +57,7 @@ export default function Timer(props) {
         <div className="value">
           {minutes}:{seconds}
         </div>
-        <div className="text">minutes</div>
+        <div className="text">Time</div>
       </div>
     );
   };
@@ -147,8 +153,9 @@ export default function Timer(props) {
 
   return (
     <div className="App">
-      <h1>StudyON Timer</h1>
+      {studyOn ? <h1>StudyON</h1> : <h1>StudyOFF</h1>}
       <div className="timer-wrapper">
+        <p style={{ color: "#004777" }}>Study</p>
         <CountdownCircleTimer
           isPlaying={playing}
           duration={study}
@@ -159,6 +166,18 @@ export default function Timer(props) {
           {children}
         </CountdownCircleTimer>
       </div>
+      {/* <div className="timer-wrapper2">
+        <p style={{ color: "#A30000" }}>Break</p>
+        <CountdownCircleTimer
+          isPlaying={playing}
+          duration={study}
+          key={key}
+          colors={[["#A30000", 0.33], ["#F7B801", 0.33], ["#004777"]]}
+          onComplete={breakTimeStart}
+        >
+          {children}
+        </CountdownCircleTimer>
+      </div> */}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -174,9 +193,9 @@ export default function Timer(props) {
             url={soundUrl}
             playStatus={Sound.status.PLAYING}
             playFromPosition={300}
-            // onLoading={this.handleSongLoading}
-            // onPlaying={this.handleSongPlaying}
-            // onFinishedPlaying={this.handleSongFinishedPlaying}
+          // onLoading={this.handleSongLoading}
+          // onPlaying={this.handleSongPlaying}
+          // onFinishedPlaying={this.handleSongFinishedPlaying}
           />
         </DialogContent>
         <DialogActions>
@@ -186,8 +205,8 @@ export default function Timer(props) {
         </DialogActions>
       </Dialog>
 
-      <div>
-        <input
+      <div style={{ textAlign: "right", float: "right" }}>
+        {/* <input
           type="number"
           min="1"
           max="60"
@@ -202,8 +221,8 @@ export default function Timer(props) {
           name="break"
           placeholder="Break time"
           onChange={handleBreakTime}
-        />
-        <button onClick={() => sendTimerSign(true)}>START</button>
+        /> */}
+        <button onClick={handleOn}>START</button>
       </div>
     </div>
   );
