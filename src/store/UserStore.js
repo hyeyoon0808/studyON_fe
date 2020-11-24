@@ -119,6 +119,7 @@ class UserStore {
       point.owner
     );
     this.pointApi.pointModify(pointApiModel);
+    console.log("현재 포인트: ", this.userPoint.point);
   }
 }
 

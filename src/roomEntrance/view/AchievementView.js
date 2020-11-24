@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
-import studyKing from "./studyKing";
-// styling
 import "../scss/Achievement.css";
-import Column from "antd/lib/table/Column";
-import { Socket } from "socket.io-client";
-// images
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,20 +24,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AchievementView = (props) => {
-  const { setPopUp, mySocket } = props;
-  // const [studyKings, setStudyKings] = useState();
+  const {
+    setPopUp,
+    mySocket,
+    onClickGood,
+    onClickNormal,
+    onClickBad,
+    studyKings,
+  } = props;
   const classes = useStyles();
-
-  const [studyKings, setStudyKings] = useState([]);
-  const [studyKing, setStudyKing] = useState("");
-  useEffect(() => {
-    mySocket.on("study king", (name) => {
-      setStudyKings((oldName) => [...oldName, name]);
-      setStudyKing(name);
-    });
-  })
-
-  const { onClickGood, onClickNormal, onClickBad } = props;
+  const socketRef = useRef();
 
   return (
     <div className="PopUp">
@@ -57,7 +49,7 @@ const AchievementView = (props) => {
           return (
             <div className={classes.root}>
               <Avatar alt="T" src={require("./popup/tomato.jpg")} />
-              <p className="study-king">{value.name}</p>
+              <p className="study-king">{value}</p>
             </div>
           );
         })}
@@ -68,15 +60,17 @@ const AchievementView = (props) => {
       </div>
       {/* button controls */}
       <div classes="three-btn">
-        <button onClick={onClickBad} className="left_btn">
-          불만족!
-        </button>
-        <button onClick={onClickNormal} className="center_btn">
-          보통!
-        </button>
-        <button onClick={onClickGood} className="right_btn">
-          만족!
-        </button>
+        <Link to="/room-list">
+          <button onClick={onClickGood} className="good_btn">
+            만족!
+          </button>
+          <button onClick={onClickNormal} className="normal_btn">
+            보통!
+          </button>
+          <button onClick={onClickBad} className="bad_btn">
+            불만족!
+          </button>
+        </Link>
       </div>
     </div>
   );

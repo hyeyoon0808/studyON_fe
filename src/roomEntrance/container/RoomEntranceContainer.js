@@ -28,7 +28,7 @@ class RoomEntranceContainer extends Component {
     //방 입장시 포인트 차감(일반유저)
     UserStore.setUserPointProp("state", "enterRoom");
     UserStore.modifyPoint(UserStore.point);
-    console.log("방 입장하면 포인트 -50 차감");
+    console.log("방 입장하면 포인트 -50 차감", UserStore.point);
 
     //방 나가기
     Store.mySocket.on("leave event", (res) => {
@@ -54,6 +54,13 @@ class RoomEntranceContainer extends Component {
     Store.updateIsPlaying(room);
   };
 
+  onRefundPoint = () => {
+    const { UserStore } = this.props;
+    UserStore.setUserPointProp("state", "refund");
+    UserStore.modifyPoint(UserStore.point);
+    console.log("studyking 포인트 50 환급", UserStore.point);
+  };
+
   render() {
     const mySocket = this.props.Store.mySocket;
     const room = this.props.Store.getRoom;
@@ -71,6 +78,7 @@ class RoomEntranceContainer extends Component {
         owner={this.props.match.params.id}
         currentUser={currentUser}
         onUpdateIsPlaying={this.onUpdateIsPlaying}
+        onRefundPoint={this.onRefundPoint}
       />
     );
   }

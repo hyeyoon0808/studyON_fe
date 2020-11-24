@@ -18,6 +18,7 @@ const RoomEntranceView = ({
   owner,
   currentUser,
   onUpdateIsPlaying,
+  onRefundPoint,
 }) => {
   const params_id = match.params.id;
   const data = rooms.find((tile) => tile.owner === params_id);
@@ -25,6 +26,8 @@ const RoomEntranceView = ({
 
   const [popUp, setPopUp] = useState(false);
   const [message, setMessage] = useState("");
+  const [studyKings, setStudyKings] = useState([]);
+  const [studyKing, setStudyKing] = useState("what");
   const duringPopUp = popUp ? "during-popup" : "";
 
   useEffect(() => {
@@ -33,6 +36,10 @@ const RoomEntranceView = ({
       setMessage("room is over " + owner);
       console.log("study king----------------");
       setPopUp(true);
+    });
+    socketRef.current.on("who is study king", (name) => {
+      setStudyKings((oldName) => [...oldName, name]);
+      setStudyKing(name);
     });
   }, []);
 
@@ -78,6 +85,7 @@ const RoomEntranceView = ({
                 room={room}
                 currentUser={currentUser}
                 onUpdateIsPlaying={onUpdateIsPlaying}
+                onRefundPoint={onRefundPoint}
               />
             </div>
           </div>
@@ -89,6 +97,7 @@ const RoomEntranceView = ({
               popUp={popUp}
               setPopUp={setPopUp}
               mySocket={mySocket}
+              studyKings={studyKings}
             />
           )}
         </div>

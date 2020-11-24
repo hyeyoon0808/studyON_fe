@@ -12,9 +12,15 @@ import Sound from "react-sound";
 import "../scss/Timer.scss";
 
 export default function Timer(props) {
-  const { mySocket, owner, room, currentUser, onUpdateIsPlaying } = props;
+  const {
+    mySocket,
+    owner,
+    room,
+    currentUser,
+    updateIsPlaying,
+    onRefundPoint,
+  } = props;
   const [playing, setPlaying] = useState(false);
-  const [audioOn, setAudioOn] = useState("");
   const [yourID, setYourID] = useState();
   const [count, setCount] = useState(0);
   const [role, setRole] = useState(owner);
@@ -26,6 +32,7 @@ export default function Timer(props) {
   const [open, setOpen] = React.useState(false);
   const [term, setTerm] = useState(1);
   const [studyOn, setStudyOn] = useState(false)
+  const [savedTerm, setSavedTerm] = useState(room.maxTerm - 2);
 
   const handleOpen = () => {
     setOpen(true);
@@ -34,6 +41,11 @@ export default function Timer(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleOn = () => {
+    setStudyOn(true);
+    sendTimerSign(true);
+  }
 
   const children = ({ remainingTime }) => {
     const minutes = Math.floor(remainingTime / 60);
@@ -54,22 +66,17 @@ export default function Timer(props) {
     console.log("dddddd");
     console.log(socketRef.current.id);
     console.log("okay");
-    // if (socketRef.current.id === role) {
+    //if(socketRef.current.id === role){
     if (bool) {
       socketRef.current.emit(
         "timer start sign",
         owner,
         socketRef.current.id + "가 timer start!! " + owner
       );
-      onUpdateIsPlaying();
+      //updateIsPlaying();
       console.log("got it");
     } else socketRef.current.emit("timer stop sign", "timer stop!!");
-    // }
-  }
-
-  const handleOn = () => {
-    sendTimerSign(true);
-    setStudyOn(true);
+    //}
   }
 
   useEffect(() => {
@@ -92,17 +99,18 @@ export default function Timer(props) {
       owner,
       currentUser.name,
       count,
-      room.maxTerm
+      savedTerm
     );
-    if (room.maxTerm == count - 1) {
+    console.log("알람 누른 수: " + count + savedTerm);
+    if (count == savedTerm) {
       socketRef.current.emit(
         "show study king",
         owner,
         currentUser.name,
         term,
-        room.maxTerm,
-        room.owner
+        savedTerm
       );
+      onRefundPoint(); //add 포인트 획득(일반유저 +50)
     }
     setOpen(false);
   }
@@ -122,8 +130,8 @@ export default function Timer(props) {
 
   function breakTimeStart() {
     setTerm((preTerm) => preTerm + 1);
-    console.log("term: ", term, room.maxTerm);
-    console.log("term: ", room.maxTerm);
+    console.log("term: ", term, savedTerm);
+    console.log("term: ", savedTerm);
     if (room.maxTerm == term) {
       socketRef.current.emit(
         "term is over",
@@ -134,7 +142,11 @@ export default function Timer(props) {
         room.owner
       );
     }
-    setOpen(true);
+    if (room.maxTerm > term) {
+      console.log("heyyyyy");
+      setOpen(true);
+    }
+
     setTimeout(handleClose, 5000);
     return [true, breakTime];
   }
@@ -154,7 +166,7 @@ export default function Timer(props) {
           {children}
         </CountdownCircleTimer>
       </div>
-      <div className="timer-wrapper2">
+      {/* <div className="timer-wrapper2">
         <p style={{ color: "#A30000" }}>Break</p>
         <CountdownCircleTimer
           isPlaying={playing}
@@ -165,7 +177,7 @@ export default function Timer(props) {
         >
           {children}
         </CountdownCircleTimer>
-      </div>
+      </div> */}
       <Dialog
         open={open}
         onClose={handleClose}

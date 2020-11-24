@@ -18,7 +18,7 @@ class RoomCreateContainer extends Component {
     Store.roomCreate(room);
     UserStore.setUserPointProp("state", "makeRoom");
     UserStore.setUserPointProp("owner", true);
-    console.log("방장님 포인트 차감 -50");
+    console.log("방장님 포인트 차감 -100", UserStore.point);
     UserStore.modifyPoint(UserStore.point);
   };
 
