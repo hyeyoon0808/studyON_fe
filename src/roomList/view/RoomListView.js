@@ -42,7 +42,7 @@ const UseStyles = makeStyles((theme) => ({
 
 export default function RoomListView(props) {
   const classes = UseStyles();
-  const { rooms, room, setRoom, mySocket } = props;
+  const { rooms, room, setRoom, mySocket,authenticated } = props;
   const [open, setOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const socketRef = useRef();
@@ -73,6 +73,7 @@ export default function RoomListView(props) {
       <GridList cols={5} cellHeight={180} className={classes.gridList}>
         {rooms.map((room) => {
           return (
+            
             <GridListTile
               key={room.owner}
               // onClick={() => handleClickOpen(room.owner)}
@@ -106,8 +107,10 @@ export default function RoomListView(props) {
           );
         })}
       </GridList>
-      {room.isPlaying === "false" ? (
-        <Dialog
+      {authenticated?
+      (room.isPlaying === "false" ?
+      (
+      <Dialog
           open={open}
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"
@@ -176,7 +179,23 @@ export default function RoomListView(props) {
             <ButtonTemplate onClick={handleClose} text={"나가기"} />
           </DialogActions>
         </Dialog>
-      )}
+      )
+      ):(
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        className="dialog"
+      >
+        <DialogTitle id="alert-dialog-title" className="dialog-title">
+          로그인 후 입장해 주세요~!
+        </DialogTitle>
+        <DialogActions>
+          <ButtonTemplate onClick={handleClose} text={"나가기"} />
+        </DialogActions>
+      </Dialog>)
+      }
     </div>
   );
 }
