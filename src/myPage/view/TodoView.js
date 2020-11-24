@@ -31,7 +31,7 @@ class TodoView extends Component {
             <MinusCircleOutlined key="delete" onClick={onRemoveTodo} />,
           ]}
         >
-          <strong style={{ fontSize: "25px", textDecoration: "line-through" }}>
+          <strong style={{ fontSize: "25px" }}>
             Todo List
           </strong>
           <div>
@@ -40,13 +40,13 @@ class TodoView extends Component {
                 return (
                   <div key={todo.id} onClick={() => onSelectTodo(todo.id)}>
                     <Checkbox onChange={onTodoCheck} checked={todo.complete} />
-                    {todo.desc}
+                    &nbsp; {todo.desc}
                   </div>
                 );
               })
             ) : (
-              <p>empty</p>
-            )}
+                <p>empty</p>
+              )}
 
             {/* 가데이터
             {dateTodo.todos.map((todo) => {
@@ -66,6 +66,7 @@ class TodoView extends Component {
             value={todo && todo.desc ? todo.desc : ""}
             onChange={(e) => onSetTodoProp("desc", e.target.value)}
             autoFocus
+            style={{ marginTop: "10px" }}
           />
         </Card>
       </div>

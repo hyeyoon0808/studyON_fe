@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../scss/MyPages.scss";
-import { Card } from "antd";
+import { Card, Avatar } from "antd";
+import { UserOutlined } from '@ant-design/icons';
 import Profile from "../images/Profile.png";
 import Header from "../../header/view/Header";
 import Footer from "../../footer/view/Footer";
@@ -14,8 +15,10 @@ class MyPages extends Component {
   componentWillMount() {
     console.log("mypageContainer--");
     const { UserStore } = this.props;
+    this.onAddUser();
     let currentUser = this.props.UserStore.currentUser;
     UserStore.checkPoint(currentUser.id);
+    console.log(currentUser.id)
   }
 
   onAddUser = () => {
@@ -33,36 +36,41 @@ class MyPages extends Component {
     return (
       <div className="mypage">
         <Header />
-        <div className="row">
-          <div className="image">
+        <div className="row" style={{ marginLeft: "180px" }}>
+          {/* <div className="image">
             <img class="disabled medium ui image" src={Profile} />
-          </div>
-          <div className="profile">
+          </div> */}
+          <Avatar size={210} icon={<UserOutlined />} />
+          <div className="profile" style={{ left: "80px" }}>
+            <br />
             <strong style={{ fontSize: "25px" }}>Profile</strong>
-            <Card className="profileCard">
-              <p>
-                <strong>Name:</strong>&nbsp; {this.props.currentUser.name}
-              </p>
-              <p>
-                <strong>Email:</strong>&nbsp; {this.props.currentUser.email}
-              </p>
-              <p>
-                <strong>Your Point:</strong>&nbsp;
+            <div className="profileCard">
+              <br />
+              <div style={{ marginLeft: "60px" }}>
+                <p>
+                  <strong>Name:</strong>&nbsp; {this.props.currentUser.name}
+                </p>
+                <p>
+                  <strong>Email:</strong>&nbsp; {this.props.currentUser.email}
+                </p>
+                <p>
+                  <strong>Your Point:</strong>&nbsp;
                 {this.props.UserStore.userPoint.point}
-              </p>
-            </Card>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="row2">
+          <CalendarContainer date={date} />
           <div className="todo">
-            <strong style={{ fontSize: "11px" }}>{date}</strong>
+            <p style={{ textAlign: "right", marginRight: "22px" }}><strong style={{ fontSize: "11px" }}>{"<" + `${date}` + ">"}</strong></p>
             <TodoContainer />
           </div>
-          <CalendarContainer date={date} />
         </div>
         {/* <Footer /> */}
-      </div>
+      </div >
     );
   }
 }

@@ -40,9 +40,14 @@ const RoomEntranceView = ({
     <>
       <div className="RoomEntrance_wrap" key={data.owner}>
         <div className="RoomEntrance_title">{data.title}</div>
+        <div className="exit_button">
+          <Link to="/room-list">
+            <ButtonTemplate text={"방 나가기"} />
+          </Link>
+        </div>
 
         <div className="RoomEntrance_container">
-          <div className="RoomEntrance_left">
+          <div className="RoomEntrance_left" style={{ height: "33rem" }}>
             <TabsCard
               roomData={data}
               mySocket={mySocket}
@@ -50,7 +55,7 @@ const RoomEntranceView = ({
               className="RoomEntrance_left_item"
             />
 
-            <Card title="실적 게시판" className="RoomEntrance_left_item">
+            <Card title="실적 게시판" className="RoomEntrance_left_item" style={{ marginTop: "5px" }}>
               <AcheivementBoard
                 mySocket={mySocket}
                 owner={owner}
@@ -65,7 +70,8 @@ const RoomEntranceView = ({
 
           <div className="RoomEntrance_right">
             {/* <TabsCard roomData={data} mySocket={mySocket} owner={owner} room={room}/> */}
-            <Card title="TIMER">
+
+            <div title="TIMER">
               <Timer
                 mySocket={mySocket}
                 owner={owner}
@@ -73,11 +79,6 @@ const RoomEntranceView = ({
                 currentUser={currentUser}
                 onUpdateIsPlaying={onUpdateIsPlaying}
               />
-            </Card>
-            <div className="exit_button">
-              <Link to="/room-list">
-                <ButtonTemplate text={"방 나가기"} />
-              </Link>
             </div>
           </div>
         </div>

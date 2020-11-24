@@ -21,14 +21,20 @@ const RoomCreateForm = (props) => {
   return (
     <div>
       {/* <button onClick={this.goBack}>취소</button> */}
-      <img
-        src={require("../images/create_img.jpeg")}
-        alt="create_img"
-        className="create_img"
-      />
-      <form className="room_create_form">
+      <div style={{ position: "relative" }}>
+        <img
+          src={require("../images/roomCreate.jpg")}
+          alt="create_img"
+          className="create_img"
+          style={{ height: "350px", width: "500px", marginLeft: "-50px" }}
+        />
+        <div style={{ position: "absolute", left: "230px", top: "35rem", color: "red" }}>
+          * 방 생성 시 100 포인트가 차감됩니다 *
+        </div>
+      </div>
+      <form className="room_create_form" style={{ marginTop: "-350px" }}>
         <div>
-          TITLE &nbsp;
+          <strong>TITLE</strong> &nbsp;
           <Input
             //name="title"
             onChange={(e) => onSetRoom("title", e.target.value)}
@@ -39,7 +45,7 @@ const RoomCreateForm = (props) => {
           />
         </div>
         <div>
-          <br /> Description 공지 &nbsp;
+          <br /> <strong>Description 공지</strong>&nbsp;
           <TextField
             multiline
             rows={3}
@@ -54,7 +60,7 @@ const RoomCreateForm = (props) => {
         </div>
         <div>
           <br />
-          Tag &nbsp;
+          <strong>Tag</strong> &nbsp;
           <Select
             //name="tag"
             // value={room.tag}
@@ -76,7 +82,7 @@ const RoomCreateForm = (props) => {
               <MenuItem
                 key={tag.id}
                 value={tag.title}
-                // style={getStyles(name, personName, theme)}
+              // style={getStyles(name, personName, theme)}
               >
                 {tag.title}
               </MenuItem>
@@ -86,7 +92,7 @@ const RoomCreateForm = (props) => {
 
         <div>
           <br />
-          People Number &nbsp; &nbsp;
+          <strong>People Number</strong> &nbsp; &nbsp;
           <TextField
             //name="maxPeopleNum"
             type="number"
@@ -99,43 +105,43 @@ const RoomCreateForm = (props) => {
         </div>
         <div>
           <br />
-          Start Time 시작시간 &nbsp; &nbsp;
+          <strong>Start Time 시작시간</strong> &nbsp; &nbsp;
           <TimePicker
             value={room.startTime}
             onChange={(e) => onSetRoom("startTime", e)}
-            //name="startTime"
+          //name="startTime"
           />
         </div>
         <div>
           <br />
-          StudyTime 공부시간 &nbsp; &nbsp;
+          <span>
+            <strong>StudyTime 공부시간</strong> &nbsp; &nbsp;
           <TextField
-            //name="studyTime"
-            type="number"
-            value={room.studyTime}
-            onChange={(e) => onSetRoom("studyTime", e.target.value)}
-            margin="normal"
-            className="form_number"
-            color="secondary"
-          />
-        </div>
-        <div>
-          <br />
-          BreakTime 쉬는시간 &nbsp; &nbsp;
+              //name="studyTime"
+              type="number"
+              value={room.studyTime}
+              onChange={(e) => onSetRoom("studyTime", e.target.value)}
+              margin="normal"
+              className="form_number"
+              color="secondary"
+            />
+          </span>
+          <span style={{ marginLeft: "180px" }}>
+            <strong>BreakTime 쉬는시간</strong> &nbsp; &nbsp;
           <TextField
-            //name="breakTime"
-            type="number"
-            value={room.breakTime}
-            onChange={(e) => onSetRoom("breakTime", e.target.value)}
-            margin="normal"
-            className="form_number"
-            color="secondary"
-          />
+              //name="breakTime"
+              type="number"
+              value={room.breakTime}
+              onChange={(e) => onSetRoom("breakTime", e.target.value)}
+              margin="normal"
+              className="form_number"
+              color="secondary"
+            />
+          </span>
         </div>
-
         <div>
           <br />
-          Term 횟수 &nbsp; &nbsp;
+          <strong>Term 횟수</strong> &nbsp; &nbsp;
           <TextField
             //name="maxTerm"
             type="number"
@@ -151,6 +157,7 @@ const RoomCreateForm = (props) => {
           color="secondary"
           type="submit"
           onClick={onAddRoom}
+          style={{ float: "right", marginRight: "50px" }}
         >
           <Link to={`/room-entrance/${mySocket.id}`} className="button_text">
             등록
