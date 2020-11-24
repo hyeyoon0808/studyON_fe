@@ -12,19 +12,26 @@ import Sound from "react-sound";
 import "../scss/Timer.scss";
 
 export default function Timer(props) {
-    const { mySocket, owner, room, currentUser, updateIsPlaying } = props;
-    const [playing, setPlaying] = useState(false);
-    const [yourID, setYourID] = useState();
-    const [count, setCount] = useState(0);
-    const [role, setRole] = useState(owner);
-    const [study, setStudy] = useState(room.studyTime * 60);
-    const [breakTime, setBreak] = useState(room.breakTime * 60000);
-    const [key, setKey] = useState(0);
-    const socketRef = useRef();
-    const [remainingTime, setRemainingTime] = useState();
-    const [open, setOpen] = React.useState(false);
-    const [term, setTerm] = useState(1);
-    const [savedTerm, setSavedTerm] = useState(room.maxTerm-2);
+  const {
+    mySocket,
+    owner,
+    room,
+    currentUser,
+    updateIsPlaying,
+    onRefundPoint,
+  } = props;
+  const [playing, setPlaying] = useState(false);
+  const [yourID, setYourID] = useState();
+  const [count, setCount] = useState(0);
+  const [role, setRole] = useState(owner);
+  const [study, setStudy] = useState(room.studyTime * 60);
+  const [breakTime, setBreak] = useState(room.breakTime * 60000);
+  const [key, setKey] = useState(0);
+  const socketRef = useRef();
+  const [remainingTime, setRemainingTime] = useState();
+  const [open, setOpen] = React.useState(false);
+  const [term, setTerm] = useState(1);
+  const [savedTerm, setSavedTerm] = useState(room.maxTerm - 2);
 
   const handleOpen = () => {
     setOpen(true);
@@ -49,42 +56,55 @@ export default function Timer(props) {
     );
   };
 
-    function sendTimerSign(bool) {
-        console.log("dddddd");
-        console.log(socketRef.current.id);
-        console.log("okay");
-        //if(socketRef.current.id === role){
-        if (bool) {
-            socketRef.current.emit(
-                "timer start sign",
-                owner,
-                socketRef.current.id + "가 timer start!! " + owner
-            );
-            //updateIsPlaying();
-            console.log("got it");
-        } else socketRef.current.emit("timer stop sign", "timer stop!!");
-        //}
-    }
+  function sendTimerSign(bool) {
+    console.log("dddddd");
+    console.log(socketRef.current.id);
+    console.log("okay");
+    //if(socketRef.current.id === role){
+    if (bool) {
+      socketRef.current.emit(
+        "timer start sign",
+        owner,
+        socketRef.current.id + "가 timer start!! " + owner
+      );
+      //updateIsPlaying();
+      console.log("got it");
+    } else socketRef.current.emit("timer stop sign", "timer stop!!");
+    //}
+  }
 
-    useEffect(() => {
-        socketRef.current = mySocket;
-        socketRef.current.on("your id", (id) => {
-            setYourID(id);
-        });
+  useEffect(() => {
+    socketRef.current = mySocket;
+    socketRef.current.on("your id", (id) => {
+      setYourID(id);
+    });
 
-        socketRef.current.on("timer start", (message) => {
-            console.log(message);
-            setPlaying(true);
-        });
-        setTerm(term);
-    }, []);
+    socketRef.current.on("timer start", (message) => {
+      console.log(message);
+      setPlaying(true);
+    });
+    setTerm(term);
+  }, []);
 
   function countAlarm() {
     setCount(count + 1);
-    socketRef.current.emit("alarm off", owner, currentUser.name, count, savedTerm);
-    console.log("알람 누른 수: "+count+ savedTerm);
-    if(count == savedTerm){
-        socketRef.current.emit("show study king", owner, currentUser.name, term, savedTerm);
+    socketRef.current.emit(
+      "alarm off",
+      owner,
+      currentUser.name,
+      count,
+      savedTerm
+    );
+    console.log("알람 누른 수: " + count + savedTerm);
+    if (count == savedTerm) {
+      socketRef.current.emit(
+        "show study king",
+        owner,
+        currentUser.name,
+        term,
+        savedTerm
+      );
+      onRefundPoint(); //add 포인트 획득(일반유저 +50)
     }
     setOpen(false);
   }
@@ -102,49 +122,54 @@ export default function Timer(props) {
     setKey(!key);
   }
 
-    function breakTimeStart(){
-        setTerm((preTerm) => preTerm + 1);
-        console.log("term: ", term, savedTerm);
-        console.log("term: ", savedTerm);
-        if(room.maxTerm == term){
-            socketRef.current.emit("term is over", owner, currentUser.name, term, room.maxTerm, room.owner);
-        }
-        if(room.maxTerm > term){
-            console.log("heyyyyy");
-            setOpen(true);
-        }
-        
-        setTimeout(handleClose, 5000);
-        return [true, breakTime];
+  function breakTimeStart() {
+    setTerm((preTerm) => preTerm + 1);
+    console.log("term: ", term, savedTerm);
+    console.log("term: ", savedTerm);
+    if (room.maxTerm == term) {
+      socketRef.current.emit(
+        "term is over",
+        owner,
+        currentUser.name,
+        term,
+        room.maxTerm,
+        room.owner
+      );
+    }
+    if (room.maxTerm > term) {
+      console.log("heyyyyy");
+      setOpen(true);
     }
 
-    return (
-        <div className="App">
-            <h1>StudyON Timer</h1>
-            <div className="timer-wrapper">
-                <CountdownCircleTimer
-                    isPlaying={playing}
-                    duration={study}
-                    key={key}
-                    colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
-                    onComplete={breakTimeStart}
-                >
-                    {children}
-                </CountdownCircleTimer>
-            </div>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">
-                    {"쉬는시간 시작"}
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        공부 끝! 쉬는 시간 시작입니다-!
-                    </DialogContentText>
+    setTimeout(handleClose, 5000);
+    return [true, breakTime];
+  }
+
+  return (
+    <div className="App">
+      <h1>StudyON Timer</h1>
+      <div className="timer-wrapper">
+        <CountdownCircleTimer
+          isPlaying={playing}
+          duration={study}
+          key={key}
+          colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+          onComplete={breakTimeStart}
+        >
+          {children}
+        </CountdownCircleTimer>
+      </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"쉬는시간 시작"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            공부 끝! 쉬는 시간 시작입니다-!
+          </DialogContentText>
           <Sound
             url={soundUrl}
             playStatus={Sound.status.PLAYING}
