@@ -26,7 +26,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AchievementView = (props) => {
-  const { setPopUp, mySocket, onClickGood, onClickNormal, onClickBad, studyKings} = props;
+  const {
+    setPopUp,
+    mySocket,
+    onClickGood,
+    onClickNormal,
+    onClickBad,
+    studyKings,
+  } = props;
   const classes = useStyles();
   const socketRef = useRef();
 
@@ -37,7 +44,7 @@ const AchievementView = (props) => {
         X
       </button>
       <div className="today-king">
-  <h3>오늘의 공부왕</h3>
+        <h3>오늘의 공부왕</h3>
       </div>
       <div className="study-king-container">
         {studyKings?.map((value) => {
@@ -55,15 +62,17 @@ const AchievementView = (props) => {
       </div>
       {/* button controls */}
       <div classes="three-btn">
-        <button onClick={onClickBad} className="left_btn">
-          불만족!
-        </button>
-        <button onClick={onClickNormal} className="center_btn">
-          보통!
-        </button>
-        <button onClick={onClickGood} className="right_btn">
-          만족!
-        </button>
+        <Link to="/room-list">
+          <button onClick={onClickGood} className="good_btn">
+            만족!
+          </button>
+          <button onClick={onClickNormal} className="normal_btn">
+            보통!
+          </button>
+          <button onClick={onClickBad} className="bad_btn">
+            불만족!
+          </button>
+        </Link>
       </div>
     </div>
   );
