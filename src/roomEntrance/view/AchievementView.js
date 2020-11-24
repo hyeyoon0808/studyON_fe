@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
-//import studyKing from "./studyKing";
-// styling
 import "../scss/Achievement.css";
-// images
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
