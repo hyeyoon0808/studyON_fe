@@ -1,8 +1,7 @@
 .RoomEntrance_wrap {
     display: flex;
     flex-direction: column;
-    width: 100%;
-}
+    width: 100%;}
 
 .RoomEntrance_title {
     display: flex;
@@ -18,6 +17,7 @@
     box-shadow: 5px 5px grey;
     font-family: "GmarketSansTTF Medium";
     font-size: x-large;
+    background-color: mistyrose;
 }
 
 .RoomEntrance_left {
