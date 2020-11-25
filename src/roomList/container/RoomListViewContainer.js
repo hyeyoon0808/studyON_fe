@@ -7,10 +7,12 @@ import RoomListView from "../view/RoomListView";
 class RoomListViewContainer extends Component {
   componentDidMount() {
     const { Store } = this.props;
+    const { UserStore } = this.props;
     // const socket = io.connect("http://localhost:8000");
 
     Store.mySocket.on("your id", (id) => {
       console.log("서버로부터 받은 소켓 아이디 " + id);
+      
     });
 
     console.log(Store.mySocket.id);
@@ -31,13 +33,15 @@ class RoomListViewContainer extends Component {
     //const rooms = this.props.Store.getTileRooms;
     const rooms = this.props.Store.getRoomList;
     const room = this.props.Store.getRoom;
-    console.log(room);
+    const authenticated=this.props.UserStore.getAuthenticated;
+    console.log("로그인 되었나요? "+authenticated );
     return (
       <RoomListView
         rooms={rooms}
         room={room}
         setRoom={this.setRoom}
         mySocket={this.props.Store.mySocket}
+        authenticated={authenticated}
       />
     );
   }
