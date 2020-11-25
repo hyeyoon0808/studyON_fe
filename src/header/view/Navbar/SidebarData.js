@@ -5,13 +5,13 @@ import { RiCustomerService2Fill } from "react-icons/ri";
 
 export const SidebarData = [
   {
-    title: "Home",
+    title: "HOME",
     path: "/",
     icon: <AiIcons.AiFillHome />,
     cName: "nav-text",
   },
   {
-    title: "ON SHOP",
+    title: "ONSHOP",
     path: "/shop",
     icon: <AiIcons.AiFillShop />,
     cName: "nav-text",
