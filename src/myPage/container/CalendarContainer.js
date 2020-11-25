@@ -22,19 +22,18 @@ class CalendarContainer extends Component {
       if (value.achievment === "GOOD") {
         this.props.TodoStore.setAcheiveProp("title", value.achievment);
         this.props.TodoStore.setAcheiveProp("date", value.todoDate);
-        this.props.TodoStore.setAcheiveProp("color", "#ace600");
+        this.props.TodoStore.setAcheiveProp("color", "#ff3333");
       } else if (value.achievment === "NORMAL") {
         this.props.TodoStore.setAcheiveProp("title", value.achievment);
         this.props.TodoStore.setAcheiveProp("date", value.todoDate);
-        this.props.TodoStore.setAcheiveProp("color", "#ffcc00");
+        this.props.TodoStore.setAcheiveProp("color", "#ff9999");
       } else if (value.achievment === "BAD") {
         this.props.TodoStore.setAcheiveProp("title", value.achievment);
         this.props.TodoStore.setAcheiveProp("date", value.todoDate);
-        this.props.TodoStore.setAcheiveProp("color", "#ff3300");
+        this.props.TodoStore.setAcheiveProp("color", "#ffe6e6");
       }
       let achievements = this.props.TodoStore.achievements;
       achievements.push(this.props.TodoStore.achievement);
-      console.log("achievement>>>>>>", achievements);
     });
   }
 

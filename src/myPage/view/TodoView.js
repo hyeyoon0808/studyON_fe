@@ -31,10 +31,10 @@ class TodoView extends Component {
             <MinusCircleOutlined key="delete" onClick={onRemoveTodo} />,
           ]}
         >
-          <strong style={{ fontSize: "25px" }}>
-            Todo List
-          </strong>
-          <div>
+          <strong style={{ fontSize: "25px" }}>Todo List</strong>
+          <br />
+          <br />
+          <div style={{ height: "15rem" }}>
             {Array.isArray(dateTodo.todos) && dateTodo.todos.length ? (
               dateTodo.todos.map((todo) => {
                 return (
@@ -45,8 +45,8 @@ class TodoView extends Component {
                 );
               })
             ) : (
-                <p>empty</p>
-              )}
+              <p>empty</p>
+            )}
 
             {/* 가데이터
             {dateTodo.todos.map((todo) => {
