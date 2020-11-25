@@ -62,7 +62,12 @@ const RoomEntranceView = ({
               className="RoomEntrance_left_item"
             />
 
-            <Card title="실적 게시판" className="RoomEntrance_left_item" style={{ marginTop: "5px" }}>
+            <Card
+              title="실적 게시판"
+              className="RoomEntrance_left_item"
+              style={{ marginTop: "5px" }}
+              headStyle={{ backgroundColor: "snow" }}
+            >
               <AcheivementBoard
                 mySocket={mySocket}
                 owner={owner}
