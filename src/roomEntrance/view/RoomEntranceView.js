@@ -7,8 +7,10 @@ import AcheivementBoard from "./AchievementBoard";
 import { Checkbox } from "antd";
 import AchievementView from "./AchievementView";
 import ButtonTemplate from "../../icon/view/ButtonTemplate";
+import ExitToApp from "@material-ui/icons/ExitToApp";
 import { Link } from "react-router-dom";
 import AchievementContainer from "../container/AchievementContainer";
+import { Button } from "@material-ui/core";
 
 const RoomEntranceView = ({
   mySocket,
@@ -48,26 +50,41 @@ const RoomEntranceView = ({
       <div className="RoomEntrance_wrap" key={data.owner}>
         <div className="RoomEntrance_title">{data.title}</div>
         <div className="exit_button">
-          <Link to="/room-list">
-            <ButtonTemplate text={"방 나가기"} />
+          <Link to="/room-list" >
+            <Button style={{ color: "black" }}><ExitToApp />EXIT</Button>
           </Link>
         </div>
 
         <div className="RoomEntrance_container">
-          <div className="RoomEntrance_left" style={{ height: "33rem" }}>
+          <div className="RoomEntrance_left" >
             <TabsCard
               roomData={data}
               mySocket={mySocket}
               owner={owner}
               className="RoomEntrance_left_item"
             />
-
+          </div>
+          <div className="RoomEntrance_right">
+            {/* <TabsCard roomData={data} mySocket={mySocket} owner={owner} room={room}/> */}
+            <Timer
+              mySocket={mySocket}
+              owner={owner}
+              room={room}
+              currentUser={currentUser}
+              onUpdateIsPlaying={onUpdateIsPlaying}
+              onRefundPoint={onRefundPoint}
+            />
+          </div>
+          <div>
             <Card
               title="실적 게시판"
-              className="RoomEntrance_left_item"
-              style={{ marginTop: "5px" }}
-              headStyle={{ backgroundColor: "snow" }}
+              className="RoomEntrance_right_item"
+              bodyStyle={{ overflow: "scroll", height: "500px" }}
+              style={{ overflow: "hidden" }}
             >
+              <p style={{ color: "#808080", fontFamily: "GmarketSansTTF Medium" }}>
+                방장이 타이머를 실행할 때까지 잠시만 기다려주세요 ^_^
+              </p>
               <AcheivementBoard
                 mySocket={mySocket}
                 owner={owner}
@@ -78,21 +95,6 @@ const RoomEntranceView = ({
                 실적게시판
               </button> */}
             </Card>
-          </div>
-
-          <div className="RoomEntrance_right">
-            {/* <TabsCard roomData={data} mySocket={mySocket} owner={owner} room={room}/> */}
-
-            <div title="TIMER">
-              <Timer
-                mySocket={mySocket}
-                owner={owner}
-                room={room}
-                currentUser={currentUser}
-                onUpdateIsPlaying={onUpdateIsPlaying}
-                onRefundPoint={onRefundPoint}
-              />
-            </div>
           </div>
         </div>
         <div>
