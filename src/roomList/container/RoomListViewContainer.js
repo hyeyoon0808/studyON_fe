@@ -14,6 +14,11 @@ class RoomListViewContainer extends Component {
       console.log("서버로부터 받은 소켓 아이디 " + id);
       
     });
+    
+    Store.mySocket.on("show the current term", (owner, term) => {
+      console.log("term: "+term);
+      
+    });
 
     console.log(Store.mySocket.id);
     //Store.initRoomList();
