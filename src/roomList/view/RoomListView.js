@@ -42,7 +42,7 @@ const UseStyles = makeStyles((theme) => ({
 
 export default function RoomListView(props) {
   const classes = UseStyles();
-  const { rooms, room, setRoom, mySocket,authenticated } = props;
+  const { rooms, room, setRoom, mySocket, authenticated } = props;
   const [open, setOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const socketRef = useRef();
