@@ -17,29 +17,26 @@ export default function AchievementBoard(props) {
         console.log(mySocket.id);
         socketRef.current = mySocket;
         socketRef.current.on("show user name", (name, count) => {
-            setMessages((oldMsgs) => [...oldMsgs, name+"가 "+(count+1)+"째 알람을 눌렀습니다."]);
+            setMessages((oldMsgs) => [...oldMsgs, name + "가 " + (count + 1) + "째 알람을 눌렀습니다."]);
         });
-        socketRef.current.on("show todo checked", (todoDesc, userName)=>{
-            setMessages((oldTodos) => [...oldTodos, userName+"가 "+todoDesc+"를 완료했습니다."]);
+        socketRef.current.on("show todo checked", (todoDesc, userName) => {
+            setMessages((oldTodos) => [...oldTodos, userName + "가 " + todoDesc + "를 완료했습니다."]);
         });
     }, []);
-    
+
 
     return (
         <div className="App">
-            <h1>
-                실적게시판 테스트 중,,,
-            </h1>
-        <div>
-        {messages.map((m, index) => {
-            
-            return (
-                //알람누른 유저 메세지 (유저 & 카운트 갯수)
-                <div>{m}</div>
-            );
-        })}
-        </div>
-           
+            <div>
+                {messages.map((m, index) => {
+
+                    return (
+                        //알람누른 유저 메세지 (유저 & 카운트 갯수)
+                        <div><p><strong>{m}</strong></p></div>
+                    );
+                })}
+            </div>
+
         </div>
     );
 }
