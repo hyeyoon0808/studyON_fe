@@ -33,6 +33,7 @@ export default function Timer(props) {
   const [term, setTerm] = useState(1);
   const [studyOn, setStudyOn] = useState(false)
   const [savedTerm, setSavedTerm] = useState(room.maxTerm - 2);
+  const [goBreak, setGoBreak] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -128,10 +129,19 @@ export default function Timer(props) {
     setKey(!key);
   }
 
+  function studyTimeStart() {
+    setGoBreak(false)
+    return [true, study];
+  }
+
   function breakTimeStart() {
     setTerm((preTerm) => preTerm + 1);
     console.log("term: ", term, savedTerm);
-    console.log("term: ", savedTerm);
+    socketRef.current.emit(
+      "current term",
+      owner,
+      term
+    );
     if (room.maxTerm == term) {
       socketRef.current.emit(
         "term is over",
@@ -146,6 +156,10 @@ export default function Timer(props) {
       console.log("heyyyyy");
       setOpen(true);
     }
+    if (term >= 1) {
+      setGoBreak(true);
+      console.log("break is on");
+    }
 
     setTimeout(handleClose, 5000);
     return [true, breakTime];
@@ -153,9 +167,28 @@ export default function Timer(props) {
 
   return (
     <div className="App">
+      <div className="start_button">
+        {/* <input
+          type="number"
+          min="1"
+          max="60"
+          name="study"
+          placeholder="Study time"
+          onChange={handleStudyTime}
+        />
+        <input
+          type="number"
+          min="1"
+          max="60"
+          name="break"
+          placeholder="Break time"
+          onChange={handleBreakTime}
+        /> */}
+        <button onClick={handleOn} className="start_btn"><strong>START</strong></button>
+      </div>
       {studyOn ? <h1>StudyON</h1> : <h1>StudyOFF</h1>}
       <div className="timer-wrapper">
-        <p style={{ color: "#004777" }}>Study</p>
+        <p style={{ color: "#004777" }}><strong>Study</strong></p>
         <CountdownCircleTimer
           isPlaying={playing}
           duration={study}
@@ -166,18 +199,18 @@ export default function Timer(props) {
           {children}
         </CountdownCircleTimer>
       </div>
-      {/* <div className="timer-wrapper2">
-        <p style={{ color: "#A30000" }}>Break</p>
+      <div className="timer-wrapper2">
+        <p style={{ color: "#A30000" }}><strong>Break</strong></p>
         <CountdownCircleTimer
-          isPlaying={playing}
-          duration={study}
+          isPlaying={goBreak}
+          duration={breakTime / 1000}
           key={key}
           colors={[["#A30000", 0.33], ["#F7B801", 0.33], ["#004777"]]}
-          onComplete={breakTimeStart}
+          onComplete={studyTimeStart}
         >
           {children}
         </CountdownCircleTimer>
-      </div> */}
+      </div>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -204,26 +237,6 @@ export default function Timer(props) {
           </Button>
         </DialogActions>
       </Dialog>
-
-      <div style={{ textAlign: "right", float: "right" }}>
-        {/* <input
-          type="number"
-          min="1"
-          max="60"
-          name="study"
-          placeholder="Study time"
-          onChange={handleStudyTime}
-        />
-        <input
-          type="number"
-          min="1"
-          max="60"
-          name="break"
-          placeholder="Break time"
-          onChange={handleBreakTime}
-        /> */}
-        <button onClick={handleOn}>START</button>
-      </div>
     </div>
   );
 }

@@ -19,10 +19,10 @@ class RoomEntranceContainer extends Component {
     Store.mySocket.on("enter event", (owner, res) => {
       console.log(res + "가 입장!");
       Store.mySocket.emit("send user", owner, res);
-      let room = Store.room;
-      Store.user = res;
+      //let room = Store.room;
+      //Store.user = res;
       // console.log("현재 방 유저리스트 id >> ", res);
-      // Store.addUserList(room);
+      //Store.addUserList(room);
     });
 
     //방 입장시 포인트 차감(일반유저)
@@ -33,6 +33,11 @@ class RoomEntranceContainer extends Component {
     //방 나가기
     Store.mySocket.on("leave event", (res) => {
       console.log(res + "가 나감!");
+    });
+
+    Store.mySocket.on("show the current term", (owner, term) => {
+      console.log("term: "+term);
+      
     });
   }
 
