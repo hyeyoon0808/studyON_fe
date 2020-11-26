@@ -9,6 +9,7 @@ import "../scss/roomCreate.scss";
 import { Link } from "react-router-dom";
 import tagData from "../../roomList/tagData";
 import Chip from "@material-ui/core/Chip";
+import { RiCheckboxMultipleFill } from "react-icons/ri";
 
 const RoomCreateForm = (props) => {
   const { mySocket, room, onSetRoom, onAddRoom } = props;
@@ -28,44 +29,49 @@ const RoomCreateForm = (props) => {
           className="create_img"
           style={{ height: "350px", width: "500px", marginLeft: "-50px" }}
         />
-        <div style={{ position: "absolute", left: "230px", top: "35rem", color: "red" }}>
+        <div
+          style={{
+            position: "absolute",
+            left: "230px",
+            top: "35rem",
+            color: "red",
+            fontFamily: "GmarketSansTTF Medium",
+          }}
+        >
           * 방 생성 시 100 포인트가 차감됩니다 *
         </div>
       </div>
       <form className="room_create_form" style={{ marginTop: "-350px" }}>
         <div>
-          <strong>TITLE</strong> &nbsp;
+          <strong>TITLE</strong> &nbsp;&nbsp;
           <Input
-            //name="title"
             onChange={(e) => onSetRoom("title", e.target.value)}
             value={room.title}
             className="form_title"
             variant="outlined"
             color="secondary"
+            placeholder="방 제목을 입력하세요"
           />
         </div>
         <div>
-          <br /> <strong>Description 공지</strong>&nbsp;
+          <br /> <strong>Description</strong>&nbsp;
           <TextField
             multiline
             rows={3}
             fullWidth
             variant="outlined"
-            //name="description"
             onChange={(e) => onSetRoom("description", e.target.value)}
             value={room.description}
             color="secondary"
             className="form_desc"
+            placeholder="전달하고 싶은 공지를 작성하세요"
           />
         </div>
         <div>
           <br />
           <strong>Tag</strong> &nbsp;
           <Select
-            //name="tag"
-            // value={room.tag}
             onChange={handleChange}
-            // onChange={(e) => onSetRoom("tag", e.target.value)}
             className="form_tag"
             color="secondary"
             multiple
@@ -79,11 +85,7 @@ const RoomCreateForm = (props) => {
             )}
           >
             {tagData.map((tag) => (
-              <MenuItem
-                key={tag.id}
-                value={tag.title}
-              // style={getStyles(name, personName, theme)}
-              >
+              <MenuItem key={tag.id} value={tag.title}>
                 {tag.title}
               </MenuItem>
             ))}
@@ -109,14 +111,13 @@ const RoomCreateForm = (props) => {
           <TimePicker
             value={room.startTime}
             onChange={(e) => onSetRoom("startTime", e)}
-          //name="startTime"
           />
         </div>
         <div>
           <br />
           <span>
             <strong>StudyTime 공부시간</strong> &nbsp; &nbsp;
-          <TextField
+            <TextField
               //name="studyTime"
               type="number"
               value={room.studyTime}
@@ -128,7 +129,7 @@ const RoomCreateForm = (props) => {
           </span>
           <span style={{ marginLeft: "180px" }}>
             <strong>BreakTime 쉬는시간</strong> &nbsp; &nbsp;
-          <TextField
+            <TextField
               //name="breakTime"
               type="number"
               value={room.breakTime}
@@ -153,14 +154,13 @@ const RoomCreateForm = (props) => {
           />
         </div>
         <Button
-          variant="contained"
-          color="secondary"
+          variant="outlined"
           type="submit"
           onClick={onAddRoom}
           style={{ float: "right", marginRight: "50px" }}
         >
-          <Link to={`/room-entrance/${mySocket.id}`} className="button_text">
-            등록
+          <Link to={`/room-entrance/${mySocket.id}`} className="button_text_s">
+            <RiCheckboxMultipleFill /> 등록
           </Link>
         </Button>
       </form>
