@@ -31,6 +31,7 @@ export default function AchievementBoard(props) {
                 {messages.map((m, index) => {
 
                     return (
+                        
                         //알람누른 유저 메세지 (유저 & 카운트 갯수)
                         <div><p><strong>{m}</strong></p></div>
                     );

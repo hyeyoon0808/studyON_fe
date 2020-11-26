@@ -34,6 +34,11 @@ class RoomEntranceContainer extends Component {
     Store.mySocket.on("leave event", (res) => {
       console.log(res + "가 나감!");
     });
+
+    Store.mySocket.on("show the current term", (owner, term) => {
+      console.log("term: "+term);
+      
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
