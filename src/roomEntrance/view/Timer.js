@@ -131,7 +131,11 @@ export default function Timer(props) {
   function breakTimeStart() {
     setTerm((preTerm) => preTerm + 1);
     console.log("term: ", term, savedTerm);
-    console.log("term: ", savedTerm);
+    socketRef.current.emit(
+      "current term",
+      owner,
+      term
+    );
     if (room.maxTerm == term) {
       socketRef.current.emit(
         "term is over",

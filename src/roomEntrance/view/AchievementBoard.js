@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "../scss/Timer.scss";
 
 
-export default function Timer(props) {
+export default function AchievementBoard(props) {
     const {mySocket, owner, room} = props;
     const [playing, setPlaying] = useState(false);
     const [key, setKey] = useState(0);
