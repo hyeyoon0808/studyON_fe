@@ -31,7 +31,7 @@ export default function Timer(props) {
   const [remainingTime, setRemainingTime] = useState();
   const [open, setOpen] = React.useState(false);
   const [term, setTerm] = useState(1);
-  const [studyOn, setStudyOn] = useState(false)
+  // const [studyOn, setStudyOn] = useState(false)
   const [savedTerm, setSavedTerm] = useState(room.maxTerm - 2);
   const [goBreak, setGoBreak] = useState(false);
 
@@ -43,10 +43,10 @@ export default function Timer(props) {
     setOpen(false);
   };
 
-  const handleOn = () => {
-    setStudyOn(true);
-    sendTimerSign(true);
-  }
+  // const handleOn = () => {
+  //   setStudyOn(true);
+  //   sendTimerSign(true);
+  // }
 
   const children = ({ remainingTime }) => {
     const minutes = Math.floor(remainingTime / 60);
@@ -163,8 +163,24 @@ export default function Timer(props) {
 
   return (
     <div className="App">
-      <div className="start_button">
-        {/* <input
+      {/* {studyOn ? <h1>StudyON</h1> : <h1>StudyOFF</h1>} */}
+      <h1>StudyON Timer</h1>
+      {/* <button onClick={() => { sendTimerSign(true) }} className="start_btn"><strong>START</strong></button> */}
+      <div className="timer2">
+        <div className="timer-wrapper">
+          <CountdownCircleTimer
+            isPlaying={playing}
+            duration={study}
+            key={key}
+            colors={[["#8091a8", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+            onComplete={breakTimeStart}
+          >
+            {children}
+          </CountdownCircleTimer>
+          <p style={{ color: "#8091a8" }}><strong>Study</strong></p>
+        </div>
+        <div className="start_button">
+          {/* <input
           type="number"
           min="1"
           max="60"
@@ -180,32 +196,22 @@ export default function Timer(props) {
           placeholder="Break time"
           onChange={handleBreakTime}
         /> */}
-        <button onClick={handleOn} className="start_btn"><strong>START</strong></button>
-      </div>
-      {studyOn ? <h1>StudyON</h1> : <h1>StudyOFF</h1>}
-      <div className="timer-wrapper">
-        <p style={{ color: "#004777" }}><strong>Study</strong></p>
-        <CountdownCircleTimer
-          isPlaying={playing}
-          duration={study}
-          key={key}
-          colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
-          onComplete={breakTimeStart}
-        >
-          {children}
-        </CountdownCircleTimer>
-      </div>
-      <div className="timer-wrapper2">
-        <p style={{ color: "#A30000" }}><strong>Break</strong></p>
-        <CountdownCircleTimer
-          isPlaying={goBreak}
-          duration={breakTime / 1000}
-          key={key}
-          colors={[["#A30000", 0.33], ["#F7B801", 0.33], ["#004777"]]}
-          onComplete={studyTimeStart}
-        >
-          {children}
-        </CountdownCircleTimer>
+          <button onClick={() => { sendTimerSign(true) }} className="start_btn">
+            <p className="btn_font"><strong>START</strong></p>
+          </button>
+        </div>
+        <div className="timer-wrapper2">
+          <CountdownCircleTimer
+            isPlaying={goBreak}
+            duration={breakTime / 1000}
+            key={key}
+            colors={[["#c9b3c5", 0.33], ["#F7B801", 0.33], ["#004777"]]}
+            onComplete={studyTimeStart}
+          >
+            {children}
+          </CountdownCircleTimer>
+          <p style={{ color: "#c9b3c5" }}><strong>Break</strong></p>
+        </div>
       </div>
       <Dialog
         open={open}
