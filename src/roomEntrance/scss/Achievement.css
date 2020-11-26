@@ -71,7 +71,7 @@ button:hover {
   width: 100px;
   align-items: center;
   justify-content: center;
-  background-color: #e84d3c;
+  background-color: #ffe6e6;
   color: black;
 }
 
@@ -81,7 +81,7 @@ button:hover {
   width: 100px;
   align-items: center;
   justify-content: center;
-  background-color: #e8df3c;
+  background-color: #ff9999;
   color: black;
 }
 
@@ -91,7 +91,7 @@ button:hover {
   width: 100px;
   align-items: center;
   justify-content: center;
-  background-color: #78e83c;
+  background-color: #ff3333;
   color: black;
 }
 .pu-img {

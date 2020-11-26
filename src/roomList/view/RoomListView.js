@@ -17,6 +17,8 @@ import ButtonTemplate from "../../icon/view/ButtonTemplate";
 import Divider from "@material-ui/core/Divider";
 import moment from "moment";
 import { PropTypes } from "mobx-react";
+import { BiArrowToRight } from "react-icons/bi";
+import ExitToApp from "@material-ui/icons/ExitToApp";
 
 const UseStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +46,6 @@ export default function RoomListView(props) {
   const classes = UseStyles();
   const { rooms, room, setRoom, mySocket, authenticated } = props;
   const [open, setOpen] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   const socketRef = useRef();
 
   const handleClickOpen = (owner) => {
@@ -57,23 +58,11 @@ export default function RoomListView(props) {
     // console.log("room.isPlaying", room.isPlaying);
   };
 
-  // const modalOpen = () =>
-  // useEffect(() => {
-  //     socketRef.current = mySocket;
-  //     socketRef.current.on("start", (isPlaying) => {
-  //         setIsPlaying(isPlaying);
-  //     });
-  // }, []);
-
-  // console.log(isPlaying);
-  // console.log(JSON.parse(room.isPlaying);
-
   return (
     <div className={classes.root}>
       <GridList cols={5} cellHeight={180} className={classes.gridList}>
         {rooms.map((room) => {
           return (
-            
             <GridListTile
               key={room.owner}
               // onClick={() => handleClickOpen(room.owner)}
@@ -107,63 +96,99 @@ export default function RoomListView(props) {
           );
         })}
       </GridList>
-      {authenticated?
-      (room.isPlaying === "false" ?
-      (
-      <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          className="dialog"
-        >
-          <DialogTitle id="alert-dialog-title" className="dialog-title">
-            {`${room.title} 입장`}
-          </DialogTitle>
-          <DialogContent className="big-input-block">
-            <div class="input-block">
-              <span className="content-title">공부 시작 시간</span>
-              <span>{moment(room.startTime).format("YYYY-MM-DD hh:mm a")}</span>
-            </div>
-            <div class="input-block">
-              <span className="content-title">공부 시간</span>
-              <span>{room.studyTime} 분</span>
-            </div>
-            <div class="input-block">
-              <span className="content-title">쉬는 시간</span>
-              <span>{room.breakTime} 분</span>
-            </div>
-            <div class="input-block">
+      {authenticated ? (
+        room.isPlaying === "false" ? (
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            className="dialog"
+          >
+            <DialogTitle id="alert-dialog-title" className="dialog-title">
+              <span className="dialog-title_room">[{room.title}]</span>
+            </DialogTitle>
+            <DialogContent className="big-input-block">
+              <div class="input-block">
+                <span className="content-title">공부 시작 시간</span>
+                <span className="content-title_bold">
+                  {moment(room.startTime).format("YYYY-MM-DD hh:mm a")}
+                </span>
+              </div>
+              <div class="input-block">
+                <span className="content-title">공부 시간</span>
+                <span className="content-title_bold">{room.studyTime} 분</span>
+              </div>
+              <div class="input-block">
+                <span className="content-title">쉬는 시간</span>
+                <span className="content-title_bold">{room.breakTime} 분</span>
+              </div>
+              {/* <div class="input-block">
               <span className="content-title">현재 인원</span>
               <span>1 바꿔야됨</span>
-            </div>
-            <div class="input-block">
-              <span className="content-title">최대 인원</span>
-              <span>{room.maxPeopleNum} 명</span>
-            </div>
-            <div class="input-block">
-              <span className="content-title">현재 싸이클</span>
-              <span>1 바꿔야됨</span>
-            </div>
-            <div class="input-block">
-              <span className="content-title">총 싸이클 횟수</span>
-              <span>{room.maxTerm} 회</span>
-            </div>
-            <div style={({ color: "red" }, { marginLeft: "120px" })}>
-              <p>
-                <strong>포인트 50점이 차감됩니다</strong>
-              </p>
-              <p style={{ fontSize: "20px" }}>
-                <strong>입장하시겠습니까?</strong>
-              </p>
-            </div>
-          </DialogContent>
-          <DialogActions>
-            <Link to={`/room-entrance/${room.owner}`}>
-              <ButtonTemplate text={"방 입장"} />
-            </Link>
-          </DialogActions>
-        </Dialog>
+            </div> */}
+              <div class="input-block">
+                <span className="content-title">최대 인원</span>
+                <span className="content-title_bold">
+                  {room.maxPeopleNum} 명
+                </span>
+              </div>
+              <div class="input-block">
+                <span className="content-title">현재 싸이클</span>
+                <span className="content-title_bold">1 바꿔야됨</span>
+              </div>
+              <div class="input-block">
+                <span className="content-title">총 싸이클 횟수</span>
+                <span className="content-title_bold">{room.maxTerm} 회</span>
+              </div>
+
+              <div className="point-sub-position">
+                <p
+                  style={{
+                    color: "red",
+                  }}
+                >
+                  <strong>* 포인트 50점이 차감됩니다 *</strong>
+                </p>
+
+                <p
+                  style={{
+                    fontSize: "18px",
+                  }}
+                >
+                  <strong>[{room.title}] 에 입장하시겠습니까?</strong>
+                </p>
+              </div>
+            </DialogContent>
+            <DialogActions>
+              <Link
+                to={`/room-entrance/${room.owner}`}
+                className="button_entrance"
+              >
+                {/* <ButtonTemplate text={"방 입장"} /> */}
+                <Button variant="outlined">
+                  <BiArrowToRight size="20px" /> &nbsp; 방입장
+                </Button>
+              </Link>
+            </DialogActions>
+          </Dialog>
+        ) : (
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            className="dialog"
+          >
+            <DialogTitle id="alert-dialog-title" className="dialog-title">
+              이미 공부 시작된 방입니다! <br />
+              다른 방을 이용해보세요 ^_^
+            </DialogTitle>
+            <DialogActions>
+              <ButtonTemplate onClick={handleClose} text={"나가기"} />
+            </DialogActions>
+          </Dialog>
+        )
       ) : (
         <Dialog
           open={open}
@@ -173,29 +198,16 @@ export default function RoomListView(props) {
           className="dialog"
         >
           <DialogTitle id="alert-dialog-title" className="dialog-title">
-            이미 공부 시작된 방입니다!
+            로그인 후 입장해 주세요~!
           </DialogTitle>
           <DialogActions>
-            <ButtonTemplate onClick={handleClose} text={"나가기"} />
+            {/* <ButtonTemplate onClick={handleClose} text={"나가기"} /> */}
+            <Button>
+              <ExitToApp /> 나가기
+            </Button>
           </DialogActions>
         </Dialog>
-      )
-      ):(
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        className="dialog"
-      >
-        <DialogTitle id="alert-dialog-title" className="dialog-title">
-          로그인 후 입장해 주세요~!
-        </DialogTitle>
-        <DialogActions>
-          <ButtonTemplate onClick={handleClose} text={"나가기"} />
-        </DialogActions>
-      </Dialog>)
-      }
+      )}
     </div>
   );
 }

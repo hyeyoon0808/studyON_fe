@@ -8,10 +8,28 @@
   font-family: "GmarketSansTTF Bold";
   font-size: large;
 }
+.guid_text_m {
+  font-family: "GmarketSansTTF Bold";
+  font-size: x-large;
+  position: relative;
+  left: 14rem;
+  display: inline-flex;
+}
+.guid_text_m_b {
+  color: #ff6666;
+}
+.guid_text_m_desc {
+  font-family: "GmarketSansTTF medium";
+  position: relative;
+  left: -13.8rem;
+  text-align: center;
+  font-size: large;
+}
+
 .guide_text_t {
   font-family: "GmarketSansTTF Bold";
   font-size: medium;
-  color: #58854d;
+  color: #02021ad7;
 }
 .guide_text_u {
   font-family: "GmarketSansTTF Medium";

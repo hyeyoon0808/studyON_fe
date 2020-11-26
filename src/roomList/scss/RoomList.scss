@@ -1,36 +1,75 @@
 .roomList {
-    margin-top: 10rem;
-    padding-bottom: 10rem;
+  margin-top: 10rem;
+  padding-bottom: 10rem;
 }
 .tagList {
-    width: fit-content;
-    margin: 0 auto;
-    margin-bottom: 1rem;
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 1rem;
 }
 .big-input-block {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .input-block {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    .input-block {
-        display: flex;
-        flex-direction: column;
-        margin-right: 1rem;
-        padding: 10px 10px 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        margin-bottom: 20px;
-        transition: 0.3s;
-        width: 350px;
-    }
+    flex-direction: column;
+    margin-left: 0.8rem;
+    margin-right: 0.5rem;
+    padding: 10px 10px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    transition: 0.3s;
+    width: 350px;
+  }
 }
 
 .dialog {
-    margin: 0 auto;
+  margin: 0 auto;
+}
+
+.dialog-title {
+  font-family: "GmarketSansTTF Medium";
+  text-align: center;
+  position: relative;
+  top: 1.5rem;
+}
+.dialog-title_room {
+  font-family: "GmarketSansTTF Medium";
+  font-size: x-large;
+  text-align: center;
+  position: relative;
+  top: -1rem;
+}
+
+.content-title {
+  font-family: "GmarketSansTTF Medium";
+  text-align: center;
+  color: #595959;
+}
+.content-title_bold {
+  font-family: "GmarketSansTTF Medium";
+  text-align: center;
+  font-weight: bold;
+}
+
+.point-sub-position {
+  text-align: center;
+  font-family: "GmarketSansTTF Medium";
+  position: relative;
+  left: 12rem;
+  padding-top: 1rem;
+}
+.button_entrance {
+  position: relative;
+  bottom: 1rem;
+  right: 1rem;
 }
 
 .MuiDialog-paperWidthSm {
-    max-width: 100% !important;
+  max-width: 100% !important;
 }
 .MuiPaper-root {
-    width: 800px !important;
+  width: 800px !important;
 }

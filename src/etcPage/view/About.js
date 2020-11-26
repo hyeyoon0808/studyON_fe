@@ -22,6 +22,23 @@ const Shop = () => {
         <img src={UserGuide}></img>
       </div>
       <div className="middle">
+        <span className="guid_text_m">
+          '뽀모도로' 공부법을 활용한 &nbsp;
+          <span className="guid_text_m_b">studyON만의 공부법</span>
+        </span>
+        <div className="guid_text_m_desc">
+          <br />
+          기존의 뽀모도로 공부법은 ‘25분 공부시간 + 5분 쉬는시간’의 규칙을 세워
+          진행하지만 <br />
+          studyON은{" "}
+          <span className="guid_text_m_b">
+            자신이 원하는 공부/쉬는 시간을 커스터마이징
+          </span>
+          하여 나만의 공부 습관을 만들게 합니다
+        </div>
+      </div>
+      <br />
+      <div className="middle">
         <p className="guide_text_t">How to use</p>
         <p className="guide_text">
           1. 다른 사람과 함께 공부하고 싶다 ? ('방찾기' Click)
@@ -39,12 +56,6 @@ const Shop = () => {
       <br />
       <br />
       <br />
-      <br />
-      <hr />
-      <div className="middle2">
-        <p className="guide_text_t">studyON's 공부법</p>
-        <img src={Method}></img>
-      </div>
       <br />
       <hr />
       <div className="bottom">
@@ -71,12 +82,11 @@ const Shop = () => {
       <hr />
       <div className="bottom">
         <p className="guide_text_t">How to use 'Calendar/Todo'</p>
-        <p className="guide_text">Calendar</p>
+        <br />
         <img src={Calendar}></img> &nbsp;
         <br />
         <br />
         <br />
-        <p className="guide_text">Todo</p>
         <img src={Todo}></img> &nbsp;
       </div>
       <br />

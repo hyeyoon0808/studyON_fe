@@ -17,6 +17,9 @@ const Shop = () => {
       <Header />
       <div className="top">
         <div className="shop_text">&nbsp; ON SHOP</div>
+        <p className="shop_text_m">
+          &nbsp;&nbsp;point가 부족하다면 shop을 이용하세요^8^
+        </p>
         <img src={Premium} className="premium"></img>
       </div>
 
