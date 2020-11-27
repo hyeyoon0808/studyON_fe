@@ -39,9 +39,6 @@ class Store {
   @observable
   searchList = [];
 
-  @observable
-  currentTerm = 0;
-
   @computed
   get getRoomList() {
     return this.rooms ? this.rooms.slice() : [];
@@ -212,12 +209,6 @@ class Store {
       ...this.room,
       [name]: value,
     };
-  }
-
-  @action
-  setCurrentTerm(currentTerm) {
-    this.currentTerm = currentTerm;
-    console.log("currentTerm이 스토어에 들어왔다!", currentTerm);
   }
 }
 

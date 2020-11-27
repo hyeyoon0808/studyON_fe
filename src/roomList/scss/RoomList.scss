@@ -23,6 +23,15 @@
     transition: 0.3s;
     width: 350px;
   }
+  .input-block_p {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    left: 1rem;
+  }
 }
 
 .dialog {
@@ -56,10 +65,10 @@
 
 .point-sub-position {
   text-align: center;
-  font-family: "GmarketSansTTF Medium";
-  position: relative;
+  position: absolute;
   align-items: center;
-  left: 2rem;
+  right: 6.5rem;
+  bottom: 4rem;
 }
 .button_entrance {
   position: relative;

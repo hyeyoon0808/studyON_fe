@@ -142,7 +142,7 @@ export default function RoomListView(props) {
                 <span className="content-title_bold">{room.maxTerm} 회</span>
               </div>
 
-              <div className="point-sub-position">
+              <div className="input-block_p">
                 <p
                   style={{
                     color: "red",
@@ -153,6 +153,7 @@ export default function RoomListView(props) {
                 <p
                   style={{
                     fontSize: "16px",
+                    fontFamily: "GmarketSansTTF Medium",
                   }}
                 >
                   <strong>[{room.title}] 에 입장하시겠습니까?</strong>
