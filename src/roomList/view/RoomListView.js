@@ -173,6 +173,23 @@ export default function RoomListView(props) {
             </DialogActions>
           </Dialog>
         ) : (
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+              className="dialog"
+            >
+              <DialogTitle id="alert-dialog-title" className="dialog-title">
+                이미 공부 시작된 방입니다! <br />
+              다른 방을 이용해보세요 ^_^
+            </DialogTitle>
+              <DialogActions>
+                <ButtonTemplate onClick={handleClose} text={"나가기"} />
+              </DialogActions>
+            </Dialog>
+          )
+      ) : (
           <Dialog
             open={open}
             onClose={handleClose}
@@ -181,33 +198,16 @@ export default function RoomListView(props) {
             className="dialog"
           >
             <DialogTitle id="alert-dialog-title" className="dialog-title">
-              이미 공부 시작된 방입니다! <br />
-              다른 방을 이용해보세요 ^_^
-            </DialogTitle>
+              로그인 후 입장해 주세요~!
+          </DialogTitle>
             <DialogActions>
-              <ButtonTemplate onClick={handleClose} text={"나가기"} />
+              {/* <ButtonTemplate onClick={handleClose} text={"나가기"} /> */}
+              <Button>
+                <ExitToApp /> 나가기
+            </Button>
             </DialogActions>
           </Dialog>
-        )
-      ) : (
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          className="dialog"
-        >
-          <DialogTitle id="alert-dialog-title" className="dialog-title">
-            로그인 후 입장해 주세요~!
-          </DialogTitle>
-          <DialogActions>
-            {/* <ButtonTemplate onClick={handleClose} text={"나가기"} /> */}
-            <Button>
-              <ExitToApp /> 나가기
-            </Button>
-          </DialogActions>
-        </Dialog>
-      )}
+        )}
     </div>
   );
 }

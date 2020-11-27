@@ -3,7 +3,7 @@ import "../scss/Timer.scss";
 
 
 export default function AchievementBoard(props) {
-    const {mySocket, owner, room} = props;
+    const { mySocket, owner, room } = props;
     const [playing, setPlaying] = useState(false);
     const [key, setKey] = useState(0);
     const [name, setName] = useState("");
@@ -32,13 +32,11 @@ export default function AchievementBoard(props) {
                 {messages.map((m, index) => {
 
                     return (
-                        
+
                         //알람누른 유저 메세지 (유저 & 카운트 갯수)
                         <div><p style={{ color: "#3C36F7", fontFamily: "GmarketSansTTF Medium" }}><strong>{m}</strong></p></div>
                     );
                 })}
-            </div>
-            <div>
                 {messages2.map((m, index) => {
 
                     return (
@@ -47,6 +45,15 @@ export default function AchievementBoard(props) {
                     );
                 })}
             </div>
+            {/* <div>
+                {messages2.map((m, index) => {
+
+                    return (
+                        //알람누른 유저 메세지 (유저 & 카운트 갯수)
+                        <div><p style={{ color: "#4A73D0", fontFamily: "GmarketSansTTF Medium" }}><strong>{m}</strong></p></div>
+                    );
+                })}
+            </div> */}
         </div>
     );
 }
