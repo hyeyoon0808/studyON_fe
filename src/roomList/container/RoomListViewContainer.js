@@ -37,8 +37,6 @@ class RoomListViewContainer extends Component {
     const rooms = this.props.Store.getRoomList;
     const room = this.props.Store.getRoom;
     const authenticated = this.props.UserStore.getAuthenticated;
-    const currentTerm = this.props.Store.currentTerm;
-    console.log("텀이 들어왔나?", currentTerm);
     console.log("로그인 되었나요? " + authenticated);
     return (
       <RoomListView
@@ -47,7 +45,6 @@ class RoomListViewContainer extends Component {
         setRoom={this.setRoom}
         mySocket={this.props.Store.mySocket}
         authenticated={authenticated}
-        currentTerm={currentTerm}
       />
     );
   }

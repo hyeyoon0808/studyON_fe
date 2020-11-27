@@ -72,9 +72,11 @@ class RoomEntranceContainer extends Component {
     const room = this.props.Store.getRoom;
     const rooms = this.props.Store.getRoomList;
     const currentUser = this.props.UserStore.getCurrentUser;
-    const currentTerm = this.props.Store.currentTerm;
     console.log(this.props.match);
     console.log(rooms);
+
+    const currentTerm = this.props.Store.currentTerm;
+    console.log("텀이 들어왔나?", currentTerm);
 
     return (
       <RoomEntranceView

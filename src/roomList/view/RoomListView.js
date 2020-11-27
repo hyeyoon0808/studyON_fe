@@ -44,7 +44,7 @@ const UseStyles = makeStyles((theme) => ({
 
 export default function RoomListView(props) {
   const classes = UseStyles();
-  const { rooms, room, setRoom, mySocket, authenticated, currentTerm } = props;
+  const { rooms, room, setRoom, mySocket, authenticated } = props;
   const [open, setOpen] = useState(false);
   const socketRef = useRef();
 
@@ -133,10 +133,10 @@ export default function RoomListView(props) {
                   {room.maxPeopleNum} 명
                 </span>
               </div>
-              <div class="input-block">
+              {/* <div class="input-block">
                 <span className="content-title">현재 싸이클</span>
                 <span className="content-title_bold">{currentTerm}</span>
-              </div>
+              </div> */}
               <div class="input-block">
                 <span className="content-title">총 싸이클 횟수</span>
                 <span className="content-title_bold">{room.maxTerm} 회</span>
@@ -150,10 +150,9 @@ export default function RoomListView(props) {
                 >
                   <strong>* 포인트 50점이 차감됩니다 *</strong>
                 </p>
-
                 <p
                   style={{
-                    fontSize: "18px",
+                    fontSize: "16px",
                   }}
                 >
                   <strong>[{room.title}] 에 입장하시겠습니까?</strong>
@@ -165,7 +164,6 @@ export default function RoomListView(props) {
                 to={`/room-entrance/${room.owner}`}
                 className="button_entrance"
               >
-                {/* <ButtonTemplate text={"방 입장"} /> */}
                 <Button variant="outlined">
                   <BiArrowToRight size="20px" /> &nbsp; 방입장
                 </Button>
@@ -185,7 +183,9 @@ export default function RoomListView(props) {
               다른 방을 이용해보세요 ^_^
             </DialogTitle>
             <DialogActions>
-              <ButtonTemplate onClick={handleClose} text={"나가기"} />
+              <Button onClick={handleClose}>
+                <ExitToApp /> 나가기
+              </Button>
             </DialogActions>
           </Dialog>
         )
@@ -202,7 +202,7 @@ export default function RoomListView(props) {
           </DialogTitle>
           <DialogActions>
             {/* <ButtonTemplate onClick={handleClose} text={"나가기"} /> */}
-            <Button>
+            <Button onClick={handleClose}>
               <ExitToApp /> 나가기
             </Button>
           </DialogActions>
