@@ -90,7 +90,6 @@ class RoomEntranceContainer extends Component {
           currentUser={currentUser}
           onUpdateIsPlaying={this.onUpdateIsPlaying}
           onRefundPoint={this.onRefundPoint}
-          notify={this.notify}
         />
         <ToastContainer
           autoClose={3000}

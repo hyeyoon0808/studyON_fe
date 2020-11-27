@@ -184,7 +184,9 @@ export default function RoomListView(props) {
               다른 방을 이용해보세요 ^_^
             </DialogTitle>
               <DialogActions>
-                <ButtonTemplate onClick={handleClose} text={"나가기"} />
+                <Button onClick={handleClose}>
+                  <ExitToApp /> 나가기
+              </Button>
               </DialogActions>
             </Dialog>
           )
