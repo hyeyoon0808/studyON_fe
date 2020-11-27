@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../scss/Mypage.scss";
-import { Card } from "antd";
+import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import Header from "../../header/view/Header";
 import Footer from "../../footer/view/Footer";
@@ -38,7 +38,8 @@ class MyPages extends Component {
         </div>
         <div className="middle_m">
           <div className="profile_img">
-            <img src={Profile} />
+            <Avatar src={this.props.currentUser.imageUrl} size={210} style={{ top: "2rem" }} />
+            {/* <img src={Profile} /> */}
             <div className="profile">
               <p>
                 <strong>Name:</strong>&nbsp;
