@@ -40,9 +40,9 @@ class RoomEntranceContainer extends Component {
       console.log(res + "가 나감!");
     });
 
+    //방 텀 보여주기
     Store.mySocket.on("show the current term", (owner, term) => {
       console.log("term: " + term);
-
     });
   }
 
