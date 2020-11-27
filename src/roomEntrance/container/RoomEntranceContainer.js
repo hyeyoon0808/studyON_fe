@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import RoomEntranceView from "../view/RoomEntranceView";
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 @inject("Store", "UserStore")
 @observer
@@ -26,6 +29,8 @@ class RoomEntranceContainer extends Component {
     });
 
     //방 입장시 포인트 차감(일반유저)
+    const notify = () => toast("포인트가 차감되었습니다.");
+    notify();
     UserStore.setUserPointProp("state", "enterRoom");
     UserStore.modifyPoint(UserStore.point);
     console.log("방 입장하면 포인트 -50 차감", UserStore.point);
@@ -75,16 +80,22 @@ class RoomEntranceContainer extends Component {
     console.log(rooms);
 
     return (
-      <RoomEntranceView
-        mySocket={mySocket}
-        room={room}
-        rooms={rooms}
-        match={this.props.match}
-        owner={this.props.match.params.id}
-        currentUser={currentUser}
-        onUpdateIsPlaying={this.onUpdateIsPlaying}
-        onRefundPoint={this.onRefundPoint}
-      />
+      <div>
+        <RoomEntranceView
+          mySocket={mySocket}
+          room={room}
+          rooms={rooms}
+          match={this.props.match}
+          owner={this.props.match.params.id}
+          currentUser={currentUser}
+          onUpdateIsPlaying={this.onUpdateIsPlaying}
+          onRefundPoint={this.onRefundPoint}
+        />
+        <ToastContainer
+          autoClose={3000}
+        />
+
+      </div>
     );
   }
 }

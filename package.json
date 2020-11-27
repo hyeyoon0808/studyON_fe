@@ -82,6 +82,7 @@
     "react-scrollbar": "^0.5.6",
     "react-shadow": "^18.4.2",
     "react-sound": "^1.2.0",
+    "react-toastify": "^6.1.0",
     "resolve": "1.15.0",
     "resolve-url-loader": "3.1.1",
     "sass-loader": "8.0.2",

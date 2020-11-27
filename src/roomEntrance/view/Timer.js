@@ -10,6 +10,9 @@ import Button from "@material-ui/core/Button";
 import soundUrl from "../images/sound.mp3";
 import Sound from "react-sound";
 import "../scss/Timer.scss";
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Timer(props) {
   const {
@@ -93,6 +96,8 @@ export default function Timer(props) {
     setTerm(term);
   }, []);
 
+  const notify2 = () => toast("포인트가 환급됩니다.");
+
   function countAlarm() {
     setCount(count + 1);
     socketRef.current.emit(
@@ -112,6 +117,7 @@ export default function Timer(props) {
         savedTerm
       );
       onRefundPoint(); //add 포인트 획득(일반유저 +50)
+      notify2();
     }
     setOpen(false);
   }
