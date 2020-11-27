@@ -35,9 +35,10 @@ class RoomEntranceContainer extends Component {
       console.log(res + "가 나감!");
     });
 
+    //방 텀 보여주기
     Store.mySocket.on("show the current term", (owner, term) => {
-      console.log("term: "+term);
-      
+      console.log("term: " + term);
+      Store.setCurrentTerm(term);
     });
   }
 
@@ -74,6 +75,9 @@ class RoomEntranceContainer extends Component {
     console.log(this.props.match);
     console.log(rooms);
 
+    const currentTerm = this.props.Store.currentTerm;
+    console.log("텀이 들어왔나?", currentTerm);
+
     return (
       <RoomEntranceView
         mySocket={mySocket}
@@ -84,6 +88,7 @@ class RoomEntranceContainer extends Component {
         currentUser={currentUser}
         onUpdateIsPlaying={this.onUpdateIsPlaying}
         onRefundPoint={this.onRefundPoint}
+        currentTerm={currentTerm}
       />
     );
   }
