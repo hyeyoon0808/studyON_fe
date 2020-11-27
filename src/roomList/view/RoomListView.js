@@ -44,7 +44,7 @@ const UseStyles = makeStyles((theme) => ({
 
 export default function RoomListView(props) {
   const classes = UseStyles();
-  const { rooms, room, setRoom, mySocket, authenticated } = props;
+  const { rooms, room, setRoom, mySocket, authenticated, currentTerm } = props;
   const [open, setOpen] = useState(false);
   const socketRef = useRef();
 
@@ -135,7 +135,7 @@ export default function RoomListView(props) {
               </div>
               <div class="input-block">
                 <span className="content-title">현재 싸이클</span>
-                <span className="content-title_bold">1 바꿔야됨</span>
+                <span className="content-title_bold">{currentTerm}</span>
               </div>
               <div class="input-block">
                 <span className="content-title">총 싸이클 횟수</span>
