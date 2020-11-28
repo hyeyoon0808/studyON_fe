@@ -7,7 +7,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-import soundUrl from "../images/sound.mp3";
+import breakSoundUrl from "../images/breakAlarm.mp3";
+import studyAlarmUrl from "../images/studyAlarm.mp3"
 import Sound from "react-sound";
 import "../scss/Timer.scss";
 import { ToastContainer, toast } from 'react-toastify';
@@ -26,7 +27,6 @@ export default function Timer(props) {
   const [playing, setPlaying] = useState(false);
   const [yourID, setYourID] = useState();
   const [count, setCount] = useState(0);
-  const [role, setRole] = useState(owner);
   const [study, setStudy] = useState(room.studyTime * 60);
   const [breakTime, setBreak] = useState(room.breakTime * 60000);
   const [key, setKey] = useState(0);
@@ -34,9 +34,10 @@ export default function Timer(props) {
   const [remainingTime, setRemainingTime] = useState();
   const [open, setOpen] = React.useState(false);
   const [term, setTerm] = useState(1);
-  // const [studyOn, setStudyOn] = useState(false)
+  const [soundUrl, setSoundUrl] = useState();
   const [savedTerm, setSavedTerm] = useState(room.maxTerm - 2);
   const [goBreak, setGoBreak] = useState(false);
+  const [alarmPlay, setAlarmPlay] = useState();
 
   const handleOpen = () => {
     setOpen(true);
@@ -51,6 +52,7 @@ export default function Timer(props) {
   //   sendTimerSign(true);
   // }
 
+  //타이머 시작시간, 쉬는시간 세팅
   const children = ({ remainingTime }) => {
     const minutes = Math.floor(remainingTime / 60);
     const seconds = remainingTime % 60;
@@ -66,6 +68,7 @@ export default function Timer(props) {
     );
   };
 
+  //timer 스타트할때 소켓보내기
   function sendTimerSign(bool) {
     console.log("dddddd");
     console.log(socketRef.current.id);
@@ -92,12 +95,14 @@ export default function Timer(props) {
     socketRef.current.on("timer start", (message) => {
       console.log(message);
       setPlaying(true);
+      
     });
     setTerm(term);
   }, []);
 
   const notify2 = () => toast("포인트가 환급됩니다.");
 
+  //알람 누른 수 
   function countAlarm() {
     setCount(count + 1);
     socketRef.current.emit(
@@ -119,6 +124,7 @@ export default function Timer(props) {
       onRefundPoint(); //add 포인트 획득(일반유저 +50)
       notify2();
     }
+    setAlarmPlay(Sound.status.STOPPED);
     setOpen(false);
   }
 
@@ -136,7 +142,9 @@ export default function Timer(props) {
   }
 
   function studyTimeStart() {
-    setGoBreak(false)
+    setGoBreak(false);
+    setAlarmPlay(Sound.status.PLAYING);
+    setSoundUrl(studyAlarmUrl);
     return [true, study];
   }
 
@@ -166,7 +174,8 @@ export default function Timer(props) {
       setGoBreak(true);
       console.log("break is on");
     }
-
+    setAlarmPlay(Sound.status.PLAYING)
+    setSoundUrl(breakSoundUrl);
     setTimeout(handleClose, 5000);
     return [true, breakTime];
   }
@@ -223,6 +232,14 @@ export default function Timer(props) {
           <p style={{ color: "#c9b3c5" }}><strong>Break</strong></p>
         </div>
       </div>
+      <Sound
+            url={soundUrl}
+            playStatus={alarmPlay}
+            playFromPosition={300}
+          // onLoading={this.handleSongLoading}
+          // onPlaying={this.handleSongPlaying}
+          // onFinishedPlaying={this.handleSongFinishedPlaying}
+      />
       <Dialog
         open={open}
         onClose={handleClose}
@@ -234,14 +251,7 @@ export default function Timer(props) {
           <DialogContentText id="alert-dialog-description">
             공부 끝! 쉬는 시간 시작입니다-!
           </DialogContentText>
-          <Sound
-            url={soundUrl}
-            playStatus={Sound.status.PLAYING}
-            playFromPosition={300}
-          // onLoading={this.handleSongLoading}
-          // onPlaying={this.handleSongPlaying}
-          // onFinishedPlaying={this.handleSongFinishedPlaying}
-          />
+          
         </DialogContent>
         <DialogActions>
           <Button onClick={countAlarm} color="primary" autoFocus>
@@ -249,6 +259,7 @@ export default function Timer(props) {
           </Button>
         </DialogActions>
       </Dialog>
+      
     </div>
   );
 }
