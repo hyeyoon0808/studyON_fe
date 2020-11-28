@@ -23,7 +23,7 @@
 .RoomEntrance_left {
     display: flex;
     flex-direction: column;
-    width: 24.4%;
+    width: 63%;
     height: 540px;
     margin-right: 2rem;
     position: relative;
@@ -32,6 +32,7 @@
 }
 .RoomEntrance_left_item {
     font-size: large;
+    // width: 500px;
 }
 
 .RoomEntrance_right {
