@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../scss/RoomEntrance.scss";
 import TabsCard from "./TabsCard";
+import Footer from "../../footer/view/Footer";
 import { Card } from "antd";
 import Timer from "./Timer";
 import AcheivementBoard from "./AchievementBoard";
@@ -50,13 +51,16 @@ const RoomEntranceView = ({
       <div className="RoomEntrance_wrap" key={data.owner}>
         <div className="RoomEntrance_title">{data.title}</div>
         <div className="exit_button">
-          <Link to="/room-list" >
-            <Button style={{ color: "black" }}><ExitToApp />EXIT</Button>
+          <Link to="/room-list">
+            <Button style={{ color: "black" }}>
+              <ExitToApp />
+              EXIT
+            </Button>
           </Link>
         </div>
 
         <div className="RoomEntrance_container">
-          <div className="RoomEntrance_left" >
+          <div className="RoomEntrance_left">
             <TabsCard
               roomData={data}
               mySocket={mySocket}
@@ -82,7 +86,12 @@ const RoomEntranceView = ({
               bodyStyle={{ overflow: "scroll", height: "500px" }}
               style={{ overflow: "hidden" }}
             >
-              <p style={{ color: "#808080", fontFamily: "GmarketSansTTF Medium" }}>
+              <p
+                style={{
+                  color: "#808080",
+                  fontFamily: "GmarketSansTTF Medium",
+                }}
+              >
                 방장이 타이머를 실행할 때까지 잠시만 기다려주세요 ^_^
               </p>
               <AcheivementBoard
@@ -108,6 +117,7 @@ const RoomEntranceView = ({
             />
           )}
         </div>
+        <Footer />
       </div>
     </>
   );
