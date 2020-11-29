@@ -39,7 +39,6 @@ class RoomListViewContainer extends Component {
     const rooms = this.props.Store.getRoomList;
     const room = this.props.Store.getRoom;
     const authenticated = this.props.UserStore.getAuthenticated;
-    console.log("로그인 되었나요? " + authenticated);
     return (
       <RoomListView
         rooms={rooms}
