@@ -29,11 +29,12 @@ class TabsCard extends React.Component {
     name: "hello",
   };
   member() {
-    this.props.mySocket.on("방 멤버", (res) => {
-      console.log("test" + res + "test");
-      this.setState({ name: res });
-      console.log("test" + this.state.name + "test");
-    });
+    // this.props.mySocket.on("방 멤버", (res) => {
+    //   console.log("test" + res + "test");
+    //   this.setState({ name: res });
+    //   console.log("test" + this.state.name + "test");
+    // });
+    this.setState({ name: "hi" });
   }
 
   state = {
@@ -54,9 +55,6 @@ class TabsCard extends React.Component {
       ),
       member: (
         <>
-          {/* <RoomMember
-                        mySocket={this.props.mySocket}
-                    /> */}
           <div>{this.state.name}</div>
         </>
       ),
