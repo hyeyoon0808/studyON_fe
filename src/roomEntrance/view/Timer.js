@@ -22,7 +22,7 @@ export default function Timer(props) {
     owner,
     room,
     currentUser,
-    updateIsPlaying,
+    onUpdateIsPlaying,
     onRefundPoint,
   } = props;
   const [playing, setPlaying] = useState(false);
@@ -72,9 +72,7 @@ export default function Timer(props) {
 
   //timer 스타트할때 소켓보내기
   function sendTimerSign(bool) {
-    console.log("dddddd");
     console.log(socketRef.current.id);
-    console.log("okay");
     //if(socketRef.current.id === role){
     if (bool) {
       socketRef.current.emit(
@@ -82,7 +80,7 @@ export default function Timer(props) {
         owner,
         socketRef.current.id + "가 timer start!! " + owner
       );
-      //updateIsPlaying();
+      onUpdateIsPlaying();
       console.log("got it");
     } else socketRef.current.emit("timer stop sign", "timer stop!!");
     //}

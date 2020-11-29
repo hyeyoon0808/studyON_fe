@@ -76,12 +76,22 @@ class RoomEntranceContainer extends Component {
     console.log("getContinueRoom: ***"+this.props.Store.getContinueRoom);
   };
 
+  onRecreateRoom = () => {
+    const { Store, UserStore } = this.props;
+    console.log("my socket id is: "+ Store.mySocket.id);
+    let room = this.props.Store.room;
+    Store.roomRecreate(room);
+    this.props.Store.setContinueRoom(true);
+    UserStore.setUserPointProp("state", "makeRoom");
+    UserStore.setUserPointProp("owner", true);
+    UserStore.modifyPoint(UserStore.point);
+  };
+
   render() {
     const mySocket = this.props.Store.mySocket;
     const room = this.props.Store.getRoom;
     const rooms = this.props.Store.getRoomList;
     const currentUser = this.props.UserStore.getCurrentUser;
-    
     console.log(this.props.match);
     console.log(rooms);
 
@@ -98,6 +108,7 @@ class RoomEntranceContainer extends Component {
           onUpdateIsPlaying={this.onUpdateIsPlaying}
           onRefundPoint={this.onRefundPoint}
           onRecreateCheck = {this.onRecreateCheck}
+          onRecreateRoom={this.onRecreateRoom}
         />
         <ToastContainer
           autoClose={3000}

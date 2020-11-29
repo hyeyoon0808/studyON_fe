@@ -135,9 +135,9 @@ class Store {
   }
 
   @action
-  async addUserList(room) {
-    this.userList.push(this.user);
-    room.userList = this.userList;
+  async roomRecreate(room) {
+    room.owner = this.mySocket.id;
+    room.isPlaying = false;
     const roomApiModel = new RoomApiModel(
       room.title,
       room.description,
@@ -147,14 +147,37 @@ class Store {
       room.maxPeopleNum,
       room.tag,
       room.maxTerm,
-      room.owner,
+      this.mySocket.id,
       room.isPlaying,
       room.userList
     );
-    console.log("addUserList ", roomApiModel);
-    const result = this.roomApi.userList(roomApiModel);
-    if (result == null) this.errorMessage = "userList error!!";
+    console.log("createRoom", roomApiModel);
+    const result = this.roomApi.roomRecreate(roomApiModel);
+    //this.rooms.push(room);
+    if (result == null) this.errorMessage = "Create error!!";
   }
+
+  // @action
+  // async addUserList(room) {
+  //   this.userList.push(this.user);
+  //   room.userList = this.userList;
+  //   const roomApiModel = new RoomApiModel(
+  //     room.title,
+  //     room.description,
+  //     room.startTime,
+  //     room.studyTime,
+  //     room.breakTime,
+  //     room.maxPeopleNum,
+  //     room.tag,
+  //     room.maxTerm,
+  //     room.owner,
+  //     room.isPlaying,
+  //     room.userList
+  //   );
+  //   console.log("addUserList ", roomApiModel);
+  //   const result = this.roomApi.userList(roomApiModel);
+  //   if (result == null) this.errorMessage = "userList error!!";
+  // }
 
   @action
   setRoom(owner) {

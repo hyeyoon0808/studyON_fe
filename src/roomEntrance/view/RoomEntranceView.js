@@ -24,6 +24,7 @@ const RoomEntranceView = ({
   onUpdateIsPlaying,
   onRefundPoint,
   onRecreateCheck,
+  onRecreateRoom,
 }) => {
   const params_id = match.params.id;
   const data = rooms.find((tile) => tile.owner === params_id);
@@ -126,6 +127,8 @@ const RoomEntranceView = ({
               setPopUp={setPopUp}
               mySocket={mySocket}
               studyKings={studyKings}
+              onRecreateRoom={onRecreateRoom}
+              onRecreateCheck={onRecreateCheck}
             />
           )}
         </div>
