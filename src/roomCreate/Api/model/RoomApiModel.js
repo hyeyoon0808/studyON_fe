@@ -5,14 +5,13 @@ class RoomApiModel {
   title = "기본 제목";
   description = "기본 공지";
   startTime = moment().toString();
-  studyTime = "30";
+  studyTime = "25";
   breakTime = "5";
   maxPeopleNum = 4;
   tag = "토익";
   maxTerm = 6;
   owner = this.userId;
   isPlaying = false;
-  userList = [];
 
   constructor(
     title,
@@ -24,8 +23,7 @@ class RoomApiModel {
     tag,
     maxTerm,
     owner,
-    isPlaying,
-    userList
+    isPlaying
   ) {
     this.userId = owner;
     this.title = title;
@@ -38,7 +36,6 @@ class RoomApiModel {
     this.maxTerm = maxTerm;
     this.owner = owner;
     this.isPlaying = isPlaying;
-    this.userList = userList;
   }
   getJson() {
     let json = {
@@ -54,7 +51,6 @@ class RoomApiModel {
         maxTerm: this.maxTerm,
         owner: this.owner,
         isPlaying: this.isPlaying,
-        userList: this.userList,
       },
     };
     return json;
