@@ -10,14 +10,14 @@ import {
 import { Button } from "@material-ui/core";
 import "../scss/Tabs.scss";
 
-const About = ({ mySocket, roomData, store, owner }) => {
+const TabsCard = (props) => {
+  const { mySocket, roomData, store, owner } = props;
   const { TabPane } = Tabs;
   const [message, setMessage] = useState([]);
   const socketRef = useRef();
 
   useEffect(() => {
     socketRef.current = mySocket;
-
     socketRef.current.on("enter event", (owner, userName) => {
       const msg = (
         <p>
@@ -41,7 +41,7 @@ const About = ({ mySocket, roomData, store, owner }) => {
             }
             key="1"
           >
-            <TodoContainer />
+            <TodoContainer owner={owner} />
           </TabPane>
           <TabPane
             tab={
@@ -88,4 +88,4 @@ const About = ({ mySocket, roomData, store, owner }) => {
   );
 };
 
-export default About;
+export default TabsCard;
