@@ -40,12 +40,13 @@ class AchievementContainer extends Component {
   };
 
   render() {
-    const { popUp, setPopUp, mySocket, studyKings} = this.props;
+    const { store, popUp, setPopUp, mySocket, studyKings} = this.props;
     let achievements = this.props.TodoStore.achievements;
     console.log(achievements);
     return (
       <div>
         <AchievementView
+          store={store}
           setPopUp={setPopUp}
           mySocket={mySocket}
           onClickGood={this.onClickGood}

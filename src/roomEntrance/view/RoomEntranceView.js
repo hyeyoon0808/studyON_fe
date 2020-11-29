@@ -14,6 +14,7 @@ import AchievementContainer from "../container/AchievementContainer";
 import { Button } from "@material-ui/core";
 
 const RoomEntranceView = ({
+  store,
   mySocket,
   room,
   rooms,
@@ -22,13 +23,16 @@ const RoomEntranceView = ({
   currentUser,
   onUpdateIsPlaying,
   onRefundPoint,
+  onRecreateCheck,
 }) => {
   const params_id = match.params.id;
   const data = rooms.find((tile) => tile.owner === params_id);
   const socketRef = useRef();
 
+
   const [popUp, setPopUp] = useState(false);
   const [message, setMessage] = useState("");
+  const [socketId, setSocketId] = useState("");
   const [studyKings, setStudyKings] = useState([]);
   const [studyKing, setStudyKing] = useState("what");
   const duringPopUp = popUp ? "during-popup" : "";
@@ -58,7 +62,13 @@ const RoomEntranceView = ({
             </Button>
           </Link>
         </div>
-
+        {/* {store.mySocket.id === owner ?( */}
+          <div className="exit_button">
+            <Checkbox onChange={onRecreateCheck} />
+            &nbsp; 방을 계속 이어나갈껀가요?
+          </div>
+          {/* ):(<div></div>)
+        } */}
         <div className="RoomEntrance_container">
           <div className="RoomEntrance_left">
             <TabsCard
@@ -71,6 +81,7 @@ const RoomEntranceView = ({
           <div className="RoomEntrance_right">
             {/* <TabsCard roomData={data} mySocket={mySocket} owner={owner} room={room}/> */}
             <Timer
+              store={store}
               mySocket={mySocket}
               owner={owner}
               room={room}
@@ -110,6 +121,7 @@ const RoomEntranceView = ({
           {/* {popUp && <AchievementView setPopUp={setPopUp} mySocket={mySocket} />} */}
           {popUp && (
             <AchievementContainer
+              store={store}
               popUp={popUp}
               setPopUp={setPopUp}
               mySocket={mySocket}
