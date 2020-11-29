@@ -186,7 +186,7 @@ export default function Timer(props) {
             isPlaying={playing}
             duration={study}
             key={key}
-            colors={[["#8091a8", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+            colors={[["#8091a8", 0.33], ["#80a8a8", 0.33], ["#a9bfd6"]]}
             onComplete={breakTimeStart}
           >
             {children}
@@ -228,7 +228,7 @@ export default function Timer(props) {
             isPlaying={goBreak}
             duration={breakTime / 1000}
             key={key}
-            colors={[["#c9b3c5", 0.33], ["#F7B801", 0.33], ["#004777"]]}
+            colors={[["#c9b3c5", 0.33], ["#ffe0b3", 0.33], ["#b8b8e0"]]}
             onComplete={studyTimeStart}
           >
             {children}

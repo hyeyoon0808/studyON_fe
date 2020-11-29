@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState } from "react";
 import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -10,15 +10,38 @@ import { Link } from "react-router-dom";
 import tagData from "../../roomList/tagData";
 import Chip from "@material-ui/core/Chip";
 import { RiCheckboxMultipleFill } from "react-icons/ri";
-
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 const RoomCreateForm = (props) => {
   const { mySocket, room, onSetRoom, onAddRoom } = props;
-  const [tagName, setTagName] = React.useState([]);
+  const [tagName, setTagName] = useState([]);
+  const [method, setMethod] = useState("pomodoro");
+  const [studyTime, setStudyTime] = useState(25);
+  const [breakTime, setBreakTime] = useState(5);
 
   const handleChange = (event) => {
     setTagName(event.target.value);
     onSetRoom("tag", event.target.value.toString());
   };
+
+  const handleChangeMethod = (e) => {
+    setMethod(e.target.value);
+    console.log(e.target.value);
+    if (e.target.value === "pomodoro") {
+      setStudyTime(25);
+      setBreakTime(5);
+    } else if (e.target.value === "studyon") {
+      setStudyTime(50);
+      setBreakTime(10);
+    } else {
+      setStudyTime(room.studyTime);
+      setBreakTime(room.breakTime);
+    }
+  };
+
   return (
     <div>
       {/* <button onClick={this.goBack}>취소</button> */}
@@ -43,7 +66,20 @@ const RoomCreateForm = (props) => {
       </div>
       <form className="room_create_form" style={{ marginTop: "-350px" }}>
         <div>
-          <strong>TITLE</strong> &nbsp;&nbsp;
+          <strong>
+            TITLE
+            <span
+              style={{
+                fontWeight: "normal",
+                fontSize: "0.1em",
+                color: "red",
+                verticalAlign: "super",
+              }}
+            >
+              *필수
+            </span>
+          </strong>
+          &nbsp;&nbsp;
           <Input
             onChange={(e) => onSetRoom("title", e.target.value)}
             value={room.title}
@@ -54,7 +90,7 @@ const RoomCreateForm = (props) => {
           />
         </div>
         <div>
-          <br /> <strong>Description</strong>&nbsp;
+          <br /> <strong>Notice 공지</strong>&nbsp;
           <TextField
             multiline
             rows={3}
@@ -69,7 +105,20 @@ const RoomCreateForm = (props) => {
         </div>
         <div>
           <br />
-          <strong>Tag</strong> &nbsp;
+          <strong>
+            Tag 태그
+            <span
+              style={{
+                fontWeight: "normal",
+                fontSize: "0.1em",
+                color: "red",
+                verticalAlign: "super",
+              }}
+            >
+              *필수
+            </span>
+          </strong>{" "}
+          &nbsp;
           <Select
             onChange={handleChange}
             className="form_tag"
@@ -94,7 +143,7 @@ const RoomCreateForm = (props) => {
 
         <div>
           <br />
-          <strong>People Number</strong> &nbsp; &nbsp;
+          <strong>People Number 인원수</strong> &nbsp; &nbsp;
           <TextField
             //name="maxPeopleNum"
             type="number"
@@ -107,42 +156,124 @@ const RoomCreateForm = (props) => {
         </div>
         <div>
           <br />
-          <strong>Start Time 시작시간</strong> &nbsp; &nbsp;
+          <strong>
+            Start Time 시작시간
+            <span
+              style={{
+                fontWeight: "normal",
+                fontSize: "0.1em",
+                color: "red",
+                verticalAlign: "super",
+              }}
+            >
+              *필수
+            </span>
+          </strong>
+          &nbsp; &nbsp;
           <TimePicker
             value={room.startTime}
             onChange={(e) => onSetRoom("startTime", e)}
           />
         </div>
         <div>
+          <FormControl>
+            <FormLabel>
+              <RadioGroup
+                aria-label="method"
+                name="method1"
+                value={method}
+                onChange={handleChangeMethod}
+              >
+                <FormControlLabel
+                  value="pomodoro"
+                  control={<Radio />}
+                  label="뽀모도로"
+                ></FormControlLabel>
+                <FormControlLabel
+                  value="studyon"
+                  control={<Radio />}
+                  label="스터디온"
+                ></FormControlLabel>
+                <FormControlLabel
+                  value="etc"
+                  control={<Radio />}
+                  label="나만의 공부방법 설정"
+                ></FormControlLabel>
+              </RadioGroup>
+            </FormLabel>
+          </FormControl>
+        </div>
+        <div>
           <br />
           <span>
-            <strong>StudyTime 공부시간</strong> &nbsp; &nbsp;
+            <strong>
+              StudyTime 공부시간 (분)
+              <span
+                style={{
+                  fontWeight: "normal",
+                  fontSize: "0.1em",
+                  color: "red",
+                  verticalAlign: "super",
+                }}
+              >
+                *필수
+              </span>
+            </strong>
+            &nbsp; &nbsp;
             <TextField
               //name="studyTime"
               type="number"
-              value={room.studyTime}
+              value={studyTime}
               onChange={(e) => onSetRoom("studyTime", e.target.value)}
               margin="normal"
               className="form_number"
               color="secondary"
+              placeholder="25"
             />
           </span>
           <span style={{ marginLeft: "180px" }}>
-            <strong>BreakTime 쉬는시간</strong> &nbsp; &nbsp;
+            <strong>
+              BreakTime 쉬는시간 (분)
+              <span
+                style={{
+                  fontWeight: "normal",
+                  fontSize: "0.1em",
+                  color: "red",
+                  verticalAlign: "super",
+                }}
+              >
+                *필수
+              </span>
+            </strong>
+            &nbsp; &nbsp;
             <TextField
               //name="breakTime"
               type="number"
-              value={room.breakTime}
+              value={breakTime}
               onChange={(e) => onSetRoom("breakTime", e.target.value)}
               margin="normal"
               className="form_number"
               color="secondary"
+              placeholder="5"
             />
           </span>
         </div>
         <div>
           <br />
-          <strong>Term 횟수</strong> &nbsp; &nbsp;
+          <strong>
+            Term 횟수
+            <span
+              style={{
+                fontWeight: "normal",
+                fontSize: "0.1em",
+                color: "red",
+                verticalAlign: "super",
+              }}
+            >
+              *필수
+            </span>
+          </strong>{" "}
+          &nbsp; &nbsp;
           <TextField
             //name="maxTerm"
             type="number"
