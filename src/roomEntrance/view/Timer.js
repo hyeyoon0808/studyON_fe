@@ -169,7 +169,7 @@ export default function Timer(props) {
     if (room.maxTerm > term) {
       setOpen(true);
     }
-    if (term >= 1 && term <room.maxTerm) {
+    if (term >= 1 && term < room.maxTerm) {
       setGoBreak(true);
       console.log("break is on");
     }
@@ -216,7 +216,7 @@ export default function Timer(props) {
           placeholder="Break time"
           onChange={handleBreakTime}
         /> */}
-        {/* {store.mySocket.id === owner ?( */}
+          {/* {store.mySocket.id === owner ?( */}
           <button
             onClick={() => {
               sendTimerSign(true);
@@ -229,7 +229,7 @@ export default function Timer(props) {
           </button>
           {/* ):(<div></div>)}  */}
         </div>
-          
+
         <div className="timer-wrapper2">
           <CountdownCircleTimer
             isPlaying={goBreak}
@@ -249,9 +249,9 @@ export default function Timer(props) {
         url={soundUrl}
         playStatus={alarmPlay}
         playFromPosition={300}
-        // onLoading={this.handleSongLoading}
-        // onPlaying={this.handleSongPlaying}
-        // onFinishedPlaying={this.handleSongFinishedPlaying}
+      // onLoading={this.handleSongLoading}
+      // onPlaying={this.handleSongPlaying}
+      // onFinishedPlaying={this.handleSongFinishedPlaying}
       />
       <Dialog
         open={open}
