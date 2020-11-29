@@ -7,8 +7,10 @@ import {
   SoundOutlined,
   ProfileOutlined,
 } from "@ant-design/icons";
+import { Button } from "@material-ui/core";
+import "../scss/Tabs.scss";
 
-const About = ({ mySocket, roomData }) => {
+const About = ({ mySocket, roomData, store, owner }) => {
   const { TabPane } = Tabs;
   const [message, setMessage] = useState([]);
   const socketRef = useRef();
@@ -28,7 +30,7 @@ const About = ({ mySocket, roomData }) => {
 
   return (
     <div>
-      <div style={{ width: "20rem", position: "relative", left: "3rem" }}>
+      <div className="tabs">
         <Tabs defaultActiveKey="1">
           <TabPane
             tab={
@@ -50,7 +52,7 @@ const About = ({ mySocket, roomData }) => {
             }
             key="2"
           >
-            <div>
+            <div style={{ width: "17rem", height: "25rem" }}>
               {roomData.description.split("\n").map((line) => {
                 return (
                   <span>
@@ -60,6 +62,12 @@ const About = ({ mySocket, roomData }) => {
                 );
               })}
             </div>
+
+            {store.mySocket.id === owner ? (
+              <Button variant="outlined">수정</Button>
+            ) : (
+              <div></div>
+            )}
           </TabPane>
           <TabPane
             tab={

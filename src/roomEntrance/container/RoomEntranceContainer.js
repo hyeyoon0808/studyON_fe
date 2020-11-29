@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import RoomEntranceView from "../view/RoomEntranceView";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 @inject("Store", "UserStore")
 @observer
@@ -22,18 +22,11 @@ class RoomEntranceContainer extends Component {
     Store.mySocket.on("enter event", (owner, res) => {
       console.log(res + "가 입장!");
       Store.mySocket.emit("send user", owner, res);
-      //let room = Store.room;
-      //Store.user = res;
-      // console.log("현재 방 유저리스트 id >> ", res);
-      //Store.addUserList(room);
     });
 
     //방 입장시 포인트 차감(일반유저)
     const notify = () => toast("포인트가 차감되었습니다.");
     notify();
-    UserStore.setUserPointProp("state", "enterRoom");
-    UserStore.modifyPoint(UserStore.point);
-    console.log("방 입장하면 포인트 -50 차감", UserStore.point);
 
     //방 나가기
     Store.mySocket.on("leave event", (res) => {
@@ -73,12 +66,12 @@ class RoomEntranceContainer extends Component {
 
   onRecreateCheck = () => {
     this.props.Store.setContinueRoom(true);
-    console.log("getContinueRoom: ***"+this.props.Store.getContinueRoom);
+    console.log("getContinueRoom: ***" + this.props.Store.getContinueRoom);
   };
 
   onRecreateRoom = () => {
     const { Store, UserStore } = this.props;
-    console.log("my socket id is: "+ Store.mySocket.id);
+    console.log("my socket id is: " + Store.mySocket.id);
     let room = this.props.Store.room;
     Store.roomRecreate(room);
     this.props.Store.setContinueRoom(true);
@@ -98,7 +91,7 @@ class RoomEntranceContainer extends Component {
     return (
       <div>
         <RoomEntranceView
-          store = {this.props.Store}
+          store={this.props.Store}
           mySocket={mySocket}
           room={room}
           rooms={rooms}
@@ -107,13 +100,10 @@ class RoomEntranceContainer extends Component {
           currentUser={currentUser}
           onUpdateIsPlaying={this.onUpdateIsPlaying}
           onRefundPoint={this.onRefundPoint}
-          onRecreateCheck = {this.onRecreateCheck}
+          onRecreateCheck={this.onRecreateCheck}
           onRecreateRoom={this.onRecreateRoom}
         />
-        <ToastContainer
-          autoClose={3000}
-        />
-
+        <ToastContainer autoClose={3000} />
       </div>
     );
   }
