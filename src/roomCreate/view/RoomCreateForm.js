@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -15,8 +15,10 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import Footer from "../../footer/view/Footer";
+
 const RoomCreateForm = (props) => {
-  const { mySocket, room, onSetRoom, onAddRoom } = props;
+  const { mySocket, room, onSetRoom, onAddRoom, onSetRoomTime } = props;
   const [tagName, setTagName] = useState([]);
   const [method, setMethod] = useState("pomodoro");
   const [studyTime, setStudyTime] = useState(25);
@@ -27,6 +29,11 @@ const RoomCreateForm = (props) => {
     onSetRoom("tag", event.target.value.toString());
   };
 
+  useEffect(() => {
+    onSetRoom("studyTime", studyTime);
+    onSetRoom("breakTime", breakTime);
+  }, []);
+
   const handleChangeMethod = (e) => {
     setMethod(e.target.value);
     console.log(e.target.value);
@@ -36,10 +43,18 @@ const RoomCreateForm = (props) => {
     } else if (e.target.value === "studyon") {
       setStudyTime(50);
       setBreakTime(10);
-    } else {
-      setStudyTime(room.studyTime);
-      setBreakTime(room.breakTime);
+      onSetRoom("studyTime", 50);
+      onSetRoom("breakTime", 10);
     }
+  };
+
+  const handleStudyTime = (e) => {
+    setStudyTime(e.target.value);
+    onSetRoom("studyTime", e.target.value);
+  };
+  const handleBreakTime = (e) => {
+    setBreakTime(e.target.value);
+    onSetRoom("breakTime", e.target.value);
   };
 
   return (
@@ -68,16 +83,7 @@ const RoomCreateForm = (props) => {
         <div>
           <strong>
             TITLE
-            <span
-              style={{
-                fontWeight: "normal",
-                fontSize: "0.1em",
-                color: "red",
-                verticalAlign: "super",
-              }}
-            >
-              *필수
-            </span>
+            <span className="necessary_lang">*필수</span>
           </strong>
           &nbsp;&nbsp;
           <Input
@@ -107,16 +113,7 @@ const RoomCreateForm = (props) => {
           <br />
           <strong>
             Tag 태그
-            <span
-              style={{
-                fontWeight: "normal",
-                fontSize: "0.1em",
-                color: "red",
-                verticalAlign: "super",
-              }}
-            >
-              *필수
-            </span>
+            <span className="necessary_lang">*필수</span>
           </strong>{" "}
           &nbsp;
           <Select
@@ -152,22 +149,14 @@ const RoomCreateForm = (props) => {
             margin="normal"
             className="form_number"
             color="secondary"
+            placeholder="5명"
           />
         </div>
         <div>
           <br />
           <strong>
             Start Time 시작시간
-            <span
-              style={{
-                fontWeight: "normal",
-                fontSize: "0.1em",
-                color: "red",
-                verticalAlign: "super",
-              }}
-            >
-              *필수
-            </span>
+            <span className="necessary_lang">*필수</span>
           </strong>
           &nbsp; &nbsp;
           <TimePicker
@@ -176,81 +165,67 @@ const RoomCreateForm = (props) => {
           />
         </div>
         <div>
-          <FormControl>
-            <FormLabel>
-              <RadioGroup
-                aria-label="method"
-                name="method1"
-                value={method}
-                onChange={handleChangeMethod}
-              >
-                <FormControlLabel
-                  value="pomodoro"
-                  control={<Radio />}
-                  label="뽀모도로"
-                ></FormControlLabel>
-                <FormControlLabel
-                  value="studyon"
-                  control={<Radio />}
-                  label="스터디온"
-                ></FormControlLabel>
-                <FormControlLabel
-                  value="etc"
-                  control={<Radio />}
-                  label="나만의 공부방법 설정"
-                ></FormControlLabel>
-              </RadioGroup>
-            </FormLabel>
-          </FormControl>
+          <br />
+          <strong>
+            Study Pattern 공부 패턴
+            <span className="necessary_lang">*필수</span> <br />
+          </strong>
+          <br />
+
+          <span>
+            <Radio
+              value="pomodoro"
+              onChange={handleChangeMethod}
+              checked={method === "pomodoro"}
+              name="pomodoro"
+            />
+            뽀모도로 공부법 (25분 공부+5분 휴식)
+          </span>
+          <br />
+          <span>
+            <Radio
+              value="studyon"
+              onChange={handleChangeMethod}
+              checked={method === "studyon"}
+              name="studyon"
+            />
+            스터디온 공부법 <strong>⭐️추천⭐️</strong>(50분 공부+10분 휴식)
+          </span>
+          <br />
+          <span>
+            <Radio
+              value="etc"
+              onChange={handleChangeMethod}
+              checked={method === "etc"}
+              name="etc"
+            />
+            나만의 공부방법 설정 (원하는 시간을 설정하세요)
+          </span>
         </div>
         <div>
           <br />
           <span>
-            <strong>
-              StudyTime 공부시간 (분)
-              <span
-                style={{
-                  fontWeight: "normal",
-                  fontSize: "0.1em",
-                  color: "red",
-                  verticalAlign: "super",
-                }}
-              >
-                *필수
-              </span>
-            </strong>
+            <strong>StudyTime 공부시간 (분)</strong>
             &nbsp; &nbsp;
             <TextField
-              //name="studyTime"
               type="number"
               value={studyTime}
-              onChange={(e) => onSetRoom("studyTime", e.target.value)}
+              onChange={handleStudyTime}
+              // onChange={(e) => onSetRoom("studyTime", e.target.value)}
               margin="normal"
               className="form_number"
               color="secondary"
               placeholder="25"
             />
           </span>
-          <span style={{ marginLeft: "180px" }}>
-            <strong>
-              BreakTime 쉬는시간 (분)
-              <span
-                style={{
-                  fontWeight: "normal",
-                  fontSize: "0.1em",
-                  color: "red",
-                  verticalAlign: "super",
-                }}
-              >
-                *필수
-              </span>
-            </strong>
+          <span style={{ marginLeft: "3rem" }}>
+            <strong>BreakTime 쉬는시간 (분)</strong>
             &nbsp; &nbsp;
             <TextField
-              //name="breakTime"
               type="number"
               value={breakTime}
-              onChange={(e) => onSetRoom("breakTime", e.target.value)}
+              onChange={handleBreakTime}
+              // onChange={(e) => onSetRoom("breakTime", e.target.value)}
               margin="normal"
               className="form_number"
               color="secondary"
@@ -262,16 +237,7 @@ const RoomCreateForm = (props) => {
           <br />
           <strong>
             Term 횟수
-            <span
-              style={{
-                fontWeight: "normal",
-                fontSize: "0.1em",
-                color: "red",
-                verticalAlign: "super",
-              }}
-            >
-              *필수
-            </span>
+            <span className="necessary_lang">*필수</span>
           </strong>{" "}
           &nbsp; &nbsp;
           <TextField
@@ -282,19 +248,31 @@ const RoomCreateForm = (props) => {
             margin="normal"
             className="form_number"
             color="secondary"
+            placeholder="6번"
           />
         </div>
         <Button
           variant="outlined"
           type="submit"
-          onClick={onAddRoom}
-          style={{ float: "right", marginRight: "50px" }}
+          style={{ float: "right", right: "10.5rem" }}
         >
-          <Link to={`/room-entrance/${mySocket.id}`} className="button_text_s">
+          <Link to="/" className="button_text_s">
+            취소
+          </Link>
+        </Button>
+        <Button
+          variant="outlined"
+          type="submit"
+          onClick={onAddRoom}
+          style={{ float: "right" }}
+        >
+          <Link to={`/room-entrance/${mySocket.id}`} className="button_text_a">
             <RiCheckboxMultipleFill /> 등록
           </Link>
         </Button>
       </form>
+      <div style={{ height: "38rem" }}></div>
+      <Footer />
     </div>
   );
 };
