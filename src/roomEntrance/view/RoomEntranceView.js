@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../scss/RoomEntrance.scss";
 import TabsCard from "./TabsCard";
+import Footer from "../../footer/view/Footer";
 import { Card } from "antd";
 import Timer from "./Timer";
 import AcheivementBoard from "./AchievementBoard";
@@ -13,6 +14,7 @@ import AchievementContainer from "../container/AchievementContainer";
 import { Button } from "@material-ui/core";
 
 const RoomEntranceView = ({
+  store,
   mySocket,
   room,
   rooms,
@@ -21,13 +23,16 @@ const RoomEntranceView = ({
   currentUser,
   onUpdateIsPlaying,
   onRefundPoint,
+  onRecreateCheck,
 }) => {
   const params_id = match.params.id;
   const data = rooms.find((tile) => tile.owner === params_id);
   const socketRef = useRef();
 
+
   const [popUp, setPopUp] = useState(false);
   const [message, setMessage] = useState("");
+  const [socketId, setSocketId] = useState("");
   const [studyKings, setStudyKings] = useState([]);
   const [studyKing, setStudyKing] = useState("what");
   const duringPopUp = popUp ? "during-popup" : "";
@@ -50,13 +55,22 @@ const RoomEntranceView = ({
       <div className="RoomEntrance_wrap" key={data.owner}>
         <div className="RoomEntrance_title">{data.title}</div>
         <div className="exit_button">
-          <Link to="/room-list" >
-            <Button style={{ color: "black" }}><ExitToApp />EXIT</Button>
+          <Link to="/room-list">
+            <Button style={{ color: "black" }}>
+              <ExitToApp />
+              EXIT
+            </Button>
           </Link>
         </div>
-
+        {/* {store.mySocket.id === owner ?( */}
+          <div className="exit_button">
+            <Checkbox onChange={onRecreateCheck} />
+            &nbsp; 방을 계속 이어나갈껀가요?
+          </div>
+          {/* ):(<div></div>)
+        } */}
         <div className="RoomEntrance_container">
-          <div className="RoomEntrance_left" >
+          <div className="RoomEntrance_left">
             <TabsCard
               roomData={data}
               mySocket={mySocket}
@@ -67,6 +81,7 @@ const RoomEntranceView = ({
           <div className="RoomEntrance_right">
             {/* <TabsCard roomData={data} mySocket={mySocket} owner={owner} room={room}/> */}
             <Timer
+              store={store}
               mySocket={mySocket}
               owner={owner}
               room={room}
@@ -82,7 +97,12 @@ const RoomEntranceView = ({
               bodyStyle={{ overflow: "scroll", height: "500px" }}
               style={{ overflow: "hidden" }}
             >
-              <p style={{ color: "#808080", fontFamily: "GmarketSansTTF Medium" }}>
+              <p
+                style={{
+                  color: "#808080",
+                  fontFamily: "GmarketSansTTF Medium",
+                }}
+              >
                 방장이 타이머를 실행할 때까지 잠시만 기다려주세요 ^_^
               </p>
               <AcheivementBoard
@@ -101,6 +121,7 @@ const RoomEntranceView = ({
           {/* {popUp && <AchievementView setPopUp={setPopUp} mySocket={mySocket} />} */}
           {popUp && (
             <AchievementContainer
+              store={store}
               popUp={popUp}
               setPopUp={setPopUp}
               mySocket={mySocket}
@@ -108,6 +129,7 @@ const RoomEntranceView = ({
             />
           )}
         </div>
+        <Footer />
       </div>
     </>
   );

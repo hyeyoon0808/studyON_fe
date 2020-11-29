@@ -8,15 +8,16 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import breakSoundUrl from "../images/breakAlarm.mp3";
-import studyAlarmUrl from "../images/studyAlarm.mp3"
+import studyAlarmUrl from "../images/studyAlarm.mp3";
 import Sound from "react-sound";
 import "../scss/Timer.scss";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Timer(props) {
   const {
+    store,
     mySocket,
     owner,
     room,
@@ -27,6 +28,7 @@ export default function Timer(props) {
   const [playing, setPlaying] = useState(false);
   const [yourID, setYourID] = useState();
   const [count, setCount] = useState(0);
+  const [role, setRole] = useState(owner);
   const [study, setStudy] = useState(room.studyTime * 60);
   const [breakTime, setBreak] = useState(room.breakTime * 60000);
   const [key, setKey] = useState(0);
@@ -95,14 +97,13 @@ export default function Timer(props) {
     socketRef.current.on("timer start", (message) => {
       console.log(message);
       setPlaying(true);
-
     });
     setTerm(term);
   }, []);
 
   const notify2 = () => toast("포인트가 환급됩니다.");
 
-  //알람 누른 수 
+  //알람 누른 수
   function countAlarm() {
     setCount(count + 1);
     socketRef.current.emit(
@@ -151,11 +152,7 @@ export default function Timer(props) {
   function breakTimeStart() {
     setTerm((preTerm) => preTerm + 1);
     console.log("term: ", term, savedTerm);
-    socketRef.current.emit(
-      "current term",
-      owner,
-      term
-    );
+    socketRef.current.emit("current term", owner, term);
     if (room.maxTerm == term) {
       socketRef.current.emit(
         "term is over",
@@ -165,16 +162,18 @@ export default function Timer(props) {
         room.maxTerm,
         room.owner
       );
+      setGoBreak(false);
+      setPlaying(false);
+      setTerm(1);
     }
     if (room.maxTerm > term) {
-      console.log("heyyyyy");
       setOpen(true);
     }
-    if (term >= 1) {
+    if (term >= 1 && term < room.maxTerm) {
       setGoBreak(true);
       console.log("break is on");
     }
-    setAlarmPlay(Sound.status.PLAYING)
+    setAlarmPlay(Sound.status.PLAYING);
     setSoundUrl(breakSoundUrl);
     setTimeout(handleClose, 5000);
     return [true, breakTime];
@@ -191,12 +190,14 @@ export default function Timer(props) {
             isPlaying={playing}
             duration={study}
             key={key}
-            colors={[["#8091a8", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+            colors={[["#8091a8", 0.33], ["#80a8a8", 0.33], ["#a9bfd6"]]}
             onComplete={breakTimeStart}
           >
             {children}
           </CountdownCircleTimer>
-          <p style={{ color: "#8091a8" }}><strong>Study</strong></p>
+          <p style={{ color: "#8091a8" }}>
+            <strong>Study</strong>
+          </p>
         </div>
         <div className="start_button">
           {/* <input
@@ -215,21 +216,33 @@ export default function Timer(props) {
           placeholder="Break time"
           onChange={handleBreakTime}
         /> */}
-          <button onClick={() => { sendTimerSign(true) }} className="start_btn">
-            <p className="btn_font"><strong>START</strong></p>
+          {/* {store.mySocket.id === owner ?( */}
+          <button
+            onClick={() => {
+              sendTimerSign(true);
+            }}
+            className="start_btn"
+          >
+            <p className="btn_font">
+              <strong>START</strong>
+            </p>
           </button>
+          {/* ):(<div></div>)}  */}
         </div>
+
         <div className="timer-wrapper2">
           <CountdownCircleTimer
             isPlaying={goBreak}
             duration={breakTime / 1000}
             key={key}
-            colors={[["#c9b3c5", 0.33], ["#F7B801", 0.33], ["#004777"]]}
+            colors={[["#c9b3c5", 0.33], ["#ffe0b3", 0.33], ["#b8b8e0"]]}
             onComplete={studyTimeStart}
           >
             {children}
           </CountdownCircleTimer>
-          <p style={{ color: "#c9b3c5" }}><strong>Break</strong></p>
+          <p style={{ color: "#c9b3c5" }}>
+            <strong>Break</strong>
+          </p>
         </div>
       </div>
       <Sound
@@ -251,7 +264,6 @@ export default function Timer(props) {
           <DialogContentText id="alert-dialog-description">
             공부 끝! 쉬는 시간 시작입니다-!
           </DialogContentText>
-
         </DialogContent>
         <DialogActions>
           <Button onClick={countAlarm} color="primary" autoFocus>
@@ -259,7 +271,6 @@ export default function Timer(props) {
           </Button>
         </DialogActions>
       </Dialog>
-
     </div>
   );
 }
