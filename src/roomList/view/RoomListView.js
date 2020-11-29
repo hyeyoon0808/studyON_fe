@@ -68,20 +68,32 @@ export default function RoomListView(props) {
               // onClick={() => handleClickOpen(room.owner)}
               onClick={() => handleClickOpen(room.owner)}
             >
-              {/* {room.isPlaying === "true" ? ( */}
+              {room.isPlaying === "false" ? (
+                room.maxTerm%2 === 0 ?(
               <img
-                src={require("./roomimage.jpeg")}
+                src={require("./before7.jpg")}
                 alt=""
                 className={classes.img}
-              />
-              {/* ) : (
+              />):
+              (<img
+                src={require("./before3.jpg")}
+                alt=""
+                className={classes.img}
+              />)
+               ) : (
+                room.maxTerm%2 === 0 ?(
                   <img
-                    src={require("./noentry.png")}
+                    src={require("./after1.png")}
                     alt=""
                     className={classes.img}
-                  />
+                  />):
+                  (<img
+                    src={require("./after3.png")}
+                    alt=""
+                    className={classes.img}
+                  />)
                 )
-              } */}
+              }
               <GridListTileBar
                 title={room.title}
                 subtitle={
