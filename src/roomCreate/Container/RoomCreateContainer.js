@@ -32,6 +32,7 @@ class RoomCreateContainer extends Component {
           onAddRoom={this.onAddRoom}
           onSetRoom={this.onSetRoom}
           mySocket={mySocket}
+          userStore={this.props.UserStore}
         />
       </div>
     );

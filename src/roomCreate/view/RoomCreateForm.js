@@ -18,7 +18,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import Footer from "../../footer/view/Footer";
 
 const RoomCreateForm = (props) => {
-  const { mySocket, room, onSetRoom, onAddRoom, onSetRoomTime } = props;
+  const { mySocket, room, onSetRoom, onAddRoom, onSetRoomTime, userStore } = props;
   const [tagName, setTagName] = useState([]);
   const [method, setMethod] = useState("pomodoro");
   const [studyTime, setStudyTime] = useState(25);
@@ -260,6 +260,7 @@ const RoomCreateForm = (props) => {
             취소
           </Link>
         </Button>
+        {userStore.userPoint.point >=100 ? (
         <Button
           variant="outlined"
           type="submit"
@@ -270,6 +271,18 @@ const RoomCreateForm = (props) => {
             <RiCheckboxMultipleFill /> 등록
           </Link>
         </Button>
+        ):
+        (<Button
+          variant="outlined"
+          type="submit"
+          onClick={""}
+          style={{ float: "right" }}
+        >
+          <Link to="/shop" className="button_text_a">
+            <RiCheckboxMultipleFill /> 등록
+          </Link>
+        </Button>
+        )}
       </form>
       <div style={{ height: "38rem" }}></div>
       <Footer />
