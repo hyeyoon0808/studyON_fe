@@ -51,7 +51,7 @@ export default function AchievementBoard(props) {
           {userName}님이 들어왔습니다.
         </p>
       );
-      setMessages((oldTerm) => [...oldTerm, msg]);
+      setMessages((oldUser) => [...oldUser, msg]);
     });
   }, []);
 
