@@ -30,7 +30,6 @@ const RoomEntranceView = ({
   const data = rooms.find((tile) => tile.owner === params_id);
   const socketRef = useRef();
 
-
   const [popUp, setPopUp] = useState(false);
   const [message, setMessage] = useState("");
   const [socketId, setSocketId] = useState("");
@@ -64,15 +63,16 @@ const RoomEntranceView = ({
           </Link>
         </div>
         {/* {store.mySocket.id === owner ?( */}
-          <div className="exit_button">
-            <Checkbox onChange={onRecreateCheck} />
-            &nbsp; 방을 계속 이어나갈껀가요?
-          </div>
-          {/* ):(<div></div>)
+        <div className="exit_button">
+          <Checkbox onChange={onRecreateCheck} />
+          &nbsp; 방을 계속 이어나갈껀가요?
+        </div>
+        {/* ):(<div></div>)
         } */}
         <div className="RoomEntrance_container">
           <div className="RoomEntrance_left">
             <TabsCard
+              store={store}
               roomData={data}
               mySocket={mySocket}
               owner={owner}

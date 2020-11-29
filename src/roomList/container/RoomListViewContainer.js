@@ -23,15 +23,21 @@ class RoomListViewContainer extends Component {
     Store.mySocket.emit("test", "test send");
     Store.roomList();
     Store.mySocket.on("remove room", (id) => {
-      if(Store.getContinueRoom == false){
+      if (Store.getContinueRoom == false) {
         this.props.Store.removeRoom(id);
       }
-      
     });
   }
 
   setRoom = (owner) => {
     this.props.Store.setRoom(owner);
+  };
+
+  entranceRoomPoint = (e) => {
+    const { UserStore } = this.props;
+    UserStore.setUserPointProp("state", "enterRoom");
+    UserStore.modifyPoint(UserStore.point);
+    console.log("방 입장하면 포인트 -50 차감", UserStore.point);
   };
 
   render() {
@@ -46,6 +52,7 @@ class RoomListViewContainer extends Component {
         setRoom={this.setRoom}
         mySocket={this.props.Store.mySocket}
         authenticated={authenticated}
+        entranceRoomPoint={this.entranceRoomPoint}
       />
     );
   }

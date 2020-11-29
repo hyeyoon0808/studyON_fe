@@ -99,8 +99,6 @@ export default function Timer(props) {
     setTerm(term);
   }, []);
 
-  const notify2 = () => toast("포인트가 환급됩니다.");
-
   //알람 누른 수
   function countAlarm() {
     setCount(count + 1);
@@ -111,7 +109,7 @@ export default function Timer(props) {
       count,
       savedTerm
     );
-    console.log("알람 누른 수: " + count + savedTerm);
+    console.log("알람 누른 수: " + count + "," + savedTerm);
     if (count == savedTerm) {
       socketRef.current.emit(
         "show study king",
@@ -121,7 +119,6 @@ export default function Timer(props) {
         savedTerm
       );
       onRefundPoint(); //add 포인트 획득(일반유저 +50)
-      notify2();
     }
     setAlarmPlay(Sound.status.STOPPED);
     setOpen(false);
@@ -243,14 +240,7 @@ export default function Timer(props) {
           </p>
         </div>
       </div>
-      <Sound
-        url={soundUrl}
-        playStatus={alarmPlay}
-        playFromPosition={300}
-      // onLoading={this.handleSongLoading}
-      // onPlaying={this.handleSongPlaying}
-      // onFinishedPlaying={this.handleSongFinishedPlaying}
-      />
+      <Sound url={soundUrl} playStatus={alarmPlay} playFromPosition={300} />
       <Dialog
         open={open}
         onClose={handleClose}

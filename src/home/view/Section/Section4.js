@@ -37,7 +37,7 @@ const Section3 = () => {
           자신의 공부법을 함께 나눠보세요 !
           <div className="sec4_button">
             <Button variant="outlined">
-              <Link to="/room-list" className="button_text">
+              <Link to="/room-create" className="button_text">
                 스터디방 만들기
               </Link>
             </Button>
