@@ -1,0 +1,40 @@
+.title_service {
+  text-align: center;
+  font-family: "GmarketSansTTF Medium";
+  font-size: x-large;
+  position: relative;
+  top: 3rem;
+}
+.icons {
+  text-align: center;
+  position: relative;
+  left: -7rem;
+  top: 6rem;
+}
+.icon_service {
+  font-size: 3rem;
+  color: #d63a3a;
+  margin-left: 15rem;
+}
+
+.service_left {
+  float: left;
+  width: 12rem;
+  text-align: center;
+  position: relative;
+  left: 21rem;
+}
+.service_middle {
+  float: left;
+  position: relative;
+  left: 27rem;
+  width: 12rem;
+  text-align: center;
+}
+.service_right {
+  float: right;
+  position: relative;
+  right: 20rem;
+  width: 12rem;
+  text-align: center;
+}
