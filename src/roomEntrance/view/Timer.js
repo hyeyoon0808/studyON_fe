@@ -95,7 +95,7 @@ export default function Timer(props) {
     socketRef.current.on("timer start", (message) => {
       console.log(message);
       setPlaying(true);
-      
+
     });
     setTerm(term);
   }, []);
@@ -233,12 +233,12 @@ export default function Timer(props) {
         </div>
       </div>
       <Sound
-            url={soundUrl}
-            playStatus={alarmPlay}
-            playFromPosition={300}
-          // onLoading={this.handleSongLoading}
-          // onPlaying={this.handleSongPlaying}
-          // onFinishedPlaying={this.handleSongFinishedPlaying}
+        url={soundUrl}
+        playStatus={alarmPlay}
+        playFromPosition={300}
+      // onLoading={this.handleSongLoading}
+      // onPlaying={this.handleSongPlaying}
+      // onFinishedPlaying={this.handleSongFinishedPlaying}
       />
       <Dialog
         open={open}
@@ -251,7 +251,7 @@ export default function Timer(props) {
           <DialogContentText id="alert-dialog-description">
             공부 끝! 쉬는 시간 시작입니다-!
           </DialogContentText>
-          
+
         </DialogContent>
         <DialogActions>
           <Button onClick={countAlarm} color="primary" autoFocus>
@@ -259,7 +259,7 @@ export default function Timer(props) {
           </Button>
         </DialogActions>
       </Dialog>
-      
+
     </div>
   );
 }
