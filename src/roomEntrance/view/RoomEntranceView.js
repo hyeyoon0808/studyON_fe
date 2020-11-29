@@ -62,13 +62,13 @@ const RoomEntranceView = ({
             </Button>
           </Link>
         </div>
-        {/* {store.mySocket.id === owner ?( */}
+        {store.mySocket.id === owner ?(
         <div className="exit_button">
           <Checkbox onChange={onRecreateCheck} />
           &nbsp; 방을 계속 이어나갈껀가요?
         </div>
-        {/* ):(<div></div>)
-        } */}
+       ):(<div></div>)
+        } 
         <div className="RoomEntrance_container">
           <div className="RoomEntrance_left">
             <TabsCard

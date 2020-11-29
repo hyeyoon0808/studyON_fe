@@ -211,7 +211,7 @@ export default function Timer(props) {
           placeholder="Break time"
           onChange={handleBreakTime}
         /> */}
-          {/* {store.mySocket.id === owner ?( */}
+          {store.mySocket.id === owner ?(
           <button
             onClick={() => {
               sendTimerSign(true);
@@ -222,7 +222,7 @@ export default function Timer(props) {
               <strong>START</strong>
             </p>
           </button>
-          {/* ):(<div></div>)}  */}
+          ):(<div></div>)}
         </div>
 
         <div className="timer-wrapper2">
