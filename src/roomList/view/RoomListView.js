@@ -68,11 +68,20 @@ export default function RoomListView(props) {
               // onClick={() => handleClickOpen(room.owner)}
               onClick={() => handleClickOpen(room.owner)}
             >
+              {/* {room.isPlaying === "true" ? ( */}
               <img
                 src={require("./roomimage.jpeg")}
                 alt=""
                 className={classes.img}
               />
+              {/* ) : (
+                  <img
+                    src={require("./noentry.png")}
+                    alt=""
+                    className={classes.img}
+                  />
+                )
+              } */}
               <GridListTileBar
                 title={room.title}
                 subtitle={

@@ -103,8 +103,7 @@ class Store {
       room.tag,
       room.maxTerm,
       this.mySocket.id,
-      room.isPlaying,
-      room.userList
+      room.isPlaying
     );
     console.log("createRoom", roomApiModel);
     const result = this.roomCreateApi.roomCreate(roomApiModel);
@@ -126,8 +125,7 @@ class Store {
       room.tag,
       room.maxTerm,
       room.owner,
-      room.isPlaying,
-      room.userList
+      room.isPlaying
     );
     console.log("updateIsPlaying", roomApiModel);
     const result = this.roomApi.updateIsPlaying(roomApiModel);
@@ -147,9 +145,8 @@ class Store {
       room.maxPeopleNum,
       room.tag,
       room.maxTerm,
-      this.mySocket.id,
-      room.isPlaying,
-      room.userList
+      room.owner,
+      room.isPlaying
     );
     console.log("createRoom", roomApiModel);
     const result = this.roomApi.roomRecreate(roomApiModel);
