@@ -26,6 +26,12 @@ class RoomApi {
       .delete(this.URL + `/${id}`)
       .then((response) => (response && response.data) || null);
   }
+
+  roomRecreate(RoomApiModel) {
+    return axios
+      .put(this.URL, RoomApiModel.getJson())
+      .then((response) => (response && response.data) || null);
+  }
 }
 
 export default RoomApi;

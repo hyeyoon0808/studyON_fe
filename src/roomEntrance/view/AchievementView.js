@@ -32,6 +32,8 @@ const AchievementView = (props) => {
     onClickNormal,
     onClickBad,
     studyKings,
+    onRecreateRoom,
+    onRecreateCheck,
   } = props;
   const classes = useStyles();
   const socketRef = useRef();
@@ -39,9 +41,11 @@ const AchievementView = (props) => {
   return (
     <div className="PopUp">
       {/* x close window */}
-      <button className="popup-x" onClick={() => setPopUp(false)}>
+      <Link to="/room-list">
+      <button className="popup-x" onClick={""}>
         X
       </button>
+      </Link>
       <div className="today-king">
         <h3>오늘의 공부왕</h3>
       </div>
@@ -76,11 +80,12 @@ const AchievementView = (props) => {
         <div className="pu-content-container">
           {/* <img className="pu-img" alt="bone" /> */}
           <h3>방장님이 이방을 연장하셨습니다.</h3>
+          <></>
           <h3>이 방의 공부법이 좋았다면 또 함께 공부해요~!</h3>
         </div>
         <div classes="three-btn">
             <button onClick={() => setPopUp(false)} className="good_btn">
-              또 함께할래요
+              함께 할래요
             </button>
           <Link to="/room-list">
             <button onClick={""} className="normal_btn">
@@ -93,12 +98,14 @@ const AchievementView = (props) => {
           <>
           <div className="pu-content-container">
           {/* <img className="pu-img" alt="bone" /> */}
-          <h3>이 방의 공부법이 좋았다면 이 방의 방장이 되어보세요~!</h3>
+          <h3>이 방의 공부법이 좋았다면 방장이 되어 방을 연장시켜보세요</h3>
         </div>
         <div classes="three-btn">
-            <button onClick={() => setPopUp(false)} className="good_btn">
-              방장이 되어볼게요
+        <Link to="/room-list">
+            <button onClick={onRecreateRoom} className="good_btn">
+              연장 할래요
             </button>
+          </Link>
           <Link to="/room-list">
             <button onClick={""} className="normal_btn">
               그만 할래요
