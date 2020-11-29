@@ -1,87 +1,83 @@
-import { Card } from "antd";
-import React from "react";
-import Timer from "./Timer";
-import { Checkbox } from "antd";
-import RoomMember from "./RoomMember";
+import React, { useEffect, useState, useRef } from "react";
+import { Tabs } from "antd";
 import TodoContainer from "../../myPage/container/TodoContainer";
-import { inject, observer } from "mobx-react";
+import {
+  SmileOutlined,
+  UserOutlined,
+  SoundOutlined,
+  ProfileOutlined,
+} from "@ant-design/icons";
 
-const tabListNoTitle = [
-  {
-    key: "my_todo_list",
-    tab: "할 일",
-  },
-  {
-    key: "notice_board",
-    tab: "공지",
-  },
-  {
-    key: "member",
-    tab: "멤버",
-  },
-];
-function onChange(e) {
-  console.log(`checked = ${e.target.checked}`);
-}
+const About = ({ mySocket, roomData }) => {
+  const { TabPane } = Tabs;
+  const [message, setMessage] = useState([]);
+  const socketRef = useRef();
 
-class TabsCard extends React.Component {
-  state = {
-    name: "hello",
-  };
-  member() {
-    // this.props.mySocket.on("방 멤버", (res) => {
-    //   console.log("test" + res + "test");
-    //   this.setState({ name: res });
-    //   console.log("test" + this.state.name + "test");
-    // });
-    this.setState({ name: "hi" });
-  }
+  useEffect(() => {
+    socketRef.current = mySocket;
 
-  state = {
-    noTitleKey: "my_todo_list",
-    contentListNoTitle: {
-      my_todo_list: <TodoContainer owner={this.props.owner} />,
-      notice_board: (
-        <div>
-          {this.props.roomData.description.split("\n").map((line) => {
-            return (
+    socketRef.current.on("enter event", (owner, userName) => {
+      const msg = (
+        <p>
+          <SmileOutlined /> {userName}님
+        </p>
+      );
+      setMessage((oldUser) => [...oldUser, msg]);
+    });
+  }, []);
+
+  return (
+    <div>
+      <div style={{ width: "20rem", position: "relative", left: "3rem" }}>
+        <Tabs defaultActiveKey="1">
+          <TabPane
+            tab={
               <span>
-                {line}
-                <br />
+                <ProfileOutlined />
+                할일
               </span>
-            );
-          })}
-        </div>
-      ),
-      member: (
-        <>
-          <div>{this.state.name}</div>
-        </>
-      ),
-    },
-  };
+            }
+            key="1"
+          >
+            <TodoContainer />
+          </TabPane>
+          <TabPane
+            tab={
+              <span>
+                <SoundOutlined />
+                공지
+              </span>
+            }
+            key="2"
+          >
+            <div>
+              {roomData.description.split("\n").map((line) => {
+                return (
+                  <span>
+                    {line}
+                    <br />
+                  </span>
+                );
+              })}
+            </div>
+          </TabPane>
+          <TabPane
+            tab={
+              <span>
+                <UserOutlined />
+                멤버
+              </span>
+            }
+            key="3"
+          >
+            {message.map((m, index) => {
+              return <div>{m}</div>;
+            })}
+          </TabPane>
+        </Tabs>
+      </div>
+    </div>
+  );
+};
 
-  onTabChange = (key, type) => {
-    console.log(key, type);
-    this.setState({ [type]: key });
-  };
-
-  render() {
-    return (
-      <>
-        <Card
-          // headStyle={{ backgroundColor: "snow" }}
-          style={{ width: "100%", height: "540px" }}
-          tabList={tabListNoTitle}
-          activeTabKey={this.state.noTitleKey}
-          onTabChange={(key) => {
-            this.onTabChange(key, "noTitleKey");
-          }}
-        >
-          {this.state.contentListNoTitle[this.state.noTitleKey]}
-        </Card>
-      </>
-    );
-  }
-}
-export default TabsCard;
+export default About;

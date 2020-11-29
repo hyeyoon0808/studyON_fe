@@ -31,7 +31,7 @@ class TodoView extends Component {
             <MinusCircleOutlined key="delete" onClick={onRemoveTodo} />,
           ]}
         >
-          <strong style={{ fontSize: "25px" }}>Todo List</strong>
+          <strong style={{ fontSize: "25px" }}>TODO LIST</strong>
           <br />
           <br />
           <div style={{ height: "15rem" }}>
