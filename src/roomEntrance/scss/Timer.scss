@@ -1,28 +1,18 @@
 h1 {
   font-family: "GmarketSansTTF Medium";
-  //   text-align: center;
-  // margin-bottom: 100px;
-  // margin-left: -250px;
-  // margin-top: 100px;
   position: relative;
   left: 2rem;
-  //   left: 3rem;
 }
 
 .timer-wrapper {
   display: flex;
-  // float: left;
-  // justify-content: center;
   flex-direction: column;
   margin-left: 100px;
   margin-top: 20px;
-  // padding-top: -20px;
 }
 
 .timer-wrapper2 {
   display: flex;
-  // float: right;
-  // justify-content: center;
   flex-direction: column;
   text-align: left;
   float: left;
@@ -32,8 +22,6 @@ h1 {
 
 .timer {
   font-family: "Montserrat";
-  // display: flex;
-  // flex-direction: row;
   align-items: center;
   text-align: center;
 }
@@ -61,9 +49,7 @@ h1 {
 
 .start_btn {
   float: right;
-  // margin-right: -55px;
   border-radius: 100%;
-  // text-decoration: none;
   border: 10px solid white;
   height: 70px;
   width: 70px;
@@ -78,7 +64,6 @@ h1 {
 
 .btn_font {
   vertical-align: middle;
-  // text-align: center;
   margin-top: 5px;
   margin-left: 10px;
 }

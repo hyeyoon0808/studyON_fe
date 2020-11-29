@@ -40,16 +40,13 @@
   width: 100%;
   position: relative;
   left: 6rem;
-  // top: 2.5rem;
   flex-direction: row;
   padding-top: 5rem;
   padding-bottom: 5rem;
-  //   overflow-y: scroll;
   z-index: 5;
 }
 .RoomEntrance_right_item {
   height: 540px;
-  // bottom: 525px;
   width: 33rem;
   right: 3rem;
   top: 4rem;
@@ -63,6 +60,6 @@
 .exit_button {
   float: right;
   text-align: right;
-  margin-right: 30px;
+  margin-right: 3rem;
   margin-top: 20px;
 }
