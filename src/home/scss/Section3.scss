@@ -1,0 +1,60 @@
+.image_todo {
+  position: relative;
+  left: 5rem;
+  top: 8rem;
+}
+.image_todo_desc {
+  font-size: xx-large;
+  position: relative;
+  width: 33rem;
+  left: 50rem;
+  bottom: 33rem;
+  //   font-family: "GmarketSansTTF Medium";
+  text-align: center;
+  .sec3_button {
+    position: relative;
+    top: 2rem;
+    left: 12.5rem;
+    width: 11rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.image_room {
+  position: relative;
+  right: -40rem;
+  top: 6rem;
+}
+// .image_room_desc {
+//   font-size: large;
+//   position: relative;
+//   width: 33rem;
+//   left: 5rem;
+//   bottom: 30rem;
+//   line-height: 2rem;
+//   .sec4_button {
+//     position: relative;
+//     top: 2rem;
+//     width: 11rem;
+//     display: flex;
+//     justify-content: space-between;
+//   }
+// }
+
+.image_room2_desc {
+  font-size: xx-large;
+  position: relative;
+  width: 33rem;
+  left: 5rem;
+  bottom: 33rem;
+  text-align: center;
+  .sec4_button {
+    position: relative;
+    top: 2rem;
+    width: 11rem;
+    left: 12rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}

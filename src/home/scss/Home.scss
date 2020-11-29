@@ -1,0 +1,46 @@
+.button_text {
+  text-decoration: none;
+  color: black;
+  text-align: center;
+}
+.logo {
+  position: relative;
+  width: 30rem;
+  align-items: center;
+  left: 29rem;
+  top: 10rem;
+}
+
+.logo_desc {
+  color: #ffffff;
+  font-size: xx-large;
+  font-family: "GmarketSansTTF Medium";
+  position: relative;
+  left: 8rem;
+  top: 18rem;
+  .logo_desc2 {
+    font-size: medium;
+    position: absolute;
+    left: 0rem;
+    top: 3rem;
+  }
+}
+
+.scroll_next {
+  color: #ffffff;
+  width: auto;
+  position: absolute;
+  bottom: 5rem;
+  left: 45%;
+  opacity: 0.6;
+}
+
+.section_buttons {
+  position: absolute;
+  left: 40%;
+  bottom: -4rem;
+  // left: 50%;
+  display: flex;
+  width: 11rem;
+  justify-content: space-between;
+}
