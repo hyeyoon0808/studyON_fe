@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AchievementView = (props) => {
   const {
+    store,
     setPopUp,
     mySocket,
     onClickGood,
@@ -60,7 +61,6 @@ const AchievementView = (props) => {
       </div>
       {/* button controls */}
       <div classes="three-btn">
-        <Link to="/room-list">
           <button onClick={onClickGood} className="good_btn">
             만족!
           </button>
@@ -70,9 +70,44 @@ const AchievementView = (props) => {
           <button onClick={onClickBad} className="bad_btn">
             불만족!
           </button>
-        </Link>
       </div>
-    </div>
+      {store.getContinueRoom === true ? (
+        <>
+        <div className="pu-content-container">
+          {/* <img className="pu-img" alt="bone" /> */}
+          <h3>방장님이 이방을 연장하셨습니다.</h3>
+          <h3>이 방의 공부법이 좋았다면 또 함께 공부해요~!</h3>
+        </div>
+        <div classes="three-btn">
+            <button onClick={() => setPopUp(false)} className="good_btn">
+              또 함께할래요
+            </button>
+          <Link to="/room-list">
+            <button onClick={""} className="normal_btn">
+              그만 할래요
+            </button>
+          </Link>
+        </div>
+        </>
+        ):(
+          <>
+          <div className="pu-content-container">
+          {/* <img className="pu-img" alt="bone" /> */}
+          <h3>이 방의 공부법이 좋았다면 이 방의 방장이 되어보세요~!</h3>
+        </div>
+        <div classes="three-btn">
+            <button onClick={() => setPopUp(false)} className="good_btn">
+              방장이 되어볼게요
+            </button>
+          <Link to="/room-list">
+            <button onClick={""} className="normal_btn">
+              그만 할래요
+            </button>
+            </Link>
+        </div>
+        </>
+      )}
+      </div>
   );
 };
 

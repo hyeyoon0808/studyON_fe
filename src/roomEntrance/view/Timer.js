@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function Timer(props) {
   const {
+    store,
     mySocket,
     owner,
     room,
@@ -27,6 +28,7 @@ export default function Timer(props) {
   const [playing, setPlaying] = useState(false);
   const [yourID, setYourID] = useState();
   const [count, setCount] = useState(0);
+  const [role, setRole] = useState(owner);
   const [study, setStudy] = useState(room.studyTime * 60);
   const [breakTime, setBreak] = useState(room.breakTime * 60000);
   const [key, setKey] = useState(0);
@@ -160,12 +162,14 @@ export default function Timer(props) {
         room.maxTerm,
         room.owner
       );
+      setGoBreak(false);
+      setPlaying(false);
+      setTerm(1);
     }
     if (room.maxTerm > term) {
-      console.log("heyyyyy");
       setOpen(true);
     }
-    if (term >= 1) {
+    if (term >= 1 && term <room.maxTerm) {
       setGoBreak(true);
       console.log("break is on");
     }
@@ -212,6 +216,7 @@ export default function Timer(props) {
           placeholder="Break time"
           onChange={handleBreakTime}
         /> */}
+        {/* {store.mySocket.id === owner ?( */}
           <button
             onClick={() => {
               sendTimerSign(true);
@@ -222,7 +227,9 @@ export default function Timer(props) {
               <strong>START</strong>
             </p>
           </button>
+          {/* ):(<div></div>)}  */}
         </div>
+          
         <div className="timer-wrapper2">
           <CountdownCircleTimer
             isPlaying={goBreak}

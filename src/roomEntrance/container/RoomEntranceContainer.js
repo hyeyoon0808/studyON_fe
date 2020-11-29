@@ -71,17 +71,24 @@ class RoomEntranceContainer extends Component {
     console.log("studyking 포인트 50 환급", UserStore.point);
   };
 
+  onRecreateCheck = () => {
+    this.props.Store.setContinueRoom(true);
+    console.log("getContinueRoom: ***"+this.props.Store.getContinueRoom);
+  };
+
   render() {
     const mySocket = this.props.Store.mySocket;
     const room = this.props.Store.getRoom;
     const rooms = this.props.Store.getRoomList;
     const currentUser = this.props.UserStore.getCurrentUser;
+    
     console.log(this.props.match);
     console.log(rooms);
 
     return (
       <div>
         <RoomEntranceView
+          store = {this.props.Store}
           mySocket={mySocket}
           room={room}
           rooms={rooms}
@@ -90,6 +97,7 @@ class RoomEntranceContainer extends Component {
           currentUser={currentUser}
           onUpdateIsPlaying={this.onUpdateIsPlaying}
           onRefundPoint={this.onRefundPoint}
+          onRecreateCheck = {this.onRecreateCheck}
         />
         <ToastContainer
           autoClose={3000}

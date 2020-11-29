@@ -25,6 +25,9 @@ class Store {
   user = "";
 
   @observable
+  continueRoom = false;
+
+  @observable
   userList = [];
 
   @observable
@@ -52,6 +55,11 @@ class Store {
   @computed
   get getRoomName() {
     return this.roomName;
+  }
+
+  @computed
+  get getContinueRoom() {
+    return this.continueRoom;
   }
 
   @computed
@@ -156,6 +164,11 @@ class Store {
   @action
   setRoomName(roomName) {
     this.roomName = roomName;
+  }
+
+  @action
+  setContinueRoom(continueRoom) {
+    this.continueRoom = continueRoom;
   }
 
   @action
