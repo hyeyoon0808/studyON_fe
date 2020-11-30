@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     "/rooms",
     createProxyMiddleware({
-      target: "http://localhost:8000",
+      target: "http://ed51579b-default-springser-29a1-1434439925.us-east-1.elb.amazonaws.com",
       changeOrigin: true,
     })
   );
@@ -12,7 +12,7 @@ module.exports = function (app) {
   app.use(
     "/todo",
     createProxyMiddleware({
-      target: "http://localhost:8090",
+      target: "http://ed51579b-default-springser-29a1-1434439925.us-east-1.elb.amazonaws.com",
       changeOrigin: true,
     })
   );
@@ -20,7 +20,7 @@ module.exports = function (app) {
   app.use(
     "/todo-oneday",
     createProxyMiddleware({
-      target: "http://localhost:8090",
+      target: "http://ed51579b-default-springser-29a1-1434439925.us-east-1.elb.amazonaws.com",
       changeOrigin: true,
     })
   );
@@ -28,7 +28,7 @@ module.exports = function (app) {
   app.use(
     "/point-grade",
     createProxyMiddleware({
-      target: "http://localhost:8100",
+      target: "http://ed51579b-default-springser-29a1-1434439925.us-east-1.elb.amazonaws.com",
       changeOrigin: true,
     })
   );
