@@ -7,8 +7,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-import breakSoundUrl from "../images/breakAlarm.mp3";
-import studyAlarmUrl from "../images/studyAlarm.mp3";
+import studyAlarmUrl from "../images/breakAlarm.mp3";
+import breakSoundUrl from "../images/studyAlarm.mp3";
 import Sound from "react-sound";
 import "../scss/Timer.scss";
 import { ToastContainer, toast } from "react-toastify";
@@ -141,6 +141,9 @@ export default function Timer(props) {
     setGoBreak(false);
     setAlarmPlay(Sound.status.PLAYING);
     setSoundUrl(studyAlarmUrl);
+    if (room.maxTerm >= term) {
+      setOpen(true);
+    }
     return [true, study];
   }
 
@@ -161,9 +164,7 @@ export default function Timer(props) {
       setPlaying(false);
       setTerm(1);
     }
-    if (room.maxTerm > term) {
-      setOpen(true);
-    }
+    
     if (term >= 1 && term < room.maxTerm) {
       setGoBreak(true);
       console.log("break is on");
@@ -250,7 +251,7 @@ export default function Timer(props) {
         <DialogTitle id="alert-dialog-title">{"쉬는시간 시작"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            공부 끝! 쉬는 시간 시작입니다-!
+            쉬는 시간 끝! 공부 시간 시작입니다-!
           </DialogContentText>
         </DialogContent>
         <DialogActions>

@@ -4,7 +4,7 @@ class RoomApiModel {
   userId = 0;
   title = "기본 제목";
   description = "기본 공지";
-  startTime = moment().toString();
+  startTime = moment();
   studyTime = "25";
   breakTime = "5";
   maxPeopleNum = 4;
@@ -28,7 +28,7 @@ class RoomApiModel {
     this.userId = owner;
     this.title = title;
     this.description = description;
-    this.startTime = startTime.toString();
+    this.startTime = startTime;
     this.studyTime = studyTime;
     this.breakTime = breakTime;
     this.maxPeopleNum = maxPeopleNum;
